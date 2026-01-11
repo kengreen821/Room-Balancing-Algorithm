@@ -1,0 +1,3212 @@
+[
+  {
+    "reservation_id": 2600660,
+    "guest_name": "Anthony Parker",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQB",
+    "assigned_room_type": "NKSQB",
+    "length_of_stay": 2,
+    "special_requests": "ADA",
+    "assignment_reason": "ADA - Assigned as booked"
+  },
+  {
+    "reservation_id": 2600696,
+    "guest_name": "Joshua Sanchez",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSPD",
+    "assigned_room_type": "NKSPD",
+    "length_of_stay": 2,
+    "special_requests": "ADA",
+    "assignment_reason": "ADA - Assigned as booked"
+  },
+  {
+    "reservation_id": 2600781,
+    "guest_name": "Thomas Cruz",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQB",
+    "assigned_room_type": "NKSQB",
+    "length_of_stay": 1,
+    "special_requests": "ADA, Connecting",
+    "assignment_reason": "ADA - Assigned as booked"
+  },
+  {
+    "reservation_id": 2600646,
+    "guest_name": "Jennifer Wood",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600523,
+    "guest_name": "Frank White",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600602,
+    "guest_name": "Sharon Williams",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600621,
+    "guest_name": "Patrick Reyes",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600625,
+    "guest_name": "Jennifer Hall",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600699,
+    "guest_name": "Nancy Clark",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600543,
+    "guest_name": "Ryan Hughes",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600593,
+    "guest_name": "Patricia Collins",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600613,
+    "guest_name": "Daniel Davis",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600637,
+    "guest_name": "Ronald Wright",
+    "honors_status": "Gold",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600731,
+    "guest_name": "Dennis Gutierrez",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600746,
+    "guest_name": "Helen Evans",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600779,
+    "guest_name": "Eric Miller",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600803,
+    "guest_name": "Daniel Hughes",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600538,
+    "guest_name": "Jeffrey Rivera",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600693,
+    "guest_name": "Timothy Hernandez",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600728,
+    "guest_name": "Joseph Phillips",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600729,
+    "guest_name": "Nicole Roberts",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600497,
+    "guest_name": "Jason Perez",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600503,
+    "guest_name": "Eric Gray",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600511,
+    "guest_name": "Maria Wood",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600522,
+    "guest_name": "Sharon Kelly",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600524,
+    "guest_name": "Helen Walker",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600537,
+    "guest_name": "Joshua Howard",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600544,
+    "guest_name": "Frank Miller",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "VIP",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600574,
+    "guest_name": "Jonathan Murphy",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600577,
+    "guest_name": "Nancy Reed",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600587,
+    "guest_name": "Amanda Moore",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600596,
+    "guest_name": "Michael Anderson",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600600,
+    "guest_name": "John Walker",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600612,
+    "guest_name": "Debra Garcia",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600619,
+    "guest_name": "Margaret Gutierrez",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600629,
+    "guest_name": "John Hernandez",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600654,
+    "guest_name": "Nicholas Nguyen",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600725,
+    "guest_name": "Maria Rivera",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600768,
+    "guest_name": "Mark Phillips",
+    "honors_status": "Diamond",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600772,
+    "guest_name": "Brenda Adams",
+    "honors_status": "Diamond",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600774,
+    "guest_name": "Christine Nelson",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 2,
+    "special_requests": "VIP",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600515,
+    "guest_name": "Scott Lopez",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600589,
+    "guest_name": "Ronald Torres",
+    "honors_status": "Gold",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600606,
+    "guest_name": "Nancy Smith",
+    "honors_status": "Gold",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600611,
+    "guest_name": "Frank Morales",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600622,
+    "guest_name": "Dennis Bailey",
+    "honors_status": "Gold",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600632,
+    "guest_name": "Scott Gray",
+    "honors_status": "Gold",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600634,
+    "guest_name": "Kevin Murphy",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600642,
+    "guest_name": "Ashley Carter",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600653,
+    "guest_name": "Katherine Thomas",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600683,
+    "guest_name": "Elizabeth Jones",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600695,
+    "guest_name": "Anna Hill",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600705,
+    "guest_name": "Ronald Adams",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600710,
+    "guest_name": "Joshua Gutierrez",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600747,
+    "guest_name": "Jacob Phillips",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600765,
+    "guest_name": "Brandon Hughes",
+    "honors_status": "Gold",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600793,
+    "guest_name": "Janet Ortiz",
+    "honors_status": "Gold",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600505,
+    "guest_name": "Richard Roberts",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600506,
+    "guest_name": "Larry Richardson",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600507,
+    "guest_name": "Donna Nguyen",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600510,
+    "guest_name": "Jeffrey Thomas",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600512,
+    "guest_name": "Steven Davis",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600513,
+    "guest_name": "Dennis Campbell",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600533,
+    "guest_name": "Kathleen Parker",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600548,
+    "guest_name": "Jeffrey Evans",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600549,
+    "guest_name": "Jacob Collins",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600550,
+    "guest_name": "Daniel Phillips",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600552,
+    "guest_name": "Joseph Hill",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600561,
+    "guest_name": "Daniel Diaz",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600566,
+    "guest_name": "Laura Wilson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600569,
+    "guest_name": "Betty Rogers",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600582,
+    "guest_name": "Carol Evans",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600584,
+    "guest_name": "Emma Thompson",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600586,
+    "guest_name": "George White",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600592,
+    "guest_name": "Kevin Campbell",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600595,
+    "guest_name": "Maria Jones",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600598,
+    "guest_name": "David Reed",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600601,
+    "guest_name": "Michael Green",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 7,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600624,
+    "guest_name": "Dennis Morris",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600630,
+    "guest_name": "Angela Mitchell",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600636,
+    "guest_name": "Samantha Lee",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600640,
+    "guest_name": "Margaret Martin",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600645,
+    "guest_name": "Justin Campbell",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600649,
+    "guest_name": "Matthew Howard",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600665,
+    "guest_name": "Amy Anderson",
+    "honors_status": "Blue",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600678,
+    "guest_name": "Jessica Nelson",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 3,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600679,
+    "guest_name": "Jennifer Adams",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600682,
+    "guest_name": "Stephen Scott",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600684,
+    "guest_name": "Helen Gray",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600685,
+    "guest_name": "Samantha Clark",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600686,
+    "guest_name": "Nicole Ward",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600689,
+    "guest_name": "Jack James",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600700,
+    "guest_name": "Sandra Cook",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600707,
+    "guest_name": "Gary Collins",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600708,
+    "guest_name": "Joseph Sanchez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600713,
+    "guest_name": "Joseph Robinson",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600723,
+    "guest_name": "Donald King",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600733,
+    "guest_name": "Dennis Rodriguez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600735,
+    "guest_name": "Samuel Brown",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600738,
+    "guest_name": "Nicole Flores",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600743,
+    "guest_name": "Carolyn Thomas",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600748,
+    "guest_name": "Gary Ramos",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 4,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600752,
+    "guest_name": "Melissa Jackson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 7,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600756,
+    "guest_name": "Andrew King",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600785,
+    "guest_name": "John Gonzalez",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600790,
+    "guest_name": "Brenda Flores",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600812,
+    "guest_name": "Brandon Howard",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600813,
+    "guest_name": "Nicole Morris",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600814,
+    "guest_name": "Justin Gutierrez",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600499,
+    "guest_name": "Thomas Rogers",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600501,
+    "guest_name": "Elizabeth Ramirez",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600504,
+    "guest_name": "Jeffrey Anderson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600508,
+    "guest_name": "Scott Perez",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600509,
+    "guest_name": "Anna Gutierrez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600516,
+    "guest_name": "Christopher Kim",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600520,
+    "guest_name": "Patrick Young",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600527,
+    "guest_name": "Helen Martinez",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600530,
+    "guest_name": "Brian Lee",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600531,
+    "guest_name": "Gregory Campbell",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600534,
+    "guest_name": "Donald Miller",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600535,
+    "guest_name": "Jennifer Morgan",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600539,
+    "guest_name": "Kimberly Peterson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600541,
+    "guest_name": "Jennifer Ortiz",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600553,
+    "guest_name": "Brian Flores",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600556,
+    "guest_name": "Daniel Harris",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600557,
+    "guest_name": "Helen Jackson",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600558,
+    "guest_name": "Sandra Bennett",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600562,
+    "guest_name": "Susan King",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600563,
+    "guest_name": "Christine Mitchell",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600564,
+    "guest_name": "Timothy Ramirez",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600567,
+    "guest_name": "George Flores",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600571,
+    "guest_name": "Katherine Murphy",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600572,
+    "guest_name": "David Johnson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600573,
+    "guest_name": "Samantha Collins",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600576,
+    "guest_name": "Ryan Roberts",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600578,
+    "guest_name": "Dennis King",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600583,
+    "guest_name": "Carol Morgan",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600588,
+    "guest_name": "Kenneth Howard",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600594,
+    "guest_name": "Paul Rivera",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600599,
+    "guest_name": "Jerry Mendoza",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600603,
+    "guest_name": "Ryan Harris",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600604,
+    "guest_name": "Edward Stewart",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600607,
+    "guest_name": "Eric Edwards",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600608,
+    "guest_name": "Larry Baker",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600614,
+    "guest_name": "Frank Scott",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600615,
+    "guest_name": "Nicole Morales",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600617,
+    "guest_name": "Nancy Campbell",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600620,
+    "guest_name": "Dennis Bailey",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600623,
+    "guest_name": "Linda Gomez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600626,
+    "guest_name": "Stephen Allen",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600627,
+    "guest_name": "Kenneth Martinez",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600638,
+    "guest_name": "Michelle Mendoza",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600641,
+    "guest_name": "Kevin Thompson",
+    "honors_status": "Blue",
+    "booked_room_type": "NKSQB",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSQB (ADA exhausted) - Blue"
+  },
+  {
+    "reservation_id": 2600643,
+    "guest_name": "Barbara Richardson",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600644,
+    "guest_name": "Emma Ruiz",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600647,
+    "guest_name": "Emma Kelly",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600650,
+    "guest_name": "Donald Martinez",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600651,
+    "guest_name": "Charles Reed",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600657,
+    "guest_name": "Cynthia Thomas",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600662,
+    "guest_name": "Joseph Ruiz",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600663,
+    "guest_name": "Emily Murphy",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600666,
+    "guest_name": "James Morales",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600667,
+    "guest_name": "Michael Ruiz",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600668,
+    "guest_name": "James Rodriguez",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600669,
+    "guest_name": "Dorothy Wright",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600671,
+    "guest_name": "Frank Brooks",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600673,
+    "guest_name": "Rebecca Harris",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600690,
+    "guest_name": "Debra Ramos",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600697,
+    "guest_name": "Nancy Green",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600704,
+    "guest_name": "John Cook",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600709,
+    "guest_name": "Ashley Thompson",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KSVN",
+    "length_of_stay": 2,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600714,
+    "guest_name": "Cynthia Chavez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600715,
+    "guest_name": "Angela Young",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600716,
+    "guest_name": "Kimberly Johnson",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KEXN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600718,
+    "guest_name": "Anthony Williams",
+    "honors_status": "Silver",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600722,
+    "guest_name": "Helen Thompson",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600727,
+    "guest_name": "John Green",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600730,
+    "guest_name": "Angela Perez",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600737,
+    "guest_name": "Michael Murphy",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KEXN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600739,
+    "guest_name": "Donna Baker",
+    "honors_status": "Blue",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "NKSQA",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600740,
+    "guest_name": "Melissa Murphy",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "KEXN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600749,
+    "guest_name": "Janet Sanchez",
+    "honors_status": "Silver",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSQA (ADA exhausted) - Silver"
+  },
+  {
+    "reservation_id": 2600753,
+    "guest_name": "Gregory Harris",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600755,
+    "guest_name": "Anna James",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600758,
+    "guest_name": "Ashley Young",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600759,
+    "guest_name": "Robert Davis",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600760,
+    "guest_name": "Ryan Wood",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600761,
+    "guest_name": "Karen Clark",
+    "honors_status": "Non-member",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSQA (ADA exhausted) - Non-member"
+  },
+  {
+    "reservation_id": 2600762,
+    "guest_name": "Jonathan Morris",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "NKSPK",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600764,
+    "guest_name": "Jacob Chavez",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600767,
+    "guest_name": "Michelle Morales",
+    "honors_status": "Blue",
+    "booked_room_type": "NKSPD",
+    "assigned_room_type": "NKSP",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSPD (ADA exhausted) - Blue"
+  },
+  {
+    "reservation_id": 2600770,
+    "guest_name": "Dorothy White",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600776,
+    "guest_name": "David Rogers",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "NKSPK",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Blue"
+  },
+  {
+    "reservation_id": 2600777,
+    "guest_name": "Lisa Allen",
+    "honors_status": "Silver",
+    "booked_room_type": "NKSQA",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Cross-category from NKSQA (ADA exhausted) - Silver"
+  },
+  {
+    "reservation_id": 2600782,
+    "guest_name": "Michael Moore",
+    "honors_status": "Silver",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600786,
+    "guest_name": "Laura Gutierrez",
+    "honors_status": "Silver",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "NKSCJ",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600789,
+    "guest_name": "Justin Reyes",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TDBN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600791,
+    "guest_name": "Mark Gutierrez",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "NKSCJ",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from KSVN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600792,
+    "guest_name": "Ronald Turner",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TDBN (overbooked) - Blue"
+  },
+  {
+    "reservation_id": 2600794,
+    "guest_name": "Anna Allen",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TDBN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600795,
+    "guest_name": "Heather Johnson",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TDBN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600797,
+    "guest_name": "Carol Green",
+    "honors_status": "Blue",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TDBN (overbooked) - Blue"
+  },
+  {
+    "reservation_id": 2600808,
+    "guest_name": "Carol Hall",
+    "honors_status": "Non-member",
+    "booked_room_type": "TDBN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TDBN (overbooked) - Non-member"
+  },
+  {
+    "reservation_id": 2600811,
+    "guest_name": "Jerry Miller",
+    "honors_status": "Blue",
+    "booked_room_type": "KSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from KSVN (avoid walk) - Blue"
+  },
+  {
+    "reservation_id": 2600545,
+    "guest_name": "Brandon Thomas",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 7,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600659,
+    "guest_name": "Patricia Peterson",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSPK",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 7,
+    "special_requests": "High Floor",
+    "assignment_reason": "Cross-category from NKSPK (avoid walk) - Diamond"
+  },
+  {
+    "reservation_id": 2600698,
+    "guest_name": "Maria Gomez",
+    "honors_status": "Diamond",
+    "booked_room_type": "KOTN",
+    "assigned_room_type": "KOTN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600719,
+    "guest_name": "William Taylor",
+    "honors_status": "Diamond",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600721,
+    "guest_name": "Brenda Taylor",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600744,
+    "guest_name": "Thomas Ramos",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600798,
+    "guest_name": "Frank Brooks",
+    "honors_status": "Diamond",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600809,
+    "guest_name": "Michael Ramirez",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600526,
+    "guest_name": "Samuel Taylor",
+    "honors_status": "Gold",
+    "booked_room_type": "KEXN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from KEXN (avoid walk) - Gold"
+  },
+  {
+    "reservation_id": 2600655,
+    "guest_name": "Alexander Gutierrez",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600763,
+    "guest_name": "David Ramirez",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600536,
+    "guest_name": "George Wilson",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600674,
+    "guest_name": "Dennis Wright",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600702,
+    "guest_name": "Sharon Mendoza",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TCSN",
+    "assigned_room_type": "TCSN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600734,
+    "guest_name": "Brenda Gray",
+    "honors_status": "Lifetime Diamond",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600495,
+    "guest_name": "Thomas Lee",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600528,
+    "guest_name": "Dorothy Baker",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600529,
+    "guest_name": "Linda Morgan",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600579,
+    "guest_name": "Eric Taylor",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600656,
+    "guest_name": "Raymond Ramirez",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600680,
+    "guest_name": "David Clark",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600703,
+    "guest_name": "Thomas Torres",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600724,
+    "guest_name": "Rachel Cook",
+    "honors_status": "Diamond",
+    "booked_room_type": "NKSCJ",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSCJ (avoid walk) - Diamond"
+  },
+  {
+    "reservation_id": 2600750,
+    "guest_name": "Lisa Murphy",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600751,
+    "guest_name": "Angela Morgan",
+    "honors_status": "Diamond",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600546,
+    "guest_name": "Sandra Ward",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600565,
+    "guest_name": "Sharon Gomez",
+    "honors_status": "Gold",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600568,
+    "guest_name": "Jennifer Ortiz",
+    "honors_status": "Gold",
+    "booked_room_type": "KEXN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from KEXN (avoid walk) - Gold"
+  },
+  {
+    "reservation_id": 2600590,
+    "guest_name": "Richard Turner",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600610,
+    "guest_name": "Donald Rivera",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600664,
+    "guest_name": "Jessica Hill",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600717,
+    "guest_name": "Pamela Lee",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600778,
+    "guest_name": "Janet Phillips",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600787,
+    "guest_name": "Edward Flores",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600802,
+    "guest_name": "Donald Walker",
+    "honors_status": "Gold",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600807,
+    "guest_name": "Richard Young",
+    "honors_status": "Gold",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600502,
+    "guest_name": "Alexander Hughes",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600517,
+    "guest_name": "Eric James",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600540,
+    "guest_name": "Nicholas Lopez",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600542,
+    "guest_name": "Joseph Mendoza",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600551,
+    "guest_name": "Melissa James",
+    "honors_status": "Non-member",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 5,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600554,
+    "guest_name": "Kevin Wood",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600560,
+    "guest_name": "Margaret Ruiz",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600570,
+    "guest_name": "Anthony Ward",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600581,
+    "guest_name": "Brenda Collins",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600591,
+    "guest_name": "Sandra Sanchez",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 7,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600597,
+    "guest_name": "Daniel Hughes",
+    "honors_status": "Silver",
+    "booked_room_type": "TCSN",
+    "assigned_room_type": "TCSN",
+    "length_of_stay": 7,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600633,
+    "guest_name": "Pamela Diaz",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600652,
+    "guest_name": "Brandon Peterson",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600658,
+    "guest_name": "Brandon Sanchez",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 7,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600661,
+    "guest_name": "Maria Martin",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600672,
+    "guest_name": "Kevin Clark",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600681,
+    "guest_name": "Ronald Howard",
+    "honors_status": "Non-member",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 3,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600701,
+    "guest_name": "James Lewis",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600773,
+    "guest_name": "Edward Allen",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 6,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600784,
+    "guest_name": "Christine Mitchell",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600801,
+    "guest_name": "Justin Davis",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 4,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600805,
+    "guest_name": "Emma Walker",
+    "honors_status": "Blue",
+    "booked_room_type": "KSPN",
+    "assigned_room_type": "KSPN",
+    "length_of_stay": 3,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600496,
+    "guest_name": "Laura Martinez",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600498,
+    "guest_name": "Amanda Perez",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600500,
+    "guest_name": "Anna Ortiz",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600514,
+    "guest_name": "Amanda Nelson",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600518,
+    "guest_name": "Kimberly Taylor",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600519,
+    "guest_name": "Donna Ward",
+    "honors_status": "Non-member",
+    "booked_room_type": "KSLN",
+    "assigned_room_type": "KSLN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600521,
+    "guest_name": "Jason Allen",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600525,
+    "guest_name": "Amy Torres",
+    "honors_status": "Blue",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600532,
+    "guest_name": "Linda Gomez",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600547,
+    "guest_name": "Linda Jackson",
+    "honors_status": "Blue",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600555,
+    "guest_name": "Emma Walker",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600559,
+    "guest_name": "Linda Davis",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600575,
+    "guest_name": "Richard Sanchez",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600580,
+    "guest_name": "Kenneth Stewart",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "Connecting",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600585,
+    "guest_name": "Maria Gonzalez",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600605,
+    "guest_name": "Jonathan Baker",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600609,
+    "guest_name": "Kimberly Collins",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600616,
+    "guest_name": "Jack Ortiz",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600618,
+    "guest_name": "Emma Diaz",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600628,
+    "guest_name": "Andrew Cox",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600631,
+    "guest_name": "Edward Turner",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600635,
+    "guest_name": "Anthony Miller",
+    "honors_status": "Blue",
+    "booked_room_type": "NKSP",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Cross-category from NKSP (avoid walk) - Blue"
+  },
+  {
+    "reservation_id": 2600639,
+    "guest_name": "Emma Stewart",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600648,
+    "guest_name": "Linda Ramos",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TSVN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600670,
+    "guest_name": "Joseph Mendoza",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TCSN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600675,
+    "guest_name": "John Mitchell",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TCSN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600676,
+    "guest_name": "Rachel Hughes",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600677,
+    "guest_name": "Jonathan Scott",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600687,
+    "guest_name": "Susan Gutierrez",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600688,
+    "guest_name": "Amanda Edwards",
+    "honors_status": "Blue",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "TCSN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Blue"
+  },
+  {
+    "reservation_id": 2600691,
+    "guest_name": "Thomas Campbell",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600692,
+    "guest_name": "Christopher Young",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600694,
+    "guest_name": "Joseph Baker",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "NDSPXC",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600706,
+    "guest_name": "Brian Cooper",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600711,
+    "guest_name": "Gary Ruiz",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600712,
+    "guest_name": "Joseph Martinez",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "NDSPXC",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600720,
+    "guest_name": "Thomas Johnson",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600726,
+    "guest_name": "Linda Smith",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600732,
+    "guest_name": "Ashley Cruz",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600736,
+    "guest_name": "Jack Young",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600741,
+    "guest_name": "Stephanie Ruiz",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600742,
+    "guest_name": "Heather Richardson",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600745,
+    "guest_name": "Helen Young",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600754,
+    "guest_name": "Pamela Rivera",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600757,
+    "guest_name": "Patricia Mitchell",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600766,
+    "guest_name": "Sandra Peterson",
+    "honors_status": "Silver",
+    "booked_room_type": "TSVN",
+    "assigned_room_type": "NDSPXC",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Upgrade from TSVN (overbooked) - Silver"
+  },
+  {
+    "reservation_id": 2600769,
+    "guest_name": "Jessica Murphy",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600771,
+    "guest_name": "Debra Johnson",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600775,
+    "guest_name": "Justin Phillips",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "High Floor",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600780,
+    "guest_name": "Jack Nelson",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600783,
+    "guest_name": "Brandon Young",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600788,
+    "guest_name": "Alexander Stewart",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600796,
+    "guest_name": "Mark Lopez",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600799,
+    "guest_name": "Katherine Garcia",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600800,
+    "guest_name": "Gary Cook",
+    "honors_status": "Blue",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600804,
+    "guest_name": "Betty Ward",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600806,
+    "guest_name": "Kevin Scott",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "KNGN",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Assigned as booked"
+  },
+  {
+    "reservation_id": 2600810,
+    "guest_name": "Joshua Adams",
+    "honors_status": "Non-member",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "NDSPXC",
+    "length_of_stay": 2,
+    "special_requests": "None",
+    "assignment_reason": "Emergency assignment from KNGN (100% capacity) - Non-member"
+  },
+  {
+    "reservation_id": 2600815,
+    "guest_name": "Raymond Murphy",
+    "honors_status": "Silver",
+    "booked_room_type": "KNGN",
+    "assigned_room_type": "NDSPXC",
+    "length_of_stay": 1,
+    "special_requests": "None",
+    "assignment_reason": "Emergency assignment from KNGN (100% capacity) - Silver"
+  }
+]
