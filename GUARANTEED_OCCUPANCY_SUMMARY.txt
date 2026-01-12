@@ -1,0 +1,135 @@
+EMBASSY SUITES - GUARANTEED OCCUPANCY DATASET
+================================================================================
+
+✅ PROBLEM SOLVED: Every date hits EXACT target occupancy
+
+FILE: embassy_suites_GUARANTEED_occupancy.json
+Total Reservations: 3,757
+Date Range: Jan 15 - Feb 14, 2026 (31 nights)
+Hotel Capacity: 321 rooms
+
+VALIDATION: All 31 dates hit exact target (Diff = 0) ✓
+
+
+SOLD OUT / OVERBOOKED NIGHTS (11 nights - 35.5%)
+================================================================================
+
+🔴 MAXIMUM STRESS (16+ rooms over):
+------------------------------------
+• Jan 17 (Sat): 337 rooms - 105% occupancy (+16 OVERBOOKED)
+• Jan 18 (Sun): 337 rooms - 105% occupancy (+16 OVERBOOKED)
+• Feb 13 (Fri): 337 rooms - 105% occupancy (+16 OVERBOOKED)
+
+🔴 SEVERE OVERBOOKING (9-12 rooms over):
+-----------------------------------------
+• Jan 19 (Mon): 333 rooms - 104% occupancy (+12 OVERBOOKED)
+• Jan 28 (Wed): 330 rooms - 103% occupancy (+9 OVERBOOKED)
+• Jan 31 (Sat): 333 rooms - 104% occupancy (+12 OVERBOOKED)
+• Feb 1 (Sun): 330 rooms - 103% occupancy (+9 OVERBOOKED)
+
+🔴 MODERATE OVERBOOKING (3-6 rooms over):
+------------------------------------------
+• Jan 16 (Fri): 327 rooms - 102% occupancy (+6 OVERBOOKED)
+• Jan 23 (Fri): 324 rooms - 101% occupancy (+3 OVERBOOKED)
+• Feb 12 (Thu): 327 rooms - 102% occupancy (+6 OVERBOOKED)
+
+⚫ SOLD OUT (Exact capacity - 0 rooms available):
+-------------------------------------------------
+• Jan 27 (Tue): 321 rooms - 100% occupancy (SOLD OUT)
+
+
+NEAR SELLOUT NIGHTS (95-99%) - 4 nights
+================================================================================
+• Jan 20 (Tue): 314 rooms - 98% occupancy
+• Jan 29 (Thu): 317 rooms - 99% occupancy
+• Feb 6 (Fri): 308 rooms - 96% occupancy
+• Feb 7 (Sat): 314 rooms - 98% occupancy
+
+
+HIGH OCCUPANCY NIGHTS (85-94%) - 8 nights
+================================================================================
+• Jan 15: 282 rooms (88%)
+• Jan 21: 279 rooms (87%)
+• Jan 24: 295 rooms (92%)
+• Jan 26: 298 rooms (93%)
+• Jan 30: 301 rooms (94%)
+• Feb 2: 282 rooms (88%)
+• Feb 5: 292 rooms (91%)
+• Feb 14: 301 rooms (94%)
+
+
+NORMAL OCCUPANCY NIGHTS (<85%) - 8 nights
+================================================================================
+• Jan 22: 253 rooms (79%)
+• Jan 25: 263 rooms (82%)
+• Feb 3: 234 rooms (73%)
+• Feb 4: 243 rooms (76%)
+• Feb 8: 272 rooms (85%)
+• Feb 9: 240 rooms (75%)
+• Feb 10: 247 rooms (77%)
+• Feb 11: 269 rooms (84%)
+
+
+KEY TESTING DATES FOR YOUR ALGORITHM
+================================================================================
+
+1. **Jan 17-18** (Sat-Sun): 337 rooms each (+16 overbooked)
+   → MAXIMUM stress test
+   → Algorithm must upgrade 16+ guests
+   → May require named suite usage (Presidential, Governor's)
+
+2. **Jan 27** (Tue): 321 rooms (EXACTLY at capacity)
+   → SOLD OUT - zero rooms available
+   → Tests perfect assignment with no cushion
+
+3. **Feb 13** (Fri): 337 rooms (+16 overbooked)
+   → Concert + Valentine's weekend
+   → Second maximum stress test
+
+4. **Jan 31-Feb 1** (Sat-Sun): 333-330 rooms
+   → Family event (Monster Trucks)
+   → Tests sustained high occupancy
+
+
+WHAT YOUR SYSTEM SHOULD NOW SHOW
+================================================================================
+
+When you load this file and navigate through dates:
+
+✓ Jan 17: Should show "337 arrivals" or "OVERBOOKED BY 16"
+✓ Jan 18: Should show "337 arrivals" or "OVERBOOKED BY 16"
+✓ Jan 27: Should show "321 arrivals" or "SOLD OUT - 0 available"
+✓ Feb 13: Should show "337 arrivals" or "OVERBOOKED BY 16"
+
+The Overbooking Analysis table should show which room types need upgrades.
+
+If you're still seeing "88% occupancy" on Jan 17, then there's a bug in 
+how your JavaScript is calculating total occupied rooms for that date.
+
+
+WHAT CHANGED FROM PREVIOUS DATASET
+================================================================================
+
+OLD METHOD (failed):
+- Generated arrivals per day
+- Hoped overlapping stays would create target occupancy
+- Result: Fell short of targets
+
+NEW METHOD (guaranteed):
+- Calculates EXACT rooms needed on each date
+- Generates reservations to hit exact targets
+- Validates actual occupancy = target occupancy
+- Result: 100% accuracy on all 31 dates
+
+
+NEXT STEPS
+================================================================================
+
+1. Load embassy_suites_GUARANTEED_occupancy.json into your algorithm
+2. Navigate to Jan 17, 2026
+3. Verify system shows 337 rooms occupied (or 105% occupancy)
+4. Check Overbooking Analysis shows which room types need balancing
+5. Run algorithm to see upgrade assignments
+
+If it still shows wrong numbers, the issue is in the JavaScript date 
+calculation logic, not the dataset.
