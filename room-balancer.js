@@ -1,0 +1,487 @@
+// Room Balancing Algorithm - Embassy Suites Centennial Park
+// Priority: ADA > Rate Type > Honors Status > Length of Stay
+
+const ROOM_INVENTORY = {
+    'KNGN': 94, 'TDBN': 126, 'KSVN': 44, 'TSVN': 20,
+    'NKSQA': 13, 'NKSQB': 2, 'NDSPXC': 5, 'TCSN': 5,
+    'KEXN': 3, 'NKSCJ': 2, 'NKSPK': 2, 'NKSP': 1,
+    'NKSPD': 1, 'KSLN': 1, 'KSPN': 1, 'KOTN': 1
+};
+
+const UPGRADE_PATHS = {
+    'KNGN': ['KSVN', 'KEXN', 'NKSP', 'NKSPK', 'NKSCJ'],
+    'KSVN': ['KEXN', 'NKSPK', 'NKSCJ', 'NKSP'],
+    'KEXN': ['NKSPK', 'NKSCJ', 'NKSP'],
+    'TDBN': ['TSVN', 'TCSN', 'NDSPXC'],
+    'TSVN': ['TCSN', 'NDSPXC'],
+    'NKSQA': ['NKSQB', 'NKSPD'],
+    'NKSQB': ['NKSPD'],
+};
+
+const CROSS_CATEGORY_UPGRADES = {
+    'TDBN': ['KNGN', 'KSVN', 'KEXN', 'NKSP'],
+    'TSVN': ['KSVN', 'KEXN', 'NKSP'],
+    'KNGN': ['TDBN', 'TSVN', 'TCSN'],
+    'KSVN': ['TSVN', 'TCSN', 'NDSPXC'],
+    'NKSP': ['KNGN', 'KSVN', 'KEXN'],
+    'NKSPK': ['KSVN', 'KEXN', 'KNGN'],
+    'NKSCJ': ['KSVN', 'KEXN', 'KNGN'],
+    'NKSQA': ['KNGN', 'KSVN'],
+    'NKSQB': ['KNGN', 'KSVN'],
+    'NKSPD': ['NKSP', 'KEXN', 'KSVN'],
+};
+
+const NAMED_SUITES = ['KSPN', 'KOTN', 'KSLN'];
+const ADA_ROOMS = ['NKSQA', 'NKSQB', 'NKSPD'];
+
+// Rate type priority (lower number = higher priority)
+const RATE_PRIORITY = {
+    'Direct': 1,
+    'AAA': 2,
+    'Government': 3,
+    'Corporate': 4,
+    'Third-Party': 5,
+    'Hilton Go': 6,
+};
+
+let allReservations = [];
+let currentDate = null;
+let pendingAlerts = [];
+let finalAssignments = [];
+let filteredAssignments = [];
+
+// File upload handler
+document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        try {
+            allReservations = JSON.parse(event.target.result);
+            populateDateSelect();
+            document.getElementById('dateSelect').disabled = false;
+            document.getElementById('analyzeBtn').disabled = false;
+        } catch (error) {
+            alert('Error loading file: ' + error.message);
+        }
+    };
+    reader.readAsText(file);
+});
+
+function populateDateSelect() {
+    const dates = [...new Set(allReservations.map(r => r.checkin_date))].sort();
+    const select = document.getElementById('dateSelect');
+    select.innerHTML = '<option value="">Select a date...</option>';
+    
+    dates.forEach(date => {
+        const count = allReservations.filter(r => r.checkin_date === date).length;
+        const occupancy = ((count / 321) * 100).toFixed(0);
+        const option = document.createElement('option');
+        option.value = date;
+        option.textContent = `${date} (${count} arrivals - ${occupancy}% occupancy)`;
+        select.appendChild(option);
+    });
+}
+
+// PHASE 1: Analyze arrivals
+document.getElementById('analyzeBtn').addEventListener('click', () => {
+    currentDate = document.getElementById('dateSelect').value;
+    if (!currentDate) {
+        alert('Please select a check-in date');
+        return;
+    }
+    
+    document.getElementById('loadingState').classList.remove('hidden');
+    document.getElementById('previewPhase').classList.add('hidden');
+    document.getElementById('resultsPhase').classList.add('hidden');
+    
+    setTimeout(() => {
+        analyzeArrivals();
+        document.getElementById('loadingState').classList.add('hidden');
+        document.getElementById('previewPhase').classList.remove('hidden');
+    }, 500);
+});
+
+function analyzeArrivals() {
+    const reservations = allReservations.filter(r => r.checkin_date === currentDate);
+    pendingAlerts = [];
+    finalAssignments = [];
+    
+    // Calculate demand by room type
+    const demand = {};
+    reservations.forEach(r => {
+        demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
+    });
+    
+    // Find overbookings
+    const overbookings = [];
+    const overbookedTypes = new Set();
+    Object.entries(demand).forEach(([roomType, count]) => {
+        const available = ROOM_INVENTORY[roomType] || 0;
+        if (count > available) {
+            overbookings.push({ roomType, booked: count, available, overby: count - available });
+            overbookedTypes.add(roomType);
+        }
+    });
+    
+    // Run assignment simulation
+    const tempAvailable = { ...ROOM_INVENTORY };
+    
+    // Priority 1: ADA guests (legal requirement)
+    const adaGuests = reservations.filter(r => r.special_requests && r.special_requests.includes('ADA'));
+    adaGuests.forEach(guest => {
+        simulateAssignment(guest, tempAvailable, overbookedTypes, true);
+    });
+    
+    // Priority 2: Remaining guests sorted by rate priority, honors status, and stay length
+    const remainingGuests = reservations.filter(r => !finalAssignments.find(a => a.reservation_id === r.reservation_id));
+    
+    // Sort by priority: LOW rate priority gets upgraded first (when overbooked)
+    remainingGuests.sort((a, b) => {
+        // Lower rate priority guests get moved first (Third-Party, Hilton Go)
+        const rateA = RATE_PRIORITY[a.rate_type] || 99;
+        const rateB = RATE_PRIORITY[b.rate_type] || 99;
+        if (rateA !== rateB) return rateB - rateA; // Reverse sort - higher number first
+        
+        // Then by honors status
+        const statusA = getStatusPriority(a.honors_status);
+        const statusB = getStatusPriority(b.honors_status);
+        if (statusA !== statusB) return statusB - statusA;
+        
+        // Then by length of stay
+        return b.length_of_stay - a.length_of_stay;
+    });
+    
+    remainingGuests.forEach(guest => {
+        simulateAssignment(guest, tempAvailable, overbookedTypes, false);
+    });
+    
+    // Display preview
+    displayPreview(reservations, overbookings, demand);
+}
+
+function getStatusPriority(status) {
+    const priorities = {
+        'Lifetime Diamond': 100,
+        'Diamond': 90,
+        'Gold': 80,
+        'Silver': 70,
+        'Blue': 60,
+        'Non-member': 50
+    };
+    return priorities[status] || 0;
+}
+
+function simulateAssignment(guest, available, overbookedTypes, isAda) {
+    const bookedType = guest.booked_room_type;
+    
+    // Try booked room type first
+    if (available[bookedType] > 0) {
+        available[bookedType]--;
+        finalAssignments.push({
+            ...guest,
+            assigned_room_type: bookedType,
+            assignment_type: 'standard'
+        });
+        return true;
+    }
+    
+    // ONLY upgrade if this room type is actually overbooked
+    if (!overbookedTypes.has(bookedType)) {
+        // Room type not overbooked - guest stays unassigned for now (shouldn't happen)
+        return false;
+    }
+    
+    // Room type IS overbooked - try same-bed-type upgrades
+    const upgrades = UPGRADE_PATHS[bookedType] || [];
+    for (const upgradeType of upgrades) {
+        if (!NAMED_SUITES.includes(upgradeType) && available[upgradeType] > 0) {
+            available[upgradeType]--;
+            
+            const ratePriority = RATE_PRIORITY[guest.rate_type] || 99;
+            const isLowPriority = ratePriority >= 5; // Third-Party or Hilton Go
+            
+            pendingAlerts.push({
+                type: isLowPriority ? 'info' : 'warning',
+                message: `${isLowPriority ? 'Low-Priority ' : ''}Upgrade: ${guest.guest_name} (${guest.honors_status} | ${guest.rate_type}) from ${bookedType} → ${upgradeType}`,
+                guestName: guest.guest_name,
+                approved: false
+            });
+            
+            finalAssignments.push({
+                ...guest,
+                assigned_room_type: upgradeType,
+                assignment_type: 'upgrade'
+            });
+            return true;
+        }
+    }
+    
+    // Try cross-category upgrades
+    const crossCategory = CROSS_CATEGORY_UPGRADES[bookedType] || [];
+    for (const upgradeType of crossCategory) {
+        if (available[upgradeType] > 0) {
+            available[upgradeType]--;
+            
+            if (isAda && ADA_ROOMS.includes(bookedType) && !ADA_ROOMS.includes(upgradeType)) {
+                pendingAlerts.push({
+                    type: 'danger',
+                    message: `🚨 ADA ALERT: ${guest.guest_name} from ${bookedType} → ${upgradeType} (non-ADA). Call guest + coordinate with housekeeping.`,
+                    guestName: guest.guest_name,
+                    approved: false
+                });
+            } else {
+                pendingAlerts.push({
+                    type: 'warning',
+                    message: `Cross-Category: ${guest.guest_name} (${guest.rate_type}) from ${bookedType} → ${upgradeType}. Call guest for approval.`,
+                    guestName: guest.guest_name,
+                    approved: false
+                });
+            }
+            
+            finalAssignments.push({
+                ...guest,
+                assigned_room_type: upgradeType,
+                assignment_type: 'cross-category'
+            });
+            return true;
+        }
+    }
+    
+    // Emergency - any room available
+    for (const [roomType, count] of Object.entries(available)) {
+        if (count > 0 && !NAMED_SUITES.includes(roomType)) {
+            available[roomType]--;
+            pendingAlerts.push({
+                type: 'danger',
+                message: `⚠️ EMERGENCY: ${guest.guest_name} (${guest.rate_type}) from ${bookedType} → ${roomType}. Contact guest immediately.`,
+                guestName: guest.guest_name,
+                approved: false
+            });
+            
+            finalAssignments.push({
+                ...guest,
+                assigned_room_type: roomType,
+                assignment_type: 'emergency'
+            });
+            return true;
+        }
+    }
+    
+    // Last resort - named suites
+    for (const [roomType, count] of Object.entries(available)) {
+        if (count > 0) {
+            available[roomType]--;
+            pendingAlerts.push({
+                type: 'danger',
+                message: `🚨 NAMED SUITE: ${guest.guest_name} assigned to ${roomType}. Management approval required.`,
+                guestName: guest.guest_name,
+                approved: false
+            });
+            
+            finalAssignments.push({
+                ...guest,
+                assigned_room_type: roomType,
+                assignment_type: 'named-suite'
+            });
+            return true;
+        }
+    }
+    
+    // Could not assign - guest must be walked
+    pendingAlerts.push({
+        type: 'danger',
+        message: `❌ WALK GUEST: ${guest.guest_name} - Cannot accommodate. Contact nearby hotels.`,
+        guestName: guest.guest_name,
+        approved: false
+    });
+    return false;
+}
+
+function displayPreview(reservations, overbookings, demand) {
+    // Stats
+    document.getElementById('previewTotalGuests').textContent = reservations.length;
+    document.getElementById('previewOverbookings').textContent = overbookings.length;
+    document.getElementById('previewAlerts').textContent = pendingAlerts.length;
+    
+    const occupancy = ((reservations.length / 321) * 100).toFixed(0);
+    document.getElementById('previewOccupancy').textContent = occupancy + '%';
+    
+    // Overbooking table
+    const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    Object.entries(demand).sort((a, b) => {
+        const overA = a[1] - (ROOM_INVENTORY[a[0]] || 0);
+        const overB = b[1] - (ROOM_INVENTORY[b[0]] || 0);
+        return overB - overA;
+    }).forEach(([roomType, booked]) => {
+        const available = ROOM_INVENTORY[roomType] || 0;
+        const overby = Math.max(0, booked - available);
+        const status = overby > 0 ? 'OVERBOOKED' : 'OK';
+        const row = tbody.insertRow();
+        row.innerHTML = `
+            <td><strong>${roomType}</strong></td>
+            <td>${booked}</td>
+            <td>${available}</td>
+            <td><span class="badge ${overby > 0 ? 'overbooked' : 'ok'}">${status}</span></td>
+            <td>${overby > 0 ? overby : '-'}</td>
+        `;
+    });
+    
+    // Alerts list with checkboxes
+    const alertsList = document.getElementById('alertsList');
+    alertsList.innerHTML = '';
+    
+    if (pendingAlerts.length === 0) {
+        alertsList.innerHTML = `
+            <div class="alert-item info">
+                <span class="alert-icon">✓</span>
+                <div class="alert-content"><strong>No alerts - all guests fit in booked room types!</strong></div>
+            </div>
+        `;
+        document.getElementById('finalizeBtn').disabled = false;
+    } else {
+        pendingAlerts.forEach((alert, index) => {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert-item ${alert.type}`;
+            alertDiv.id = `alert-${index}`;
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'alert-checkbox';
+            checkbox.id = `checkbox-${index}`;
+            checkbox.addEventListener('change', () => updateApprovalStatus());
+            
+            const icon = document.createElement('span');
+            icon.className = 'alert-icon';
+            icon.textContent = alert.type === 'danger' ? '⚠️' : alert.type === 'warning' ? '⚠️' : 'ℹ️';
+            
+            const content = document.createElement('div');
+            content.className = 'alert-content';
+            content.textContent = alert.message;
+            
+            alertDiv.appendChild(checkbox);
+            alertDiv.appendChild(icon);
+            alertDiv.appendChild(content);
+            alertsList.appendChild(alertDiv);
+        });
+    }
+}
+
+function updateApprovalStatus() {
+    let allApproved = true;
+    
+    pendingAlerts.forEach((alert, index) => {
+        const checkbox = document.getElementById(`checkbox-${index}`);
+        const alertDiv = document.getElementById(`alert-${index}`);
+        
+        if (checkbox.checked) {
+            alertDiv.classList.add('approved');
+            alert.approved = true;
+        } else {
+            alertDiv.classList.remove('approved');
+            alert.approved = false;
+            allApproved = false;
+        }
+    });
+    
+    document.getElementById('finalizeBtn').disabled = !allApproved && pendingAlerts.length > 0;
+}
+
+// PHASE 2: Finalize assignments
+document.getElementById('finalizeBtn').addEventListener('click', () => {
+    document.getElementById('previewPhase').classList.add('hidden');
+    document.getElementById('resultsPhase').classList.remove('hidden');
+    
+    displayFinalResults();
+});
+
+function displayFinalResults() {
+    const reservations = allReservations.filter(r => r.checkin_date === currentDate);
+    
+    // Stats
+    document.getElementById('statTotalGuests').textContent = reservations.length;
+    document.getElementById('statAssigned').textContent = finalAssignments.length;
+    
+    const upgrades = finalAssignments.filter(a => a.assignment_type !== 'standard').length;
+    document.getElementById('statUpgrades').textContent = upgrades;
+    
+    const occupancy = ((reservations.length / 321) * 100).toFixed(0);
+    document.getElementById('statOccupancy').textContent = occupancy + '%';
+    
+    // Display all assignments
+    filteredAssignments = [...finalAssignments];
+    updateAssignmentsTable();
+}
+
+function updateAssignmentsTable() {
+    const tbody = document.getElementById('assignmentsTable').querySelector('tbody');
+    tbody.innerHTML = '';
+    
+    filteredAssignments.forEach(assignment => {
+        const row = tbody.insertRow();
+        const isUpgrade = assignment.booked_room_type !== assignment.assigned_room_type;
+        
+        const ratePriority = RATE_PRIORITY[assignment.rate_type] || 99;
+        const rateBadgeClass = ratePriority <= 4 ? 'high-priority' : 'low-priority';
+        const assignmentBadgeClass = assignment.assignment_type === 'standard' ? 'standard' : 'upgrade';
+        
+        row.innerHTML = `
+            <td>${assignment.guest_name}</td>
+            <td>${assignment.honors_status}</td>
+            <td><span class="badge ${rateBadgeClass}">${assignment.rate_type}</span></td>
+            <td>${assignment.booked_room_type}</td>
+            <td><strong>${assignment.assigned_room_type}</strong> ${isUpgrade ? '↑' : ''}</td>
+            <td>${assignment.length_of_stay}N</td>
+            <td><span class="badge ${assignmentBadgeClass}">${assignment.assignment_type}</span></td>
+        `;
+    });
+    
+    document.getElementById('assignmentCount').textContent = filteredAssignments.length;
+}
+
+// Filters
+document.getElementById('filterType').addEventListener('change', applyFilters);
+document.getElementById('filterRate').addEventListener('change', applyFilters);
+
+function applyFilters() {
+    const typeFilter = document.getElementById('filterType').value;
+    const rateFilter = document.getElementById('filterRate').value;
+    
+    filteredAssignments = finalAssignments.filter(a => {
+        const typeMatch = typeFilter === 'all' || 
+                         (typeFilter === 'upgrade' && a.assignment_type !== 'standard') ||
+                         (typeFilter === 'standard' && a.assignment_type === 'standard');
+        
+        const rateMatch = rateFilter === 'all' || a.rate_type === rateFilter;
+        
+        return typeMatch && rateMatch;
+    });
+    
+    updateAssignmentsTable();
+}
+
+// Export CSV
+document.getElementById('exportBtn').addEventListener('click', () => {
+    const csv = [
+        ['Guest Name', 'Honors Status', 'Rate Type', 'Booked Room', 'Assigned Room', 'Length of Stay', 'Assignment Type'],
+        ...filteredAssignments.map(a => [
+            a.guest_name,
+            a.honors_status,
+            a.rate_type,
+            a.booked_room_type,
+            a.assigned_room_type,
+            a.length_of_stay,
+            a.assignment_type
+        ])
+    ].map(row => row.join(',')).join('\n');
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `room-assignments-${currentDate}.csv`;
+    a.click();
+});

@@ -1,0 +1,51 @@
+QUICK START GUIDE
+=================
+
+1. OPEN THE APP
+   - Double-click "index.html" to open in your browser
+
+2. LOAD DATA
+   - Click "Load Reservations JSON"
+   - Select "embassy_suites_reservations_final.json"
+
+3. TEST WITH A SOLD-OUT DATE
+   - Select: 2026-01-17 (100% occupancy - 321 arrivals)
+   - Click "Analyze Arrivals"
+
+4. REVIEW ALERTS
+   - You'll see overbookings for TDBN, KSVN, and ADA rooms
+   - Check each alert box after "handling" it
+   - Notice: Low-priority rates (Third-Party, Hilton Go) get upgraded first
+
+5. FINALIZE
+   - Once all boxes checked, click "Finalize All Room Assignments"
+   - See all 321 assignments
+   - Export to CSV if needed
+
+TEST DATES TO TRY:
+------------------
+• 2026-01-17: 100% sold out (321 arrivals) - Multiple overbookings
+• 2026-01-19: 100% sold out (320 arrivals) - MLK Day weekend
+• 2026-01-31: 99% occupancy (317 arrivals) - Family event weekend
+• 2026-02-07: 97% occupancy (312 arrivals) - Hawks game
+• 2026-01-15: 58% occupancy (185 arrivals) - Easy test (no overbookings)
+
+GITHUB SETUP:
+-------------
+1. Create new repository: "hotel-room-balancer"
+2. Upload these files:
+   - index.html
+   - room-balancer.js
+   - README.md
+   - embassy_suites_reservations_final.json (sample data)
+
+3. Enable GitHub Pages (Settings → Pages → Deploy from main branch)
+4. Your app will be live at: https://[username].github.io/hotel-room-balancer
+
+FOR DERRICK MEETING:
+--------------------
+1. Open index.html locally or use GitHub Pages live link
+2. Load the JSON file
+3. Show January 17 (most dramatic scenario)
+4. Walk through the approval process
+5. Show the final assignments with rate priority in action
