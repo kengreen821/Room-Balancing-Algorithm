@@ -18,17 +18,21 @@ const UPGRADE_PATHS = {
     'NKSQB': ['NKSPD'],
 };
 
+// Cross-category upgrades - ONLY legitimate upgrades, NO downgrades
 const CROSS_CATEGORY_UPGRADES = {
+    // Standard Double → Kings (upgrade in bed, call guest for approval)
     'TDBN': ['KNGN', 'KSVN', 'KEXN', 'NKSP'],
-    'TSVN': ['KSVN', 'KEXN', 'NKSP'],
-    'KNGN': ['TDBN', 'TSVN', 'TCSN'],
-    'KSVN': ['TSVN', 'TCSN', 'NDSPXC'],
-    'NKSP': ['KNGN', 'KSVN', 'KEXN'],
-    'NKSPK': ['KSVN', 'KEXN', 'KNGN'],
-    'NKSCJ': ['KSVN', 'KEXN', 'KNGN'],
-    'NKSQA': ['KNGN', 'KSVN'],
-    'NKSQB': ['KNGN', 'KSVN'],
-    'NKSPD': ['NKSP', 'KEXN', 'KSVN'],
+    
+    // Park View Double → Premium Kings (upgrade)
+    'TSVN': ['KSVN', 'KEXN', 'NKSP', 'NKSPK'],
+    
+    // Conference Suite Double → Premium Kings (upgrade)
+    'TCSN': ['KEXN', 'NKSP', 'NKSPK'],
+    
+    // ADA rooms → Non-ADA same/better tier (when ADA exhausted)
+    'NKSQA': ['KNGN', 'KSVN', 'KEXN'],  // ADA Standard King → Standard/Premium Kings
+    'NKSQB': ['KNGN', 'KSVN', 'KEXN'],  // ADA Roll-in → Standard/Premium Kings
+    'NKSPD': ['NKSP', 'KEXN', 'NKSPK'], // ADA Premium → Other Premium Kings
 };
 
 const NAMED_SUITES = ['KSPN', 'KOTN', 'KSLN'];
@@ -49,6 +53,40 @@ let currentDate = null;
 let pendingAlerts = [];
 let finalAssignments = [];
 let filteredAssignments = [];
+
+// Room tier classification for downgrade detection
+const ROOM_TIERS = {
+    // Standard tier
+    'KNGN': 1, 'TDBN': 1,
+    // Park View tier
+    'KSVN': 2, 'TSVN': 2,
+    // Premium tier
+    'KEXN': 3, 'NKSPK': 3, 'NKSCJ': 3, 'NKSP': 3, 'NDSPXC': 3, 'TCSN': 3,
+    // ADA tier (special handling)
+    'NKSQA': 1, 'NKSQB': 1, 'NKSPD': 3,
+    // Named suites (highest tier)
+    'KSPN': 4, 'KOTN': 4, 'KSLN': 4,
+};
+
+function isDowngrade(fromType, toType) {
+    const fromTier = ROOM_TIERS[fromType] || 0;
+    const toTier = ROOM_TIERS[toType] || 0;
+    
+    // Moving to lower tier is always a downgrade
+    if (toTier < fromTier) {
+        return true;
+    }
+    
+    // King → Double is usually a downgrade (unless guest requested)
+    const fromIsKing = fromType.includes('K') && !fromType.includes('T');
+    const toIsDouble = toType.includes('T') || toType.includes('D');
+    
+    if (fromIsKing && toIsDouble && fromTier >= toTier) {
+        return true; // Same or lower tier + bed downgrade = downgrade
+    }
+    
+    return false;
+}
 
 // File upload handler
 document.getElementById('fileInput').addEventListener('change', (e) => {
@@ -249,9 +287,14 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Emergency - any room available
+    // Emergency - any room available (but NEVER downgrade)
     for (const [roomType, count] of Object.entries(available)) {
         if (count > 0 && !NAMED_SUITES.includes(roomType)) {
+            // Check if this is a downgrade - if so, skip it
+            if (isDowngrade(bookedType, roomType)) {
+                continue; // Skip downgrades - would rather walk guest
+            }
+            
             available[roomType]--;
             pendingAlerts.push({
                 type: 'danger',
@@ -269,9 +312,14 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Last resort - named suites
+    // Last resort - named suites (only if not a downgrade)
     for (const [roomType, count] of Object.entries(available)) {
         if (count > 0) {
+            // Even for named suites, don't downgrade
+            if (isDowngrade(bookedType, roomType)) {
+                continue;
+            }
+            
             available[roomType]--;
             pendingAlerts.push({
                 type: 'danger',
