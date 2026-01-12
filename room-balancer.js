@@ -204,7 +204,7 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
             pendingAlerts.push({
                 type: isLowPriority ? 'info' : 'warning',
                 message: `${isLowPriority ? 'Low-Priority ' : ''}Upgrade: ${guest.guest_name} (${guest.honors_status} | ${guest.rate_type}) from ${bookedType} → ${upgradeType}`,
-                guestName: guest.guest_name,
+                guest_name: guest.guest_name,
                 approved: false
             });
             
@@ -226,14 +226,14 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
                 pendingAlerts.push({
                     type: 'danger',
                     message: `🚨 ADA ALERT: ${guest.guest_name} from ${bookedType} → ${upgradeType} (non-ADA). Call guest + coordinate with housekeeping.`,
-                    guestName: guest.guest_name,
+                    guest_name: guest.guest_name,
                     approved: false
                 });
             } else {
                 pendingAlerts.push({
                     type: 'warning',
                     message: `Cross-Category: ${guest.guest_name} (${guest.rate_type}) from ${bookedType} → ${upgradeType}. Call guest for approval.`,
-                    guestName: guest.guest_name,
+                    guest_name: guest.guest_name,
                     approved: false
                 });
             }
@@ -255,7 +255,7 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
             pendingAlerts.push({
                 type: 'danger',
                 message: `⚠️ EMERGENCY: ${guest.guest_name} (${guest.rate_type}) from ${bookedType} → ${roomType}. Contact guest immediately.`,
-                guestName: guest.guest_name,
+                guest_name: guest.guest_name,
                 approved: false
             });
             
@@ -276,7 +276,7 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
             pendingAlerts.push({
                 type: 'danger',
                 message: `🚨 NAMED SUITE: ${guest.guest_name} assigned to ${roomType}. Management approval required.`,
-                guestName: guest.guest_name,
+                guest_name: guest.guest_name,
                 approved: false
             });
             
@@ -292,7 +292,7 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
     pendingAlerts.push({
         type: 'danger',
         message: `❌ WALK GUEST: ${guest.guest_name} - Cannot accommodate. Contact nearby hotels.`,
-        guestName: guest.guest_name,
+        guest_name: guest.guest_name,
         approved: false
     });
     
@@ -414,13 +414,13 @@ document.getElementById('finalizeBtn').addEventListener('click', () => {
         const checkbox = document.getElementById(`checkbox-${index}`);
         
         if (checkbox && checkbox.checked) {
-            // This alert IS approved
-            approvedGuestNames.add(alert.guestName);
+            // This alert IS approved - use the actual guest_name property
+            approvedGuestNames.add(alert.guest_name);
             alert.approved = true;
         } else {
             // This alert is NOT approved
             unapprovedAlerts.push(alert);
-            unapprovedGuestNames.add(alert.guestName);
+            unapprovedGuestNames.add(alert.guest_name);
             alert.approved = false;
         }
     });
