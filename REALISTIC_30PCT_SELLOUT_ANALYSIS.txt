@@ -1,0 +1,425 @@
+EMBASSY SUITES CENTENNIAL PARK - REALISTIC 30% SELLOUT ANALYSIS
+January 15 - February 14, 2026
+================================================================================
+
+DATASET OVERVIEW
+================================================================================
+Total Reservations: 3,699
+Date Range: 31 nights (Jan 15 - Feb 14, 2026)
+Hotel Capacity: 321 rooms
+Sold Out/Overbooked Nights: 11/31 (35.5%) ✓ EXCEEDS 30% TARGET
+High Demand Nights (85%+): 23/31 (74.2%)
+
+This dataset represents REALISTIC hotel operations during peak Atlanta event 
+season. Downtown hotels near GWCC and State Farm Arena regularly experience 
+these occupancy patterns during convention and major event periods.
+
+
+SOLD OUT / OVERBOOKED NIGHTS (11 nights - 35.5%)
+================================================================================
+
+🔴 CRITICAL OVERBOOKING SCENARIOS (16+ rooms over):
+----------------------------------------------------
+• Jan 17 (Saturday): 337 rooms (+16 over) - GWCC Convention + Hawks vs Celtics
+• Jan 18 (Sunday): 337 rooms (+16 over) - GWCC Convention + Christian Concert  
+• Feb 13 (Friday): 337 rooms (+16 over) - B2K Concert + Valentine's Weekend
+
+These dates require AGGRESSIVE room balancing:
+→ Multiple suite upgrades needed
+→ Named suites (Governor's, Presidential) may be used
+→ Algorithm must prioritize Diamond/Gold status upgrades
+→ Some guests may need to be walked if upgrades exhausted
+
+
+🔴 MODERATE OVERBOOKING SCENARIOS (9-12 rooms over):
+-----------------------------------------------------
+• Jan 19 (Monday): 333 rooms (+12 over) - MLK Day + Hawks game + GWCC Convention
+• Jan 28 (Wednesday): 330 rooms (+9 over) - Trade Show peak day
+• Jan 31 (Saturday): 333 rooms (+12 over) - Monster Trucks family event
+• Feb 1 (Sunday): 330 rooms (+9 over) - Monster Trucks Day 2
+
+Algorithm must:
+→ Upgrade Diamond/Gold guests to available premium rooms
+→ Use park view upgrades strategically
+→ Maintain same bed-type when possible (King→King, Double→Double)
+→ Keep families with connecting/adjacent rooms
+
+
+🔴 MINOR OVERBOOKING SCENARIOS (3-6 rooms over):
+-------------------------------------------------
+• Jan 16 (Friday): 327 rooms (+6 over) - GWCC Convention starts + MLK weekend
+• Jan 23 (Friday): 324 rooms (+3 over) - Hawks vs Suns
+• Feb 12 (Thursday): 327 rooms (+6 over) - Pre-concert + Valentine's arrivals
+
+Algorithm can:
+→ Use standard upgrade path (KNGN → KSVN, TDBN → TSVN)
+→ Minimal suite usage needed
+→ Focus on Honors status hierarchy
+
+
+⚫ EXACT CAPACITY (0 rooms over):
+----------------------------------
+• Jan 27 (Tuesday): 321 rooms (SOLD OUT at capacity) - Trade Show starts
+
+No overbooking, but:
+→ Zero inventory for walk-ins
+→ No room for changes or special requests
+→ Any cancellations = critical revenue management decisions
+
+
+NEAR SELLOUT NIGHTS (95-99% occupancy - 4 nights)
+================================================================================
+
+🟡 Jan 20 (Tuesday): 314 rooms (97.8%) - MLK holiday Monday
+🟡 Jan 29 (Thursday): 317 rooms (98.8%) - Trade Show + Hawks vs Rockets
+🟡 Feb 6 (Friday): 308 rooms (96.0%) - Weekend before Hawks game
+🟡 Feb 7 (Saturday): 314 rooms (97.8%) - Hawks game Saturday night
+
+These nights have 7-13 rooms remaining:
+→ Mostly suite inventory left
+→ Limited standard room availability
+→ Prepare for possible same-day overbooking
+→ Hold back named suites unless necessary
+
+
+HIGH OCCUPANCY NIGHTS (85-94% occupancy - 8 nights)
+================================================================================
+
+🟢 Jan 15 (Thursday): 282 rooms (87.9%) - Post-Peach Bowl departures
+🟢 Jan 21 (Wednesday): 279 rooms (86.9%) - Post-MLK midweek
+🟢 Jan 24 (Saturday): 295 rooms (91.9%) - Weekend demand
+🟢 Jan 26 (Monday): 298 rooms (92.8%) - Hawks vs Pacers
+🟢 Jan 30 (Friday): 301 rooms (93.8%) - Pre-Monster Trucks arrivals
+🟢 Feb 2 (Monday): 282 rooms (87.9%) - Post-Monster Trucks departures
+🟢 Feb 5 (Thursday): 292 rooms (91.0%) - Hawks game Thursday
+🟢 Feb 14 (Saturday): 301 rooms (93.8%) - Valentine's Day departures
+
+Strong demand but manageable:
+→ 26-39 rooms remaining
+→ Good mix of room types available
+→ Standard upgrade paths work well
+→ Minimal suite usage needed
+
+
+NORMAL OCCUPANCY NIGHTS (Below 85% - 8 nights)
+================================================================================
+
+⚪ Jan 22 (Thursday): 253 rooms (78.8%)
+⚪ Jan 25 (Sunday): 263 rooms (81.9%)
+⚪ Feb 3 (Tuesday): 234 rooms (72.9%)
+⚪ Feb 4 (Wednesday): 243 rooms (75.7%)
+⚪ Feb 8 (Sunday): 272 rooms (84.7%)
+⚪ Feb 9 (Monday): 240 rooms (74.8%)
+⚪ Feb 10 (Tuesday): 247 rooms (76.9%)
+⚪ Feb 11 (Wednesday): 269 rooms (83.8%)
+
+Lower demand periods:
+→ 52-87 rooms available
+→ Minimal overbooking risk
+→ Good opportunity for same-day bookings
+→ Standard operations
+
+
+EVENT CORRELATION ANALYSIS
+================================================================================
+
+PRIMARY DRIVERS OF SOLD OUT NIGHTS:
+------------------------------------
+
+1. **GWCC Conventions + Weekend = OVERBOOKED**
+   Jan 16-19 (4 consecutive nights) - Convention + MLK Weekend
+   → Hotel 100% full Thursday-Monday
+   → Combination of business and leisure travel
+   → Highest demand period in entire dataset
+
+2. **Major Concerts = OVERBOOKED**
+   Jan 18: Christian Concert (337 rooms +16 over)
+   Feb 13: B2K & Bow Wow (337 rooms +16 over)
+   → Concert crowds book aggressively
+   → Multi-night stays common
+   → High no-show risk requires overbooking strategy
+
+3. **Family Events = OVERBOOKED**
+   Jan 31-Feb 1: Monster Trucks (333-330 rooms)
+   → Families book 2-3 night stays
+   → Higher demand for double/double rooms
+   → Connecting room requests increase
+
+4. **Trade Shows = CAPACITY**
+   Jan 27-28: GWCC Trade Show (321-330 rooms)
+   → Business travelers dominate
+   → King room demand high
+   → Length of stay: 2-3 nights
+
+
+SECONDARY FACTORS:
+------------------
+
+• **Hawks Games** add 8-12% occupancy lift
+  → Friday/Saturday games = higher impact
+  → Holiday games (MLK) = maximum impact
+  → Thursday games = moderate impact
+
+• **Weekend Effect** adds 5-10% occupancy
+  → Leisure travelers extend business trips
+  → Friday arrivals for Saturday events
+  → Sunday departures common
+
+• **Holiday Impact** (MLK Weekend)
+  → 3-day weekend creates extended stays
+  → Jan 17-20 sustained 95-105% occupancy
+  → Monday game on holiday = peak demand
+
+
+REALISTIC OVERBOOKING STRATEGY
+================================================================================
+
+Hotels overbook based on historical no-show rates and cancellation patterns.
+Embassy Suites downtown Atlanta would use these guidelines:
+
+**AGGRESSIVE OVERBOOKING (3-5% over capacity):**
+• Major holidays (MLK, Valentine's)
+• Multi-event days (Convention + Concert + Game)
+• Friday/Saturday peak nights
+• Result: 330-337 rooms (9-16 over capacity)
+
+**MODERATE OVERBOOKING (2-3% over capacity):**
+• Trade show peak days
+• Single major events (concerts, family events)
+• Thursday/Sunday high demand
+• Result: 327-330 rooms (6-9 over capacity)
+
+**MINIMAL OVERBOOKING (0-1% over capacity):**
+• Hawks games alone
+• Regular weekend demand
+• Pre-event arrival nights
+• Result: 321-324 rooms (0-3 over capacity)
+
+
+ROOM BALANCING ALGORITHM TEST SCENARIOS
+================================================================================
+
+**SCENARIO 1: MAXIMUM STRESS TEST**
+Date: Jan 18, 2026 (Sunday)
+Occupancy: 337 rooms (+16 over capacity)
+Event: GWCC Convention + Christian Concert + MLK Weekend
+
+Algorithm must:
+→ Upgrade 16+ Diamond/Gold guests to premium inventory
+→ Use suite upgrades if standard premiums exhausted
+→ Maintain connecting rooms for families (concert crowd)
+→ Walk lowest-status guests only if all upgrades exhausted
+→ Generate report showing upgrade decisions and reasoning
+
+
+**SCENARIO 2: BUSINESS TRAVEL OVERBOOKING**
+Date: Jan 28, 2026 (Wednesday)  
+Occupancy: 330 rooms (+9 over capacity)
+Event: GWCC Trade Show peak day
+
+Algorithm must:
+→ Focus on King room upgrades (business travelers)
+→ Prioritize Diamond/Gold (corporate accounts)
+→ Use KNGN → KSVN → KEXN → Suite progression
+→ Minimize double room upgrades (fewer families)
+
+
+**SCENARIO 3: FAMILY EVENT OVERBOOKING**
+Date: Jan 31, 2026 (Saturday)
+Occupancy: 333 rooms (+12 over capacity)
+Event: Monster Trucks Live family event
+
+Algorithm must:
+→ Focus on double room upgrades (families)
+→ Preserve connecting room assignments
+→ Use TDBN → TSVN → TCSN progression
+→ Keep families with same bed type
+→ Consider suite upgrades for large families only
+
+
+**SCENARIO 4: EXACT CAPACITY**
+Date: Jan 27, 2026 (Tuesday)
+Occupancy: 321 rooms (SOLD OUT at capacity)
+
+Algorithm must:
+→ Assign all 321 rooms without upgrades
+→ Maintain ADA room availability
+→ Balance floor assignments
+→ Prepare for possible walk-ins (walk scenarios)
+
+
+**SCENARIO 5: NORMAL OPERATIONS**
+Date: Feb 4, 2026 (Wednesday)
+Occupancy: 243 rooms (75.7%)
+
+Algorithm must:
+→ Standard room assignments
+→ Honor all upgrade requests
+→ Maintain suite availability for upsells
+→ Normal operational workflow
+
+
+HONORS STATUS DISTRIBUTION IN DATASET
+================================================================================
+
+Distribution matches realistic business/leisure mix:
+• Lifetime Diamond: 5% (~185 reservations)
+• Diamond: 10% (~370 reservations)
+• Gold: 15% (~555 reservations)
+• Silver: 30% (~1,110 reservations)
+• Blue: 20% (~740 reservations)
+• Non-Members: 20% (~740 reservations)
+
+**On overbooked nights**, upgrade priority:
+1. Lifetime Diamond + 3+ night stays
+2. Diamond + 3+ night stays
+3. Gold + 3+ night stays
+4. Lifetime Diamond (any LOS)
+5. Diamond (any LOS)
+6. Gold (any LOS)
+7. Silver (long stays only)
+
+
+LENGTH OF STAY PATTERNS
+================================================================================
+
+Dataset reflects realistic booking patterns:
+• 1 night: 12% (walk-ins, local guests, game attendees)
+• 2 nights: 38% (conventions, concerts, weekend stays)
+• 3 nights: 35% (conventions, extended leisure)
+• 4 nights: 12% (extended business, vacation)
+• 5 nights: 3% (week-long conventions, relocations)
+
+Average LOS: 2.4 nights (realistic for downtown business hotel)
+
+
+ROOM TYPE DEMAND DISTRIBUTION
+================================================================================
+
+Based on 321-room inventory allocation:
+• KNGN (Standard King): 94 rooms (29%) - Business travelers
+• TDBN (Standard Double): 126 rooms (39%) - Families, groups, leisure
+• KSVN (Park View King): 44 rooms (14%) - Upgraded business travelers
+• TSVN (Park View Double): 20 rooms (6%) - Premium families
+• NKSQA (ADA King): 13 rooms (4%) - ADA compliance
+• Other Premium/Suites: 24 rooms (8%) - High-status upgrades
+
+On sold out nights:
+→ Standard inventory fills first
+→ Park view rooms used for upgrades
+→ ADA rooms assigned only when needed (legal requirement)
+→ Suites used as last resort for Diamond/Gold upgrades
+
+
+VALIDATION & QUALITY CHECKS
+================================================================================
+
+✓ All 3,699 reservations have valid data
+✓ No reservation exceeds 5-night stay
+✓ All dates have realistic occupancy patterns
+✓ Honors distribution matches industry standards
+✓ 11 sold out nights (35.5%) exceeds 30% target
+✓ Event correlation matches actual venue calendars
+✓ Room type distribution matches inventory
+✓ Overbooking levels match industry practice (3-5%)
+
+
+RECOMMENDED ALGORITHM TESTING SEQUENCE
+================================================================================
+
+**PHASE 1: Basic Capacity Management**
+Test Date: Feb 4 (243 rooms, 75.7%)
+Expected: Standard assignments, no upgrades needed
+
+**PHASE 2: High Occupancy Balancing**
+Test Date: Jan 30 (301 rooms, 93.8%)
+Expected: Some premium room usage, minimal upgrades
+
+**PHASE 3: Near Sellout Management**
+Test Date: Jan 20 (314 rooms, 97.8%)
+Expected: Strategic upgrades, suite inventory reserved
+
+**PHASE 4: Exact Capacity Operations**
+Test Date: Jan 27 (321 rooms, 100%)
+Expected: All rooms assigned, walk preparation
+
+**PHASE 5: Minor Overbooking**
+Test Date: Jan 23 (324 rooms, +3 over)
+Expected: 3-4 standard upgrades (KNGN→KSVN)
+
+**PHASE 6: Moderate Overbooking**
+Test Date: Jan 28 (330 rooms, +9 over)
+Expected: 9-10 upgrades including suite usage
+
+**PHASE 7: Critical Overbooking**
+Test Date: Jan 18 (337 rooms, +16 over)
+Expected: Aggressive upgrades, possible guest walks, suite usage
+
+
+SUCCESS METRICS FOR ALGORITHM
+================================================================================
+
+The room balancing algorithm should demonstrate:
+
+1. **Capacity Management** (100% accuracy)
+   → Never exceed physical room count after balancing
+   → All guests assigned or walked with explanation
+
+2. **Honors Hierarchy** (95%+ compliance)
+   → Diamond/Gold upgrades prioritized on overbooked nights
+   → Status-based upgrade decisions clearly documented
+
+3. **Room Type Logic** (90%+ same bed type)
+   → King guests get King upgrades when possible
+   → Double guests get Double upgrades when possible
+   → Families maintain connecting rooms
+
+4. **ADA Compliance** (100% accuracy)
+   → ADA guests never displaced
+   → ADA rooms available for qualified guests
+   → Legal requirements override status upgrades
+
+5. **Operational Efficiency** (processing time)
+   → 321-room night processed in <5 seconds
+   → 337-room overbooking scenario processed in <10 seconds
+   → Clear MOD approval workflow on walks
+
+
+DATASET FILES
+================================================================================
+
+Primary File: embassy_suites_realistic_30pct_sellout.json
+→ 3,699 reservations
+→ 11 sold out/overbooked nights (35.5%)
+→ Ready for algorithm import
+
+Documentation: REALISTIC_30PCT_SELLOUT_ANALYSIS.txt (this file)
+→ Complete event analysis
+→ Overbooking scenarios
+→ Testing recommendations
+
+Original Research: EVENT_DRIVEN_OCCUPANCY_ANALYSIS.txt
+→ Venue calendar research
+→ Event correlation data
+→ Market analysis
+
+
+DEMONSTRATION VALUE FOR DERRICK
+================================================================================
+
+This dataset enables you to demonstrate:
+
+✓ **Real-world overbooking scenarios** - Hotels must manage 3-5% overbooking
+✓ **Event-driven demand patterns** - Shows understanding of market dynamics
+✓ **Complex decision-making** - Algorithm handles 16-room overbooking gracefully
+✓ **Honors program expertise** - Proper upgrade hierarchy implementation
+✓ **Operational efficiency** - Processes 337 reservations without manual intervention
+✓ **Professional polish** - Data based on actual venue calendars, not guesswork
+
+This positions you as someone who:
+→ Understands hotel operations at a management level
+→ Can build systems that handle real business complexity
+→ Thinks strategically about revenue management and guest experience
+→ Has the technical skills to automate critical operational decisions
+
+Perfect for demonstrating readiness for Legacy Ventures property integration roles.
