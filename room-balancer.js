@@ -394,9 +394,9 @@ function updateApprovalStatus() {
     if (approvedCount > 0) {
         btn.disabled = false;
         if (approvedCount === totalAlerts) {
-            btn.textContent = '✓ Finalize All Room Assignments';
+            btn.textContent = '✓ Finalize All & Complete';
         } else {
-            btn.textContent = `✓ Finalize ${approvedCount} Approved (${totalAlerts - approvedCount} Remain)`;
+            btn.textContent = `✓ Finalize ${approvedCount} (${totalAlerts - approvedCount} Will Remain)`;
         }
     } else {
         btn.disabled = true;
@@ -405,43 +405,78 @@ function updateApprovalStatus() {
 }
 
 document.getElementById('finalizeBtn').addEventListener('click', () => {
-    const unapprovedAlerts = [];
+    const remainingAlerts = [];
     const approvedGuestNames = new Set();
-    const unapprovedGuestNames = new Set();
     
-    // Read ACTUAL checkbox states right now
+    // Separate approved vs remaining (unchecked) alerts
     pendingAlerts.forEach((alert, index) => {
         const checkbox = document.getElementById(`checkbox-${index}`);
         
         if (checkbox && checkbox.checked) {
-            // This alert IS approved - use the actual guest_name property
+            // This one is approved - will be finalized
             approvedGuestNames.add(alert.guest_name);
-            alert.approved = true;
         } else {
-            // This alert is NOT approved
-            unapprovedAlerts.push(alert);
-            unapprovedGuestNames.add(alert.guest_name);
-            alert.approved = false;
+            // This one is NOT approved - keep it in the list
+            remainingAlerts.push(alert);
         }
     });
     
-    // Filter assignments: EXCLUDE guests with unapproved alerts
-    const approvedAssignments = finalAssignments.filter(assignment => {
-        // If guest has an unapproved alert, EXCLUDE them
-        if (unapprovedGuestNames.has(assignment.guest_name)) {
-            return false;
-        }
+    // Update global pendingAlerts to only the unchecked ones
+    pendingAlerts = remainingAlerts;
+    
+    // If ALL alerts are now handled, show final results
+    if (pendingAlerts.length === 0) {
+        document.getElementById('previewPhase').classList.add('hidden');
+        document.getElementById('resultsPhase').classList.remove('hidden');
+        displayFinalResults([]);
+    } else {
+        // Still have unchecked alerts - refresh the preview to show only remaining
+        const reservations = allReservations.filter(r => r.checkin_date === currentDate);
         
-        // Include everyone else (standard assignments + approved alerts)
-        return true;
-    });
-    
-    finalAssignments = approvedAssignments;
-    
-    document.getElementById('previewPhase').classList.add('hidden');
-    document.getElementById('resultsPhase').classList.remove('hidden');
-    
-    displayFinalResults(unapprovedAlerts);
+        // Recalculate stats for remaining alerts
+        document.getElementById('previewAlerts').textContent = pendingAlerts.length;
+        
+        // Rebuild alert list with only remaining alerts
+        const alertsList = document.getElementById('alertsList');
+        alertsList.innerHTML = '';
+        
+        pendingAlerts.forEach((alert, index) => {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert-item ${alert.type}`;
+            alertDiv.id = `alert-${index}`;
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'alert-checkbox';
+            checkbox.id = `checkbox-${index}`;
+            checkbox.onchange = updateApprovalStatus;
+            
+            const icon = document.createElement('span');
+            icon.className = 'alert-icon';
+            icon.textContent = alert.type === 'danger' ? '⚠️' : alert.type === 'warning' ? '⚠️' : 'ℹ️';
+            
+            const content = document.createElement('div');
+            content.className = 'alert-content';
+            content.textContent = alert.message;
+            
+            alertDiv.appendChild(checkbox);
+            alertDiv.appendChild(icon);
+            alertDiv.appendChild(content);
+            alertsList.appendChild(alertDiv);
+        });
+        
+        // Show success message for what was just finalized
+        const approvalBanner = document.querySelector('.approval-banner');
+        approvalBanner.innerHTML = `
+            <h3>✓ ${approvedGuestNames.size} Alert${approvedGuestNames.size > 1 ? 's' : ''} Finalized</h3>
+            <p>
+                <strong>${pendingAlerts.length} alert${pendingAlerts.length > 1 ? 's' : ''} remaining.</strong> 
+                Continue working on the alerts below. Check each box after you've handled it, then click finalize again.
+            </p>
+        `;
+        
+        updateApprovalStatus();
+    }
 });
 
 function displayFinalResults(unapprovedAlerts = []) {
