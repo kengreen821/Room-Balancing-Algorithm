@@ -410,11 +410,11 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
     
-    let totalInHouse = 0;
-    let totalDueOuts = 0;
-    let totalArrivals = 0;
-    let totalAvailable = 0;
-    let totalOverbooked = 0;
+    let tableInHouse = 0;
+    let tableDueOuts = 0;
+    let tableArrivals = 0;
+    let tableAvailable = 0;
+    let tableOverbooked = 0;
     
     // Get all room types from inventory to show even those with 0 bookings
     const allRoomTypes = Object.keys(ROOM_INVENTORY);
@@ -433,11 +433,11 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
         const overby = Math.max(0, arrivals - actuallyAvailable);
         const status = overby > 0 ? 'OVERBOOKED' : 'OK';
         
-        totalInHouse += inHouseCount;
-        totalDueOuts += dueOutCount;
-        totalArrivals += arrivals;
-        totalAvailable += actuallyAvailable;
-        totalOverbooked += overby;
+        tableInHouse += inHouseCount;
+        tableDueOuts += dueOutCount;
+        tableArrivals += arrivals;
+        tableAvailable += actuallyAvailable;
+        tableOverbooked += overby;
         
         const row = tbody.insertRow();
         row.innerHTML = `
@@ -459,12 +459,12 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     
     totalsRow.innerHTML = `
         <td><strong>TOTALS</strong></td>
-        <td><strong>${totalArrivals}</strong></td>
-        <td><strong>${totalAvailable}</strong></td>
-        <td><strong>${totalDueOuts}</strong></td>
-        <td><strong>${totalInHouse}</strong></td>
-        <td><strong>${totalOverbooked > 0 ? totalOverbooked : '-'}</strong></td>
-        <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
+        <td><strong>${tableArrivals}</strong></td>
+        <td><strong>${tableAvailable}</strong></td>
+        <td><strong>${tableDueOuts}</strong></td>
+        <td><strong>${tableInHouse}</strong></td>
+        <td><strong>${tableOverbooked > 0 ? tableOverbooked : '-'}</strong></td>
+        <td><span class="badge ${tableOverbooked > 0 ? 'overbooked' : 'ok'}">${tableOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
     `;
     
     const alertsList = document.getElementById('alertsList');
