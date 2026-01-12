@@ -113,14 +113,14 @@
             align-self: flex-end;
         }
         
-        .btn:hover {
+        .btn:hover:not(:disabled) {
             background: var(--navy);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 87, 160, 0.3);
         }
         
         .btn:disabled {
-            background: var(--border);
+            background: #ccc;
             cursor: not-allowed;
             transform: none;
         }
@@ -129,12 +129,8 @@
             background: var(--success);
         }
         
-        .btn.success:hover {
+        .btn.success:hover:not(:disabled) {
             background: #229954;
-        }
-        
-        .btn.success:disabled {
-            background: var(--border);
         }
         
         .stats-grid {
@@ -515,14 +511,14 @@
                     <h3>📋 Review & Approve Each Action</h3>
                     <p>
                         <strong>Instructions:</strong> Check each box after you've completed the required action (called guest for approval, coordinated with housekeeping, etc.). 
-                        Once all alerts are checked, you can finalize room assignments. <strong>Alerts are prioritized by rate type</strong> - low-priority rates (Third-Party, Hilton Go) are upgraded/moved first.
+                        You can finalize with some boxes checked - unchecked alerts remain as "unresolved" for manual handling.
                     </p>
                 </div>
                 <div id="alertsList"></div>
                 
                 <div style="margin-top: 25px; text-align: center;">
                     <button class="btn success" id="finalizeBtn" disabled>
-                        ✓ Finalize All Room Assignments
+                        ✓ Check at least one alert to finalize
                     </button>
                 </div>
             </div>
@@ -558,9 +554,7 @@
             
             <div class="section">
                 <h2>✓ Balancing Complete <span class="phase-indicator complete">FINALIZED</span></h2>
-                <div style="padding: 20px; background: #e8f5e9; border-radius: 8px; margin-bottom: 20px;">
-                    <strong style="color: var(--success); font-size: 16px;">✓ All room assignments finalized and ready for check-in.</strong>
-                </div>
+                <div id="resultsBanner"></div>
                 
                 <div class="filter-bar">
                     <select id="filterType">

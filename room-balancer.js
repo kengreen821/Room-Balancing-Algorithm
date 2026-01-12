@@ -1,4 +1,4 @@
-// Room Balancing Algorithm - Embassy Suites Centennial Park
+// Room Balancing System - Embassy Suites Centennial Park
 // Priority: ADA > Rate Type > Honors Status > Length of Stay
 
 const ROOM_INVENTORY = {
@@ -18,27 +18,18 @@ const UPGRADE_PATHS = {
     'NKSQB': ['NKSPD'],
 };
 
-// Cross-category upgrades - ONLY legitimate upgrades, NO downgrades
 const CROSS_CATEGORY_UPGRADES = {
-    // Standard Double → Kings (upgrade in bed, call guest for approval)
     'TDBN': ['KNGN', 'KSVN', 'KEXN', 'NKSP'],
-    
-    // Park View Double → Premium Kings (upgrade)
     'TSVN': ['KSVN', 'KEXN', 'NKSP', 'NKSPK'],
-    
-    // Conference Suite Double → Premium Kings (upgrade)
     'TCSN': ['KEXN', 'NKSP', 'NKSPK'],
-    
-    // ADA rooms → Non-ADA same/better tier (when ADA exhausted)
-    'NKSQA': ['KNGN', 'KSVN', 'KEXN'],  // ADA Standard King → Standard/Premium Kings
-    'NKSQB': ['KNGN', 'KSVN', 'KEXN'],  // ADA Roll-in → Standard/Premium Kings
-    'NKSPD': ['NKSP', 'KEXN', 'NKSPK'], // ADA Premium → Other Premium Kings
+    'NKSQA': ['KNGN', 'KSVN', 'KEXN'],
+    'NKSQB': ['KNGN', 'KSVN', 'KEXN'],
+    'NKSPD': ['NKSP', 'KEXN', 'NKSPK'],
 };
 
 const NAMED_SUITES = ['KSPN', 'KOTN', 'KSLN'];
 const ADA_ROOMS = ['NKSQA', 'NKSQB', 'NKSPD'];
 
-// Rate type priority (lower number = higher priority)
 const RATE_PRIORITY = {
     'Direct': 1,
     'AAA': 2,
@@ -48,47 +39,34 @@ const RATE_PRIORITY = {
     'Hilton Go': 6,
 };
 
+const ROOM_TIERS = {
+    'KNGN': 1, 'TDBN': 1,
+    'KSVN': 2, 'TSVN': 2,
+    'KEXN': 3, 'NKSPK': 3, 'NKSCJ': 3, 'NKSP': 3, 'NDSPXC': 3, 'TCSN': 3,
+    'NKSQA': 1, 'NKSQB': 1, 'NKSPD': 3,
+    'KSPN': 4, 'KOTN': 4, 'KSLN': 4,
+};
+
 let allReservations = [];
 let currentDate = null;
 let pendingAlerts = [];
 let finalAssignments = [];
 let filteredAssignments = [];
 
-// Room tier classification for downgrade detection
-const ROOM_TIERS = {
-    // Standard tier
-    'KNGN': 1, 'TDBN': 1,
-    // Park View tier
-    'KSVN': 2, 'TSVN': 2,
-    // Premium tier
-    'KEXN': 3, 'NKSPK': 3, 'NKSCJ': 3, 'NKSP': 3, 'NDSPXC': 3, 'TCSN': 3,
-    // ADA tier (special handling)
-    'NKSQA': 1, 'NKSQB': 1, 'NKSPD': 3,
-    // Named suites (highest tier)
-    'KSPN': 4, 'KOTN': 4, 'KSLN': 4,
-};
-
 function isDowngrade(fromType, toType) {
     const fromTier = ROOM_TIERS[fromType] || 0;
     const toTier = ROOM_TIERS[toType] || 0;
     
-    // Moving to lower tier is always a downgrade
-    if (toTier < fromTier) {
-        return true;
-    }
+    if (toTier < fromTier) return true;
     
-    // King → Double is usually a downgrade (unless guest requested)
     const fromIsKing = fromType.includes('K') && !fromType.includes('T');
     const toIsDouble = toType.includes('T') || toType.includes('D');
     
-    if (fromIsKing && toIsDouble && fromTier >= toTier) {
-        return true; // Same or lower tier + bed downgrade = downgrade
-    }
+    if (fromIsKing && toIsDouble && fromTier >= toTier) return true;
     
     return false;
 }
 
-// File upload handler
 document.getElementById('fileInput').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -122,7 +100,6 @@ function populateDateSelect() {
     });
 }
 
-// PHASE 1: Analyze arrivals
 document.getElementById('analyzeBtn').addEventListener('click', () => {
     currentDate = document.getElementById('dateSelect').value;
     if (!currentDate) {
@@ -146,13 +123,11 @@ function analyzeArrivals() {
     pendingAlerts = [];
     finalAssignments = [];
     
-    // Calculate demand by room type
     const demand = {};
     reservations.forEach(r => {
         demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
     });
     
-    // Find overbookings
     const overbookings = [];
     const overbookedTypes = new Set();
     Object.entries(demand).forEach(([roomType, count]) => {
@@ -163,31 +138,24 @@ function analyzeArrivals() {
         }
     });
     
-    // Run assignment simulation
     const tempAvailable = { ...ROOM_INVENTORY };
     
-    // Priority 1: ADA guests (legal requirement)
     const adaGuests = reservations.filter(r => r.special_requests && r.special_requests.includes('ADA'));
     adaGuests.forEach(guest => {
         simulateAssignment(guest, tempAvailable, overbookedTypes, true);
     });
     
-    // Priority 2: Remaining guests sorted by rate priority, honors status, and stay length
     const remainingGuests = reservations.filter(r => !finalAssignments.find(a => a.reservation_id === r.reservation_id));
     
-    // Sort by priority: LOW rate priority gets upgraded first (when overbooked)
     remainingGuests.sort((a, b) => {
-        // Lower rate priority guests get moved first (Third-Party, Hilton Go)
         const rateA = RATE_PRIORITY[a.rate_type] || 99;
         const rateB = RATE_PRIORITY[b.rate_type] || 99;
-        if (rateA !== rateB) return rateB - rateA; // Reverse sort - higher number first
+        if (rateA !== rateB) return rateB - rateA;
         
-        // Then by honors status
         const statusA = getStatusPriority(a.honors_status);
         const statusB = getStatusPriority(b.honors_status);
         if (statusA !== statusB) return statusB - statusA;
         
-        // Then by length of stay
         return b.length_of_stay - a.length_of_stay;
     });
     
@@ -195,7 +163,6 @@ function analyzeArrivals() {
         simulateAssignment(guest, tempAvailable, overbookedTypes, false);
     });
     
-    // Display preview
     displayPreview(reservations, overbookings, demand);
 }
 
@@ -214,7 +181,6 @@ function getStatusPriority(status) {
 function simulateAssignment(guest, available, overbookedTypes, isAda) {
     const bookedType = guest.booked_room_type;
     
-    // Try booked room type first
     if (available[bookedType] > 0) {
         available[bookedType]--;
         finalAssignments.push({
@@ -225,20 +191,15 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         return true;
     }
     
-    // ONLY upgrade if this room type is actually overbooked
-    if (!overbookedTypes.has(bookedType)) {
-        // Room type not overbooked - guest stays unassigned for now (shouldn't happen)
-        return false;
-    }
+    if (!overbookedTypes.has(bookedType)) return false;
     
-    // Room type IS overbooked - try same-bed-type upgrades
     const upgrades = UPGRADE_PATHS[bookedType] || [];
     for (const upgradeType of upgrades) {
         if (!NAMED_SUITES.includes(upgradeType) && available[upgradeType] > 0) {
             available[upgradeType]--;
             
             const ratePriority = RATE_PRIORITY[guest.rate_type] || 99;
-            const isLowPriority = ratePriority >= 5; // Third-Party or Hilton Go
+            const isLowPriority = ratePriority >= 5;
             
             pendingAlerts.push({
                 type: isLowPriority ? 'info' : 'warning',
@@ -256,7 +217,6 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Try cross-category upgrades
     const crossCategory = CROSS_CATEGORY_UPGRADES[bookedType] || [];
     for (const upgradeType of crossCategory) {
         if (available[upgradeType] > 0) {
@@ -287,13 +247,9 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Emergency - any room available (but NEVER downgrade)
     for (const [roomType, count] of Object.entries(available)) {
         if (count > 0 && !NAMED_SUITES.includes(roomType)) {
-            // Check if this is a downgrade - if so, skip it
-            if (isDowngrade(bookedType, roomType)) {
-                continue; // Skip downgrades - would rather walk guest
-            }
+            if (isDowngrade(bookedType, roomType)) continue;
             
             available[roomType]--;
             pendingAlerts.push({
@@ -312,13 +268,9 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Last resort - named suites (only if not a downgrade)
     for (const [roomType, count] of Object.entries(available)) {
         if (count > 0) {
-            // Even for named suites, don't downgrade
-            if (isDowngrade(bookedType, roomType)) {
-                continue;
-            }
+            if (isDowngrade(bookedType, roomType)) continue;
             
             available[roomType]--;
             pendingAlerts.push({
@@ -337,7 +289,6 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         }
     }
     
-    // Could not assign - guest must be walked
     pendingAlerts.push({
         type: 'danger',
         message: `❌ WALK GUEST: ${guest.guest_name} - Cannot accommodate. Contact nearby hotels.`,
@@ -345,12 +296,10 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         approved: false
     });
     
-    // DO NOT add to finalAssignments - this guest has no room
     return false;
 }
 
 function displayPreview(reservations, overbookings, demand) {
-    // Stats
     document.getElementById('previewTotalGuests').textContent = reservations.length;
     document.getElementById('previewOverbookings').textContent = overbookings.length;
     document.getElementById('previewAlerts').textContent = pendingAlerts.length;
@@ -358,7 +307,6 @@ function displayPreview(reservations, overbookings, demand) {
     const occupancy = ((reservations.length / 321) * 100).toFixed(0);
     document.getElementById('previewOccupancy').textContent = occupancy + '%';
     
-    // Overbooking table
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
     
@@ -380,7 +328,6 @@ function displayPreview(reservations, overbookings, demand) {
         `;
     });
     
-    // Alerts list with checkboxes
     const alertsList = document.getElementById('alertsList');
     alertsList.innerHTML = '';
     
@@ -391,8 +338,9 @@ function displayPreview(reservations, overbookings, demand) {
                 <div class="alert-content"><strong>No alerts - all guests fit in booked room types!</strong></div>
             </div>
         `;
-        document.getElementById('finalizeBtn').disabled = false;
-        document.getElementById('finalizeBtn').textContent = '✓ Finalize All Room Assignments';
+        const btn = document.getElementById('finalizeBtn');
+        btn.disabled = false;
+        btn.textContent = '✓ Finalize All Room Assignments';
     } else {
         pendingAlerts.forEach((alert, index) => {
             const alertDiv = document.createElement('div');
@@ -403,9 +351,7 @@ function displayPreview(reservations, overbookings, demand) {
             checkbox.type = 'checkbox';
             checkbox.className = 'alert-checkbox';
             checkbox.id = `checkbox-${index}`;
-            checkbox.addEventListener('change', () => {
-                updateApprovalStatus();
-            });
+            checkbox.onchange = updateApprovalStatus;
             
             const icon = document.createElement('span');
             icon.className = 'alert-icon';
@@ -421,99 +367,66 @@ function displayPreview(reservations, overbookings, demand) {
             alertsList.appendChild(alertDiv);
         });
         
-        // Initialize button state
         updateApprovalStatus();
     }
 }
 
 function updateApprovalStatus() {
-    // Count how many are approved
     let approvedCount = 0;
     
     pendingAlerts.forEach((alert, index) => {
         const checkbox = document.getElementById(`checkbox-${index}`);
         const alertDiv = document.getElementById(`alert-${index}`);
         
-        if (checkbox && alertDiv) {
-            if (checkbox.checked) {
-                alertDiv.classList.add('approved');
-                alert.approved = true;
-                approvedCount++;
-            } else {
-                alertDiv.classList.remove('approved');
-                alert.approved = false;
-            }
+        if (checkbox && checkbox.checked) {
+            alertDiv.classList.add('approved');
+            alert.approved = true;
+            approvedCount++;
+        } else if (checkbox) {
+            alertDiv.classList.remove('approved');
+            alert.approved = false;
         }
     });
     
-    const finalizeBtn = document.getElementById('finalizeBtn');
+    const btn = document.getElementById('finalizeBtn');
     const totalAlerts = pendingAlerts.length;
     
-    // If no alerts at all, enable with standard text
-    if (totalAlerts === 0) {
-        finalizeBtn.disabled = false;
-        finalizeBtn.textContent = '✓ Finalize All Room Assignments';
-        return;
-    }
-    
-    // Enable button if at least one is checked
     if (approvedCount > 0) {
-        finalizeBtn.disabled = false;
-        
+        btn.disabled = false;
         if (approvedCount === totalAlerts) {
-            finalizeBtn.textContent = '✓ Finalize All Room Assignments';
+            btn.textContent = '✓ Finalize All Room Assignments';
         } else {
-            const remaining = totalAlerts - approvedCount;
-            finalizeBtn.textContent = `✓ Finalize ${approvedCount} Approved (${remaining} Remain)`;
+            btn.textContent = `✓ Finalize ${approvedCount} Approved (${totalAlerts - approvedCount} Remain)`;
         }
     } else {
-        // No approvals yet - keep button disabled
-        finalizeBtn.disabled = true;
-        finalizeBtn.textContent = '✓ Finalize Room Assignments (Check at least one alert)';
+        btn.disabled = true;
+        btn.textContent = '✓ Check at least one alert to finalize';
     }
 }
 
-// PHASE 2: Finalize assignments
 document.getElementById('finalizeBtn').addEventListener('click', () => {
-    // Separate approved and unapproved alerts
     const unapprovedAlerts = [];
-    const approvedAlertGuestNames = new Set();
+    const approvedGuestNames = new Set();
     
     pendingAlerts.forEach(alert => {
         if (alert.approved) {
-            approvedAlertGuestNames.add(alert.guestName);
+            approvedGuestNames.add(alert.guestName);
         } else {
             unapprovedAlerts.push(alert);
         }
     });
     
-    // Filter assignments:
-    // 1. Keep all standard assignments (no alerts)
-    // 2. Keep special assignments where alert was approved
-    // 3. Remove assignments where alert was NOT approved
     const approvedAssignments = finalAssignments.filter(assignment => {
-        // Standard assignments always included
-        if (assignment.assignment_type === 'standard') {
-            return true;
-        }
+        if (assignment.assignment_type === 'standard') return true;
         
-        // Special assignments only if their alert was approved
-        // (or if this assignment somehow doesn't have an associated alert)
         const hasAlert = pendingAlerts.some(a => a.guestName === assignment.guest_name);
+        if (!hasAlert) return true;
         
-        if (!hasAlert) {
-            // No alert for this guest (shouldn't happen but handle gracefully)
-            return true;
-        }
-        
-        // Has alert - only include if approved
-        return approvedAlertGuestNames.has(assignment.guest_name);
+        return approvedGuestNames.has(assignment.guest_name);
     });
     
-    // Update global finalAssignments to approved ones
     finalAssignments = approvedAssignments;
     
-    // Show results
     document.getElementById('previewPhase').classList.add('hidden');
     document.getElementById('resultsPhase').classList.remove('hidden');
     
@@ -523,7 +436,6 @@ document.getElementById('finalizeBtn').addEventListener('click', () => {
 function displayFinalResults(unapprovedAlerts = []) {
     const reservations = allReservations.filter(r => r.checkin_date === currentDate);
     
-    // Stats
     document.getElementById('statTotalGuests').textContent = reservations.length;
     document.getElementById('statAssigned').textContent = finalAssignments.length;
     
@@ -533,7 +445,6 @@ function displayFinalResults(unapprovedAlerts = []) {
     const occupancy = ((reservations.length / 321) * 100).toFixed(0);
     document.getElementById('statOccupancy').textContent = occupancy + '%';
     
-    // Create unresolved alerts banner
     let bannerHTML = '';
     
     if (unapprovedAlerts.length > 0) {
@@ -548,8 +459,7 @@ function displayFinalResults(unapprovedAlerts = []) {
                     `).join('')}
                 </div>
                 <p style="margin-top: 15px; color: #666; font-size: 14px;">
-                    <strong>Next Steps:</strong> These ${unapprovedAlerts.length} guest${unapprovedAlerts.length > 1 ? 's' : ''} require manual intervention 
-                    (walk guest, GM approval, coordinate with housekeeping, etc.). 
+                    <strong>Next Steps:</strong> These ${unapprovedAlerts.length} guest${unapprovedAlerts.length > 1 ? 's' : ''} require manual intervention. 
                     The remaining <strong>${finalAssignments.length} guests</strong> have been assigned and are ready for check-in.
                 </p>
             </div>
@@ -557,25 +467,13 @@ function displayFinalResults(unapprovedAlerts = []) {
     } else {
         bannerHTML = `
             <div style="padding: 20px; background: #e8f5e9; border-radius: 8px; margin-bottom: 20px;">
-                <strong style="color: var(--success); font-size: 16px;">✓ All room assignments finalized and ready for check-in.</strong>
+                <strong style="color: #27ae60; font-size: 16px;">✓ All room assignments finalized and ready for check-in.</strong>
             </div>
         `;
     }
     
-    // Find the section and insert banner after h2
-    const resultsSection = document.querySelector('#resultsPhase .section');
-    const h2 = resultsSection.querySelector('h2');
+    document.getElementById('resultsBanner').innerHTML = bannerHTML;
     
-    // Remove any existing banner
-    const existingBanner = h2.nextElementSibling;
-    if (existingBanner && existingBanner.tagName === 'DIV') {
-        existingBanner.remove();
-    }
-    
-    // Insert new banner
-    h2.insertAdjacentHTML('afterend', bannerHTML);
-    
-    // Display all assignments
     filteredAssignments = [...finalAssignments];
     updateAssignmentsTable();
 }
@@ -606,7 +504,6 @@ function updateAssignmentsTable() {
     document.getElementById('assignmentCount').textContent = filteredAssignments.length;
 }
 
-// Filters
 document.getElementById('filterType').addEventListener('change', applyFilters);
 document.getElementById('filterRate').addEventListener('change', applyFilters);
 
@@ -627,7 +524,6 @@ function applyFilters() {
     updateAssignmentsTable();
 }
 
-// Export CSV
 document.getElementById('exportBtn').addEventListener('click', () => {
     const csv = [
         ['Guest Name', 'Honors Status', 'Rate Type', 'Booked Room', 'Assigned Room', 'Length of Stay', 'Assignment Type'],
