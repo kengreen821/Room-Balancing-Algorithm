@@ -147,21 +147,21 @@ function analyzeArrivals() {
         }
     });
     
-    // CAPACITY CHECK: Ensure total occupancy doesn't exceed 321
+    // CRITICAL FIX: Cap In House at physical capacity
+    // Hotel has 321 rooms total - In House can NEVER exceed this
     const totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
     const totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
-    const totalArrivals = reservations.length;
-    const netOccupancy = (totalInHouse - totalDueOuts) + totalArrivals;
     
-    // If we're over capacity, reduce In House proportionally
-    if (netOccupancy > 321) {
-        const excessOccupancy = netOccupancy - 321;
-        const reductionRatio = excessOccupancy / totalInHouse;
+    // Maximum possible In House = 321 rooms (100% occupancy from previous night)
+    // But realistically, average around 85-90% (270-290 rooms)
+    const maxRealisticInHouse = 321;
+    
+    if (totalInHouse > maxRealisticInHouse) {
+        // Scale down In House proportionally across all room types
+        const scaleFactor = maxRealisticInHouse / totalInHouse;
         
-        // Reduce each room type's in-house count proportionally
         Object.keys(inHouse).forEach(roomType => {
-            const reduction = Math.ceil(inHouse[roomType] * reductionRatio);
-            inHouse[roomType] = Math.max(0, inHouse[roomType] - reduction);
+            inHouse[roomType] = Math.floor(inHouse[roomType] * scaleFactor);
         });
     }
     
@@ -414,19 +414,11 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
         `;
     });
     
-    // Calculate net occupancy: (In House - Due Outs) + Arrivals
-    const netInHouse = totalInHouse - totalDueOuts;
-    const projectedOccupancy = netInHouse + totalArrivals;
-    
     // Add totals row
     const totalsRow = tbody.insertRow();
     totalsRow.style.backgroundColor = '#f0f0f0';
     totalsRow.style.fontWeight = 'bold';
     totalsRow.style.borderTop = '2px solid #003057';
-    
-    // Validate capacity constraint
-    const capacityWarning = projectedOccupancy > 321 ? 
-        ' ⚠️' : '';
     
     totalsRow.innerHTML = `
         <td><strong>TOTALS</strong></td>
@@ -437,20 +429,6 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
         <td><strong>${totalOverbooked > 0 ? totalOverbooked : '-'}</strong></td>
         <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
     `;
-    
-    // Add capacity validation row if over limit
-    if (projectedOccupancy > 321) {
-        const warningRow = tbody.insertRow();
-        warningRow.style.backgroundColor = '#fff3e0';
-        warningRow.style.color = '#f57c00';
-        warningRow.style.fontWeight = 'bold';
-        warningRow.innerHTML = `
-            <td colspan="7" style="text-align: center; padding: 12px;">
-                ⚠️ CAPACITY ALERT: Net Occupancy = ${projectedOccupancy} rooms (${projectedOccupancy - 321} over capacity)
-                <br><small>Formula: (In House ${totalInHouse} - Due Outs ${totalDueOuts}) + Arrivals ${totalArrivals} = ${projectedOccupancy}</small>
-            </td>
-        `;
-    }
     
     const alertsList = document.getElementById('alertsList');
     alertsList.innerHTML = '';
