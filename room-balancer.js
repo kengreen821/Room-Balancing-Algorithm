@@ -407,22 +407,33 @@ function updateApprovalStatus() {
 document.getElementById('finalizeBtn').addEventListener('click', () => {
     const unapprovedAlerts = [];
     const approvedGuestNames = new Set();
+    const unapprovedGuestNames = new Set();
     
-    pendingAlerts.forEach(alert => {
-        if (alert.approved) {
+    // Read ACTUAL checkbox states right now
+    pendingAlerts.forEach((alert, index) => {
+        const checkbox = document.getElementById(`checkbox-${index}`);
+        
+        if (checkbox && checkbox.checked) {
+            // This alert IS approved
             approvedGuestNames.add(alert.guestName);
+            alert.approved = true;
         } else {
+            // This alert is NOT approved
             unapprovedAlerts.push(alert);
+            unapprovedGuestNames.add(alert.guestName);
+            alert.approved = false;
         }
     });
     
+    // Filter assignments: EXCLUDE guests with unapproved alerts
     const approvedAssignments = finalAssignments.filter(assignment => {
-        if (assignment.assignment_type === 'standard') return true;
+        // If guest has an unapproved alert, EXCLUDE them
+        if (unapprovedGuestNames.has(assignment.guest_name)) {
+            return false;
+        }
         
-        const hasAlert = pendingAlerts.some(a => a.guestName === assignment.guest_name);
-        if (!hasAlert) return true;
-        
-        return approvedGuestNames.has(assignment.guest_name);
+        // Include everyone else (standard assignments + approved alerts)
+        return true;
     });
     
     finalAssignments = approvedAssignments;
