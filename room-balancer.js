@@ -147,6 +147,24 @@ function analyzeArrivals() {
         }
     });
     
+    // CAPACITY CHECK: Ensure total occupancy doesn't exceed 321
+    const totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
+    const totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
+    const totalArrivals = reservations.length;
+    const netOccupancy = (totalInHouse - totalDueOuts) + totalArrivals;
+    
+    // If we're over capacity, reduce In House proportionally
+    if (netOccupancy > 321) {
+        const excessOccupancy = netOccupancy - 321;
+        const reductionRatio = excessOccupancy / totalInHouse;
+        
+        // Reduce each room type's in-house count proportionally
+        Object.keys(inHouse).forEach(roomType => {
+            const reduction = Math.ceil(inHouse[roomType] * reductionRatio);
+            inHouse[roomType] = Math.max(0, inHouse[roomType] - reduction);
+        });
+    }
+    
     const demand = {};
     reservations.forEach(r => {
         demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
@@ -387,29 +405,52 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
         const row = tbody.insertRow();
         row.innerHTML = `
             <td><strong>${roomType}</strong></td>
-            <td>${inHouseCount}</td>
-            <td>${dueOutCount}</td>
             <td>${arrivals}</td>
             <td>${actuallyAvailable}</td>
-            <td><span class="badge ${overby > 0 ? 'overbooked' : 'ok'}">${status}</span></td>
+            <td>${dueOutCount}</td>
+            <td>${inHouseCount}</td>
             <td>${overby > 0 ? overby : '-'}</td>
+            <td><span class="badge ${overby > 0 ? 'overbooked' : 'ok'}">${status}</span></td>
         `;
     });
+    
+    // Calculate net occupancy: (In House - Due Outs) + Arrivals
+    const netInHouse = totalInHouse - totalDueOuts;
+    const projectedOccupancy = netInHouse + totalArrivals;
     
     // Add totals row
     const totalsRow = tbody.insertRow();
     totalsRow.style.backgroundColor = '#f0f0f0';
     totalsRow.style.fontWeight = 'bold';
     totalsRow.style.borderTop = '2px solid #003057';
+    
+    // Validate capacity constraint
+    const capacityWarning = projectedOccupancy > 321 ? 
+        ' ⚠️' : '';
+    
     totalsRow.innerHTML = `
         <td><strong>TOTALS</strong></td>
-        <td><strong>${totalInHouse}</strong></td>
-        <td><strong>${totalDueOuts}</strong></td>
         <td><strong>${totalArrivals}</strong></td>
         <td><strong>${totalAvailable}</strong></td>
-        <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
+        <td><strong>${totalDueOuts}</strong></td>
+        <td><strong>${totalInHouse}</strong></td>
         <td><strong>${totalOverbooked > 0 ? totalOverbooked : '-'}</strong></td>
+        <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
     `;
+    
+    // Add capacity validation row if over limit
+    if (projectedOccupancy > 321) {
+        const warningRow = tbody.insertRow();
+        warningRow.style.backgroundColor = '#fff3e0';
+        warningRow.style.color = '#f57c00';
+        warningRow.style.fontWeight = 'bold';
+        warningRow.innerHTML = `
+            <td colspan="7" style="text-align: center; padding: 12px;">
+                ⚠️ CAPACITY ALERT: Net Occupancy = ${projectedOccupancy} rooms (${projectedOccupancy - 321} over capacity)
+                <br><small>Formula: (In House ${totalInHouse} - Due Outs ${totalDueOuts}) + Arrivals ${totalArrivals} = ${projectedOccupancy}</small>
+            </td>
+        `;
+    }
     
     const alertsList = document.getElementById('alertsList');
     alertsList.innerHTML = '';
