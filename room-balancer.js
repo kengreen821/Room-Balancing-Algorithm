@@ -310,6 +310,10 @@ function displayPreview(reservations, overbookings, demand) {
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
     
+    let totalBooked = 0;
+    let totalAvailable = 0;
+    let totalOverbooked = 0;
+    
     Object.entries(demand).sort((a, b) => {
         const overA = a[1] - (ROOM_INVENTORY[a[0]] || 0);
         const overB = b[1] - (ROOM_INVENTORY[b[0]] || 0);
@@ -318,6 +322,11 @@ function displayPreview(reservations, overbookings, demand) {
         const available = ROOM_INVENTORY[roomType] || 0;
         const overby = Math.max(0, booked - available);
         const status = overby > 0 ? 'OVERBOOKED' : 'OK';
+        
+        totalBooked += booked;
+        totalAvailable += available;
+        totalOverbooked += overby;
+        
         const row = tbody.insertRow();
         row.innerHTML = `
             <td><strong>${roomType}</strong></td>
@@ -327,6 +336,19 @@ function displayPreview(reservations, overbookings, demand) {
             <td>${overby > 0 ? overby : '-'}</td>
         `;
     });
+    
+    // Add totals row
+    const totalsRow = tbody.insertRow();
+    totalsRow.style.backgroundColor = '#f0f0f0';
+    totalsRow.style.fontWeight = 'bold';
+    totalsRow.style.borderTop = '2px solid #003057';
+    totalsRow.innerHTML = `
+        <td><strong>TOTALS</strong></td>
+        <td><strong>${totalBooked}</strong></td>
+        <td><strong>${totalAvailable}</strong></td>
+        <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
+        <td><strong>${totalOverbooked > 0 ? totalOverbooked : '-'}</strong></td>
+    `;
     
     const alertsList = document.getElementById('alertsList');
     alertsList.innerHTML = '';
