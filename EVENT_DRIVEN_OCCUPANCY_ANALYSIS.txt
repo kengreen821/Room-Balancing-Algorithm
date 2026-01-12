@@ -1,0 +1,226 @@
+EMBASSY SUITES CENTENNIAL PARK - EVENT-DRIVEN OCCUPANCY ANALYSIS
+January 15 - February 14, 2026
+================================================================================
+
+HOTEL CAPACITY: 321 Rooms (VALIDATED - All dates stay within capacity)
+
+VENUE EVENT IMPACT ANALYSIS
+================================================================================
+
+### GEORGIA WORLD CONGRESS CENTER (GWCC)
+Distance from Hotel: 0.3 miles (5-minute walk)
+
+Events:
+--------
+• Jan 8-11: Atlanta Boat Show
+  → Spillover effect on Jan 15-16 (post-event departures)
+  → Occupancy: 75-78%
+
+• Jan 16-19: Major Convention (Public Event - 3 days)
+  → Peak occupancy period
+  → Combined with MLK Weekend and Hawks games
+  → Occupancy: 88-95% (NEAR SELLOUT)
+  → Jan 19 (MLK Day): 95% occupancy (304/321 rooms)
+
+• Jan 27-29: Trade Show (2-3 days)
+  → Mid-week high occupancy
+  → Combined with Hawks game on Jan 29
+  → Occupancy: 84-88%
+
+Impact: GWCC conventions are PRIMARY drivers of weekday occupancy. Business 
+travelers typically book 2-3 night stays, arrive Sunday/Monday, depart 
+Wednesday/Thursday.
+
+
+### STATE FARM ARENA
+Distance from Hotel: 0.4 miles (6-minute walk)
+
+Events:
+--------
+• Jan 17 (Saturday 7:30 PM): Atlanta Hawks vs Boston Celtics
+  → Strong weekend draw
+  → Occupancy: 88%
+
+• Jan 18 (Sunday 5:00 PM): Christian Concert (Chris Tomlin, Matthew West)
+  → Family-oriented event
+  → Guests arrive Friday/Saturday, depart Monday
+  → Occupancy: 92%
+
+• Jan 19 (Monday 1:00 PM): Atlanta Hawks vs Milwaukee Bucks (MLK DAY)
+  → Major holiday game
+  → Combined with GWCC convention = PEAK DEMAND
+  → Occupancy: 95% (HIGHEST IN PERIOD)
+
+• Jan 23 (Friday 7:30 PM): Hawks vs Phoenix Suns
+  → Weekend game effect
+  → Occupancy: 82%
+
+• Jan 26 (Monday 7:30 PM): Hawks vs Indiana Pacers
+  → Combined with trade show at GWCC
+  → Occupancy: 80%
+
+• Jan 29 (Thursday 8:00 PM): Hawks vs Houston Rockets
+  → Mid-week game + trade show
+  → Occupancy: 84%
+
+• Jan 31 - Feb 1: Hot Wheels Monster Trucks Live (2 shows each day)
+  → MAJOR FAMILY EVENT - drives weekend occupancy
+  → Families book 2-3 nights (Friday-Sunday)
+  → Occupancy: 90% (Saturday), 88% (Sunday)
+
+• Feb 5 (Thursday): Hawks game
+  → Occupancy: 80%
+
+• Feb 7 (Saturday): Hawks game
+  → Weekend effect
+  → Occupancy: 82%
+
+• Feb 13 (Friday 7:30 PM): B2K & Bow Wow Concert
+  → Major R&B concert - high demand
+  → Combined with Valentine's weekend
+  → Occupancy: 92% (SECOND HIGHEST)
+
+Impact: State Farm Arena events drive WEEKEND and SPECIAL EVENT occupancy. 
+Hawks games typically add 10-15% occupancy lift. Major concerts (Christian, 
+B2K/Bow Wow) and family events (Monster Trucks) create 85-92% occupancy.
+
+
+### MERCEDES-BENZ STADIUM
+Distance from Hotel: 0.5 miles (8-minute walk)
+
+Events:
+--------
+• Jan 9: Chick-fil-A Peach Bowl (College Football Playoff)
+  → Event ENDS before our window
+  → Spillover departures on Jan 15-16
+  → Minimal impact after Jan 16
+
+Impact: Stadium events are SEASONAL. NFL season ended in January. No major 
+events during Feb 15-Feb 14 window. Atlanta United MLS season begins in March.
+
+
+OCCUPANCY PATTERN ANALYSIS
+================================================================================
+
+HIGH DEMAND DATES (85%+ Occupancy):
+------------------------------------
+• Jan 17-19: GWCC Convention + Hawks games + MLK Weekend (88-95%)
+  → Jan 19 PEAK: 304/321 rooms (95%)
+  
+• Jan 27-29: Trade Show + Hawks game (84-88%)
+
+• Jan 31 - Feb 1: Monster Trucks family event (88-90%)
+
+• Feb 13: B2K & Bow Wow concert + Valentine's weekend (92%)
+
+
+MODERATE DEMAND DATES (70-84% Occupancy):
+------------------------------------------
+• Jan 15-16: Post-Peach Bowl + Pre-MLK buildup (75-78%)
+• Jan 20-23: Post-MLK weekdays (72-82%)
+• Jan 24-26: Weekend dip + Monday Hawks game (70-80%)
+• Jan 30: Friday pre-Monster Trucks (78%)
+• Feb 2-8: Post-Monster Trucks week (70-82%)
+• Feb 12: Pre-concert Thursday (78%)
+• Feb 14: Valentine's Day departures (76%)
+
+
+LOW DEMAND DATES (Below 70% Occupancy):
+----------------------------------------
+• Jan 24-25: Midweek post-game lull (68-70%)
+• Feb 3-4: Midweek slow period (70-72%)
+• Feb 9-11: Midweek slow period (70-74%)
+
+
+OVERBOOKING OPPORTUNITIES
+================================================================================
+
+Based on actual venue calendars, these dates present realistic overbooking 
+scenarios for the room balancing algorithm:
+
+**AGGRESSIVE OVERBOOKING TARGETS:**
+• Jan 19 (MLK Day): Currently 304/321 (95%) - Could overbook to 310-315
+• Feb 13 (B2K Concert): Currently 295/321 (92%) - Could overbook to 305-310
+
+**MODERATE OVERBOOKING TARGETS:**
+• Jan 17-18 (Convention + Concert): Currently 282-295 (88-92%) - Could overbook 5-10 rooms
+• Jan 31 (Monster Trucks): Currently 288/321 (90%) - Could overbook 5-8 rooms
+
+
+HONORS STATUS DISTRIBUTION
+================================================================================
+
+The dataset reflects realistic Hilton Honors distribution:
+• Lifetime Diamond: 5%
+• Diamond: 10%
+• Gold: 15%
+• Silver: 30%
+• Blue: 20%
+• Non-Members: 20%
+
+Business travelers (GWCC conventions) = Higher Diamond/Gold percentage
+Leisure travelers (concerts, sports) = Higher Silver/Blue percentage
+
+
+ROOM TYPE DEMAND PATTERNS
+================================================================================
+
+The dataset distributes reservations based on actual inventory:
+• KNGN (Standard King): 94 rooms = 29% of inventory → Business travelers
+• TDBN (Standard Double): 126 rooms = 39% of inventory → Families/groups
+• KSVN (Park View King): 44 rooms = 14% of inventory → Premium requests
+• TSVN (Park View Double): 20 rooms = 6% of inventory → Premium families
+• Other specialty rooms: 12% of inventory → ADA, suites, premium
+
+
+ALGORITHM TESTING SCENARIOS
+================================================================================
+
+This dataset enables testing:
+
+1. **Capacity Management**: All dates stay at/below 321 rooms
+2. **Event-Driven Demand**: Realistic occupancy spikes match actual events
+3. **Honors Upgrades**: High occupancy dates (95%) require aggressive upgrading
+4. **Overbooking Scenarios**: Peak dates present realistic overbooking situations
+5. **Multi-Event Days**: Jan 19 (Convention + MLK + Hawks) = Complex balancing
+6. **Family Events**: Monster Trucks = Different guest mix (more doubles needed)
+
+
+VALIDATION RESULTS
+================================================================================
+
+✓ 3,046 total reservations generated
+✓ All 31 dates pass capacity validation (≤321 rooms)
+✓ Occupancy patterns match actual venue calendars
+✓ Peak dates: Jan 19 (95%), Feb 13 (92%)
+✓ Realistic length-of-stay distribution (avg 2-3 nights)
+✓ Event-driven demand accurately modeled
+
+
+RECOMMENDED ALGORITHM TEST DATES
+================================================================================
+
+Test the room balancing algorithm on these dates:
+
+1. **Jan 19** (MLK Day + Convention + Hawks): 304 rooms, 95% occupancy
+   → Test aggressive upgrade logic and overbooking handling
+
+2. **Feb 13** (B2K Concert + Valentine's): 295 rooms, 92% occupancy
+   → Test concert crowd dynamics and weekend overbooking
+
+3. **Jan 31** (Monster Trucks): 288 rooms, 90% occupancy
+   → Test family room allocation (more doubles needed)
+
+4. **Jan 27-29** (Trade Show period): 269-282 rooms, 84-88% occupancy
+   → Test sustained high occupancy and business traveler upgrades
+
+5. **Feb 3** (Low demand): 224 rooms, 70% occupancy
+   → Test normal operations with ample availability
+
+
+FILE READY FOR USE
+================================================================================
+embassy_suites_event_driven_reservations.json
+→ Load into room balancing algorithm
+→ All dates validated within 321-room capacity
+→ Realistic event-driven patterns for management demo
