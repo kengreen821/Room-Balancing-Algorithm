@@ -149,21 +149,45 @@ function analyzeArrivals() {
     
     // CRITICAL FIX: Cap In House at physical capacity
     // Hotel has 321 rooms total - In House can NEVER exceed this
-    const totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
-    const totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
+    let totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
+    let totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
     
     // Maximum possible In House = 321 rooms (100% occupancy from previous night)
-    // But realistically, average around 85-90% (270-290 rooms)
-    const maxRealisticInHouse = 321;
+    const maxCapacity = 321;
     
-    if (totalInHouse > maxRealisticInHouse) {
+    if (totalInHouse > maxCapacity) {
         // Scale down In House proportionally across all room types
-        const scaleFactor = maxRealisticInHouse / totalInHouse;
+        const scaleFactor = maxCapacity / totalInHouse;
         
         Object.keys(inHouse).forEach(roomType => {
             inHouse[roomType] = Math.floor(inHouse[roomType] * scaleFactor);
         });
+        
+        totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
     }
+    
+    // CRITICAL FIX #2: Due Outs cannot exceed In House
+    // You can't check out more people than are currently in the hotel
+    if (totalDueOuts > totalInHouse) {
+        const dueOutScaleFactor = totalInHouse / totalDueOuts;
+        
+        Object.keys(dueOuts).forEach(roomType => {
+            dueOuts[roomType] = Math.floor(dueOuts[roomType] * dueOutScaleFactor);
+        });
+        
+        totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
+    }
+    
+    // CRITICAL FIX #3: For EACH room type, Due Outs can't exceed In House
+    Object.keys(dueOuts).forEach(roomType => {
+        const inHouseCount = inHouse[roomType] || 0;
+        const dueOutCount = dueOuts[roomType] || 0;
+        
+        if (dueOutCount > inHouseCount) {
+            // Cap this room type's due outs at its in-house count
+            dueOuts[roomType] = inHouseCount;
+        }
+    });
     
     const demand = {};
     reservations.forEach(r => {

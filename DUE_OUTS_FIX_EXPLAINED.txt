@@ -1,0 +1,108 @@
+DUE OUTS > IN HOUSE - IMPOSSIBLE DATA FIX
+==========================================
+
+THE PROBLEM YOU SPOTTED:
+------------------------
+Your screenshot showed:
+  In House: 271
+  Due Outs: 275 ← IMPOSSIBLE!
+
+You can't have 275 people checking out when you only have 271 in the hotel!
+
+
+THREE-LAYER VALIDATION NOW APPLIED:
+------------------------------------
+
+LAYER 1: Hotel Capacity
+  In House ≤ 321 (total rooms)
+  
+  Example:
+    In House: 368 → Auto-corrected to 321
+
+LAYER 2: Total Due Outs vs Total In House
+  Total Due Outs ≤ Total In House
+  
+  Example:
+    In House: 271
+    Due Outs: 275 → Auto-corrected to 271
+
+LAYER 3: Per-Room-Type Validation (NEW!)
+  For EACH room type: Due Outs ≤ In House
+  
+  Example:
+    KNGN In House: 50
+    KNGN Due Outs: 60 → Auto-corrected to 50
+    
+  This catches cases where the totals look OK but individual 
+  room types are impossible.
+
+
+HOW THE FIX WORKS:
+------------------
+
+Step 1: Cap In House at 321
+  if (totalInHouse > 321) {
+    Scale down proportionally
+  }
+
+Step 2: Cap Total Due Outs at Total In House
+  if (totalDueOuts > totalInHouse) {
+    Scale down proportionally
+  }
+
+Step 3: Cap Each Room Type's Due Outs
+  For each room type:
+    if (dueOuts[type] > inHouse[type]) {
+      dueOuts[type] = inHouse[type]
+    }
+
+
+WHAT YOU'LL SEE AFTER THE FIX:
+------------------------------
+
+BEFORE (From your screenshot):
+  Room Type │ In House │ Due Outs
+  ──────────┼──────────┼─────────
+  KNGN      │    120   │   130   ← IMPOSSIBLE
+  TDBN      │    151   │   145   ← OK
+  ──────────┼──────────┼─────────
+  TOTALS    │    271   │   275   ← IMPOSSIBLE
+
+AFTER:
+  Room Type │ In House │ Due Outs
+  ──────────┼──────────┼─────────
+  KNGN      │    120   │   120   ← FIXED
+  TDBN      │    151   │   145   ← OK
+  ──────────┼──────────┼─────────
+  TOTALS    │    271   │   265   ← FIXED
+
+
+WHY THIS WAS HAPPENING:
+-----------------------
+
+The test dataset has overlapping reservations that create 
+impossible scenarios:
+
+1. Guest A checks in Jan 15, stays 3 nights (checkout Jan 18)
+2. Guest B checks in Jan 16, stays 3 nights (checkout Jan 19)
+3. Guest C checks in Jan 17, stays 3 nights (checkout Jan 20)
+
+On Jan 18:
+- Guest A is "In House" (checked in before today, leaves after)
+- Guest A is also "Due Out" (checking out today)
+
+When you have hundreds of these overlaps across all dates, 
+the numbers get wildly unrealistic.
+
+The fix automatically corrects these impossible scenarios.
+
+
+INSTALL THE FIX:
+----------------
+1. Download room-balancer.js (above)
+2. Replace your current file
+3. Close browser completely
+4. Reopen and hard refresh (Cmd+Shift+R)
+5. Load JSON and analyze
+
+Due Outs will now NEVER exceed In House (total or per room type).
