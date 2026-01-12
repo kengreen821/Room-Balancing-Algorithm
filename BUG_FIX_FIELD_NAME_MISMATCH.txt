@@ -1,0 +1,195 @@
+ROOM BALANCING ALGORITHM - BUG FIX #2: FIELD NAME MISMATCH
+================================================================================
+Date: January 12, 2026
+Issue: JavaScript looking for "booked_room_type" but dataset uses "room_type"
+
+SYMPTOM
+================================================================================
+
+Dashboard showed:
+- 240 Total Arrivals
+- 75% Occupancy
+
+But Overbooking Analysis Table showed:
+- 0 Arrivals in totals row
+- 0 In House
+- 0 Due Outs
+- All individual room types showing 0 arrivals
+
+ROOT CAUSE
+================================================================================
+
+**Mismatch between dataset field name and JavaScript code:**
+
+DATASET (JSON):
+```json
+{
+  "reservation_id": "RES001000",
+  "guest_name": "Michael Smith",
+  "room_type": "KNGN",          ← Uses "room_type"
+  "checkin_date": "2026-01-15",
+  ...
+}
+```
+
+JAVASCRIPT CODE:
+```javascript
+demand[r.booked_room_type] = ...  ← Looks for "booked_room_type"
+```
+
+Since the field didn't exist, all lookups returned `undefined`, resulting in:
+- demand object was empty
+- All arrivals showed as 0
+- All calculations failed
+
+
+THE FIX
+================================================================================
+
+Changed all 13 instances of `booked_room_type` to `room_type` in JavaScript:
+
+LOCATIONS FIXED:
+1. Line 146: const roomType = res.room_type;
+2. Line 203: demand[r.room_type] = (demand[r.room_type] || 0) + 1;
+3. Line 278: const bookedType = guest.room_type;
+4. Line 694: const isUpgrade = assignment.room_type !== assignment.assigned_room_type;
+5. Line 704: <td>${assignment.room_type}</td>
+6. Line 741: a.room_type
+7-13: Other references to room_type throughout the code
+
+
+BEFORE vs AFTER
+================================================================================
+
+BEFORE (Wrong):
+```javascript
+// Line 203
+demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
+// Result: undefined field, demand object stays empty
+
+// Line 146
+const roomType = res.booked_room_type;
+// Result: undefined, in-house calculations fail
+```
+
+AFTER (Correct):
+```javascript
+// Line 203
+demand[r.room_type] = (demand[r.room_type] || 0) + 1;
+// Result: Correctly reads "KNGN", "TDBN", etc.
+
+// Line 146
+const roomType = res.room_type;
+// Result: Correctly reads room type for all calculations
+```
+
+
+EXPECTED RESULTS AFTER FIX
+================================================================================
+
+When you reload the fixed code with embassy_suites_GUARANTEED_occupancy.json:
+
+**Jan 15, 2026 (75% occupancy day):**
+✅ Table should show 240 arrivals distributed across room types
+✅ Totals row shows: 240 Arrivals (not 0)
+✅ In House, Due Outs calculated correctly
+✅ Individual room types show proper arrival counts
+
+**Jan 17, 2026 (105% occupancy day - OVERBOOKED):**
+✅ Table should show 125 arrivals
+✅ Should show 337 total occupied rooms
+✅ Overbooking Analysis should show which room types overbooked
+✅ Totals row shows proper overbooked amounts
+
+
+DEPLOYMENT STEPS
+================================================================================
+
+1. Download: room-balancer-FIXED-v2.js
+2. Rename to: room-balancer.js
+3. Replace in GitHub repo
+4. Commit: "Fix field name mismatch: booked_room_type → room_type"
+5. Hard reload Chrome: ⌘ + Shift + R
+6. Test with embassy_suites_GUARANTEED_occupancy.json
+7. Verify table shows 240 arrivals on Jan 15
+
+
+TESTING CHECKLIST
+================================================================================
+
+After deploying:
+
+□ Jan 15: Table shows 240 total arrivals (not 0)
+□ Jan 15: KNGN shows ~80 arrivals
+□ Jan 15: TDBN shows ~105 arrivals
+□ Jan 17: Table shows 125 total arrivals
+□ Jan 17: Shows overbooked room types
+□ Jan 27: Table shows 120 arrivals
+□ Dashboard occupancy % matches table calculations
+
+
+WHY THIS HAPPENED
+================================================================================
+
+Two separate pieces of code created at different times:
+
+1. **Original algorithm** (weeks ago):
+   - Used `booked_room_type` as the field name
+   - Designed for hotel operations workflow
+
+2. **Dataset generator** (today):
+   - Used `room_type` as the field name
+   - Standard Python naming convention
+   - Didn't check against existing JavaScript expectations
+
+The mismatch wasn't caught until testing with real data because previous test
+data either didn't exist or used different field names.
+
+
+LESSON LEARNED
+================================================================================
+
+When generating test data, always verify field names match the code that will
+consume it. Add a JSON schema validation or TypeScript interface to catch
+these mismatches during development.
+
+
+SUMMARY OF ALL FIXES
+================================================================================
+
+BUG #1: Occupancy Calculation (Fixed previously)
+- Issue: Counted arrivals only, not total occupied
+- Fix: Calculate In House - Due Outs + Arrivals
+
+BUG #2: Field Name Mismatch (This fix)
+- Issue: JavaScript used booked_room_type, dataset used room_type
+- Fix: Changed JavaScript to use room_type throughout
+
+Both bugs are now fixed in: room-balancer-FIXED-v2.js
+
+
+FILES TO DEPLOY
+================================================================================
+
+✅ room-balancer-FIXED-v2.js (contains both fixes)
+✅ embassy_suites_GUARANTEED_occupancy.json (correct dataset)
+□ index.html (no changes needed)
+
+
+FINAL VALIDATION
+================================================================================
+
+To confirm both fixes are working, test this sequence:
+
+1. Load embassy_suites_GUARANTEED_occupancy.json
+2. Select Jan 17, 2026 from dropdown
+3. Should show: "125 arrivals - 337 occupied - 105% occupancy"
+4. Click "Analyze This Date"
+5. Overbooking Analysis should show:
+   - 125 total arrivals (not 0)
+   - ~200+ in house
+   - ~XX due outs
+   - Overbooked room types highlighted
+6. Table should show all 16 room types with proper data
+
+If all above checks pass → Both bugs are fixed! ✅

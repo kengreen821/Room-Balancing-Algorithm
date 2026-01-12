@@ -143,7 +143,7 @@ function analyzeArrivals() {
         const checkoutDate = new Date(checkinDate);
         checkoutDate.setDate(checkoutDate.getDate() + res.length_of_stay);
         
-        const roomType = res.booked_room_type;
+        const roomType = res.room_type;
         
         // In House: checked in before today, checking out after today
         if (checkinDate < currentDateObj && checkoutDate > currentDateObj) {
@@ -200,7 +200,7 @@ function analyzeArrivals() {
     
     const demand = {};
     reservations.forEach(r => {
-        demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
+        demand[r.room_type] = (demand[r.room_type] || 0) + 1;
     });
     
     const overbookings = [];
@@ -275,7 +275,7 @@ function getStatusPriority(status) {
 }
 
 function simulateAssignment(guest, available, overbookedTypes, isAda) {
-    const bookedType = guest.booked_room_type;
+    const bookedType = guest.room_type;
     
     if (available[bookedType] > 0) {
         available[bookedType]--;
@@ -691,7 +691,7 @@ function updateAssignmentsTable() {
     
     filteredAssignments.forEach(assignment => {
         const row = tbody.insertRow();
-        const isUpgrade = assignment.booked_room_type !== assignment.assigned_room_type;
+        const isUpgrade = assignment.room_type !== assignment.assigned_room_type;
         
         const ratePriority = RATE_PRIORITY[assignment.rate_type] || 99;
         const rateBadgeClass = ratePriority <= 4 ? 'high-priority' : 'low-priority';
@@ -701,7 +701,7 @@ function updateAssignmentsTable() {
             <td>${assignment.guest_name}</td>
             <td>${assignment.honors_status}</td>
             <td><span class="badge ${rateBadgeClass}">${assignment.rate_type}</span></td>
-            <td>${assignment.booked_room_type}</td>
+            <td>${assignment.room_type}</td>
             <td><strong>${assignment.assigned_room_type}</strong> ${isUpgrade ? '↑' : ''}</td>
             <td>${assignment.length_of_stay}N</td>
             <td><span class="badge ${assignmentBadgeClass}">${assignment.assignment_type}</span></td>
@@ -738,7 +738,7 @@ document.getElementById('exportBtn').addEventListener('click', () => {
             a.guest_name,
             a.honors_status,
             a.rate_type,
-            a.booked_room_type,
+            a.room_type,
             a.assigned_room_type,
             a.length_of_stay,
             a.assignment_type
