@@ -123,6 +123,30 @@ function analyzeArrivals() {
     pendingAlerts = [];
     finalAssignments = [];
     
+    // Calculate In House and Due Outs for this date
+    const currentDateObj = new Date(currentDate);
+    
+    const inHouse = {};  // Guests staying over from previous night
+    const dueOuts = {};  // Guests checking out today
+    
+    allReservations.forEach(res => {
+        const checkinDate = new Date(res.checkin_date);
+        const checkoutDate = new Date(checkinDate);
+        checkoutDate.setDate(checkoutDate.getDate() + res.length_of_stay);
+        
+        const roomType = res.booked_room_type;
+        
+        // In House: checked in before today, checking out after today
+        if (checkinDate < currentDateObj && checkoutDate > currentDateObj) {
+            inHouse[roomType] = (inHouse[roomType] || 0) + 1;
+        }
+        
+        // Due Outs: checking out today
+        if (checkoutDate.toISOString().split('T')[0] === currentDate) {
+            dueOuts[roomType] = (dueOuts[roomType] || 0) + 1;
+        }
+    });
+    
     const demand = {};
     reservations.forEach(r => {
         demand[r.booked_room_type] = (demand[r.booked_room_type] || 0) + 1;
@@ -130,15 +154,36 @@ function analyzeArrivals() {
     
     const overbookings = [];
     const overbookedTypes = new Set();
-    Object.entries(demand).forEach(([roomType, count]) => {
-        const available = ROOM_INVENTORY[roomType] || 0;
-        if (count > available) {
-            overbookings.push({ roomType, booked: count, available, overby: count - available });
+    
+    // Calculate actual availability: Inventory - (In House - Due Outs)
+    Object.entries(demand).forEach(([roomType, arrivals]) => {
+        const totalInventory = ROOM_INVENTORY[roomType] || 0;
+        const currentlyOccupied = (inHouse[roomType] || 0) - (dueOuts[roomType] || 0);
+        const actuallyAvailable = totalInventory - currentlyOccupied;
+        
+        if (arrivals > actuallyAvailable) {
+            overbookings.push({ 
+                roomType, 
+                arrivals, 
+                inHouse: inHouse[roomType] || 0,
+                dueOuts: dueOuts[roomType] || 0,
+                available: actuallyAvailable, 
+                overby: arrivals - actuallyAvailable 
+            });
             overbookedTypes.add(roomType);
         }
     });
     
     const tempAvailable = { ...ROOM_INVENTORY };
+    
+    // Adjust availability based on in-house guests
+    Object.entries(inHouse).forEach(([roomType, count]) => {
+        const checkout = dueOuts[roomType] || 0;
+        const netOccupied = count - checkout;
+        if (tempAvailable[roomType]) {
+            tempAvailable[roomType] = Math.max(0, tempAvailable[roomType] - netOccupied);
+        }
+    });
     
     const adaGuests = reservations.filter(r => r.special_requests && r.special_requests.includes('ADA'));
     adaGuests.forEach(guest => {
@@ -163,7 +208,7 @@ function analyzeArrivals() {
         simulateAssignment(guest, tempAvailable, overbookedTypes, false);
     });
     
-    displayPreview(reservations, overbookings, demand);
+    displayPreview(reservations, overbookings, demand, inHouse, dueOuts);
 }
 
 function getStatusPriority(status) {
@@ -299,7 +344,7 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
     return false;
 }
 
-function displayPreview(reservations, overbookings, demand) {
+function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     document.getElementById('previewTotalGuests').textContent = reservations.length;
     document.getElementById('previewOverbookings').textContent = overbookings.length;
     document.getElementById('previewAlerts').textContent = pendingAlerts.length;
@@ -310,28 +355,42 @@ function displayPreview(reservations, overbookings, demand) {
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
     
-    let totalBooked = 0;
+    let totalInHouse = 0;
+    let totalDueOuts = 0;
+    let totalArrivals = 0;
     let totalAvailable = 0;
     let totalOverbooked = 0;
     
-    Object.entries(demand).sort((a, b) => {
-        const overA = a[1] - (ROOM_INVENTORY[a[0]] || 0);
-        const overB = b[1] - (ROOM_INVENTORY[b[0]] || 0);
-        return overB - overA;
-    }).forEach(([roomType, booked]) => {
-        const available = ROOM_INVENTORY[roomType] || 0;
-        const overby = Math.max(0, booked - available);
+    // Get all room types from inventory to show even those with 0 bookings
+    const allRoomTypes = Object.keys(ROOM_INVENTORY);
+    
+    allRoomTypes.sort((a, b) => {
+        const demandA = demand[a] || 0;
+        const demandB = demand[b] || 0;
+        return demandB - demandA;
+    }).forEach(roomType => {
+        const arrivals = demand[roomType] || 0;
+        const totalInventory = ROOM_INVENTORY[roomType] || 0;
+        const inHouseCount = inHouse[roomType] || 0;
+        const dueOutCount = dueOuts[roomType] || 0;
+        const currentlyOccupied = inHouseCount - dueOutCount;
+        const actuallyAvailable = totalInventory - currentlyOccupied;
+        const overby = Math.max(0, arrivals - actuallyAvailable);
         const status = overby > 0 ? 'OVERBOOKED' : 'OK';
         
-        totalBooked += booked;
-        totalAvailable += available;
+        totalInHouse += inHouseCount;
+        totalDueOuts += dueOutCount;
+        totalArrivals += arrivals;
+        totalAvailable += actuallyAvailable;
         totalOverbooked += overby;
         
         const row = tbody.insertRow();
         row.innerHTML = `
             <td><strong>${roomType}</strong></td>
-            <td>${booked}</td>
-            <td>${available}</td>
+            <td>${inHouseCount}</td>
+            <td>${dueOutCount}</td>
+            <td>${arrivals}</td>
+            <td>${actuallyAvailable}</td>
             <td><span class="badge ${overby > 0 ? 'overbooked' : 'ok'}">${status}</span></td>
             <td>${overby > 0 ? overby : '-'}</td>
         `;
@@ -344,7 +403,9 @@ function displayPreview(reservations, overbookings, demand) {
     totalsRow.style.borderTop = '2px solid #003057';
     totalsRow.innerHTML = `
         <td><strong>TOTALS</strong></td>
-        <td><strong>${totalBooked}</strong></td>
+        <td><strong>${totalInHouse}</strong></td>
+        <td><strong>${totalDueOuts}</strong></td>
+        <td><strong>${totalArrivals}</strong></td>
         <td><strong>${totalAvailable}</strong></td>
         <td><span class="badge ${totalOverbooked > 0 ? 'overbooked' : 'ok'}">${totalOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>
         <td><strong>${totalOverbooked > 0 ? totalOverbooked : '-'}</strong></td>

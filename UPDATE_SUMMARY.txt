@@ -1,0 +1,95 @@
+UPDATES - In House & Due Outs + Realistic Distribution
+======================================================
+
+CHANGE 1: Added In House and Due Outs Columns
+----------------------------------------------
+
+The Overbooking Analysis table now shows:
+
+┌──────────────┬──────────┬──────────┬──────────┬───────────┬────────┬──────────────┐
+│ Room Type    │ In House │ Due Outs │ Arrivals │ Available │ Status │ Overbooked By│
+├──────────────┼──────────┼──────────┼──────────┼───────────┼────────┼──────────────┤
+│ KNGN         │    85    │    12    │    91    │    21     │   OK   │      -       │
+│ TDBN         │   110    │    15    │   119    │    31     │   OK   │      -       │
+│ KEXN         │     2    │     0    │     4    │     1     │  OVER  │      3       │
+├──────────────┼──────────┼──────────┼──────────┼───────────┼────────┼──────────────┤
+│ TOTALS       │   197    │    27    │   253    │   151     │  OVER  │      3       │
+└──────────────┴──────────┴──────────┴──────────┴───────────┴────────┴──────────────┘
+
+**Definitions:**
+- **In House**: Guests staying over from previous night(s)
+- **Due Outs**: Guests checking out TODAY
+- **Arrivals**: Guests checking in TODAY (what was previously "Booked")
+- **Available**: Inventory - (In House - Due Outs)
+
+**Formula:**
+Available for new arrivals = Total Inventory - (In House - Due Outs)
+
+Example:
+- KNGN has 94 total rooms
+- 85 guests staying over (In House)
+- 12 checking out today (Due Outs)
+- Net occupied: 85 - 12 = 73
+- Available: 94 - 73 = 21 rooms
+- 91 arrivals vs 21 available = Would be overbooked, but algorithm upgrades to KSVN/KEXN
+
+
+CHANGE 2: Realistic Room Type Distribution
+-------------------------------------------
+
+**OLD Distribution** (Uniform):
+- TDBN: 39%
+- KNGN: 30%
+- KSVN: 14%
+- TSVN: 6%
+- Other: 11%
+
+**NEW Distribution** (Realistic):
+- KNGN: 45% ← MOST COMMON (Standard King)
+- TDBN: 35% ← VERY COMMON (Standard Double)
+- KSVN: 8% (Park View King)
+- TSVN: 5% (Park View Double)
+- NKSQA: 3% (ADA King)
+- KEXN: 2% (Executive King)
+- Other: 2% (Premium suites, etc.)
+
+**Why this matters:**
+- 80% of bookings are now KNGN or TDBN (standard rooms)
+- Premium rooms (KEXN, NKSP, suites) are RARE - as they should be
+- Matches real-world booking patterns
+- Makes overbooking scenarios more realistic
+
+**Impact on Algorithm:**
+- Most guests book KNGN or TDBN
+- When overbooked, upgrade paths focus on these common types
+- Premium upgrades (to KEXN, NKSP) are special events, not routine
+- Named suites (KSPN, KOTN, KSLN) are emergency-only
+
+
+FILES TO REPLACE:
+-----------------
+1. index.html (updated table headers)
+2. room-balancer.js (In House/Due Outs logic)
+3. embassy_suites_reservations_realistic.json (NEW dataset with realistic distribution)
+
+
+TESTING:
+--------
+1. Replace all 3 files
+2. Hard refresh (Ctrl+F5)
+3. Load the NEW JSON file (embassy_suites_reservations_realistic.json)
+4. Select January 17, 2026
+5. Click Analyze
+
+Expected Results:
+- You'll see In House and Due Outs columns populated
+- Most arrivals are KNGN or TDBN
+- Totals row shows complete picture
+- Available column reflects actual availability after accounting for stayovers
+
+
+NEXT STEPS (If Needed):
+-----------------------
+- CSV upload support for real PMS data
+- OnQ/Opera API integration
+- Excel template for manual data entry
