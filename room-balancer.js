@@ -91,11 +91,20 @@ function populateDateSelect() {
     select.innerHTML = '<option value="">Select a date...</option>';
     
     dates.forEach(date => {
-        const count = allReservations.filter(r => r.checkin_date === date).length;
-        const occupancy = ((count / 321) * 100).toFixed(0);
+        const arrivals = allReservations.filter(r => r.checkin_date === date).length;
+        
+        // Calculate TOTAL rooms occupied on this date (not just arrivals)
+        const occupied = allReservations.filter(r => {
+            const checkin = new Date(r.checkin_date);
+            const checkout = new Date(r.checkout_date);
+            const target = new Date(date);
+            return checkin <= target && checkout > target;
+        }).length;
+        
+        const occupancy = ((occupied / 321) * 100).toFixed(0);
         const option = document.createElement('option');
         option.value = date;
-        option.textContent = `${date} (${count} arrivals - ${occupancy}% occupancy)`;
+        option.textContent = `${date} (${arrivals} arrivals - ${occupied} occupied - ${occupancy}% occupancy)`;
         select.appendChild(option);
     });
 }
@@ -391,8 +400,12 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     document.getElementById('previewOverbookings').textContent = overbookings.length;
     document.getElementById('previewAlerts').textContent = pendingAlerts.length;
     
-    const occupancy = ((reservations.length / 321) * 100).toFixed(0);
-    document.getElementById('previewOccupancy').textContent = occupancy + '%';
+    // Calculate TOTAL occupied rooms: (In House - Due Outs + New Arrivals)
+    const totalInHouse = Object.values(inHouse).reduce((a, b) => a + b, 0);
+    const totalDueOuts = Object.values(dueOuts).reduce((a, b) => a + b, 0);
+    const totalOccupied = totalInHouse - totalDueOuts + reservations.length;
+    const occupancy = ((totalOccupied / 321) * 100).toFixed(0);
+    document.getElementById('previewOccupancy').textContent = occupancy + '% (' + totalOccupied + ' rooms)';
     
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
@@ -614,8 +627,30 @@ function displayFinalResults(unapprovedAlerts = []) {
     const upgrades = finalAssignments.filter(a => a.assignment_type !== 'standard').length;
     document.getElementById('statUpgrades').textContent = upgrades;
     
-    const occupancy = ((reservations.length / 321) * 100).toFixed(0);
-    document.getElementById('statOccupancy').textContent = occupancy + '%';
+    // Calculate TOTAL occupied rooms (In House - Due Outs + Arrivals)
+    const currentDateObj = new Date(currentDate);
+    let totalInHouse = 0;
+    let totalDueOuts = 0;
+    
+    allReservations.forEach(res => {
+        const checkinDate = new Date(res.checkin_date);
+        const checkoutDate = new Date(checkinDate);
+        checkoutDate.setDate(checkoutDate.getDate() + res.length_of_stay);
+        
+        // In House: checked in before today, checking out after today
+        if (checkinDate < currentDateObj && checkoutDate > currentDateObj) {
+            totalInHouse++;
+        }
+        
+        // Due Outs: checking out today
+        if (checkoutDate.toISOString().split('T')[0] === currentDate) {
+            totalDueOuts++;
+        }
+    });
+    
+    const totalOccupied = Math.min(321, totalInHouse - totalDueOuts + reservations.length);
+    const occupancy = ((totalOccupied / 321) * 100).toFixed(0);
+    document.getElementById('statOccupancy').textContent = occupancy + '% (' + totalOccupied + ' rooms)';
     
     let bannerHTML = '';
     
