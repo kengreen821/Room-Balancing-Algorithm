@@ -1,0 +1,65 @@
+PARTIAL APPROVAL WORKFLOW - HOW IT WORKS
+=========================================
+
+SCENARIO: 20 Alerts on Sold-Out Night
+--------------------------------------
+
+Phase 1: Review Alerts
+----------------------
+☐ Upgrade: Guest A (Third-Party) TDBN → TSVN
+☐ Upgrade: Guest B (Hilton Go) KNGN → KSVN
+☐ Cross-category: Guest C (Direct) TDBN → KNGN - Call for approval
+☐ ADA Alert: Guest D NKSQA → KNGN - Coordinate with housekeeping
+☐ Upgrade: Guest E (AAA) KSVN → KEXN
+... (15 more alerts)
+
+MOD Actions:
+✓ Checked box 1: Called Guest A, approved upgrade
+✓ Checked box 2: Called Guest B, approved upgrade
+✗ Box 3 unchecked: Guest C didn't answer phone - need to retry
+✓ Checked box 4: Coordinated with housekeeping for Guest D
+✗ Box 5 unchecked: Can't upgrade Guest E - no KEXN available, need GM approval
+... (continue handling)
+
+Button now shows: "Finalize 15 Approved (5 Remain)"
+
+Phase 2: Finalize Partial
+--------------------------
+Click "Finalize 15 Approved (5 Remain)"
+
+RESULT:
+✓ 15 guests assigned and ready for check-in
+⚠️ 5 guests remain unresolved:
+  - Guest C: Still need to call for cross-category approval
+  - Guest E: Escalated to GM for named suite approval
+  - Guest F: Walk guest - no suitable room
+  - Guest G: Waiting callback from guest
+  - Guest H: Need to coordinate with maintenance
+
+Final Assignments Table:
+------------------------
+Shows the 15 finalized assignments
+
+Unresolved Alerts Section:
+--------------------------
+Lists the 5 remaining issues with details
+
+MOD Next Steps:
+- Continue working on the 5 unresolved
+- Can handle them over next 1-2 hours
+- Doesn't block check-in for the 15 resolved guests
+
+
+OLD WORKFLOW (Before v1.2):
+----------------------------
+✗ All 20 alerts MUST be checked before finalizing
+✗ Can't proceed until everything resolved
+✗ Blocks check-in for everyone if one guest unreachable
+
+
+NEW WORKFLOW (v1.2+):
+---------------------
+✓ Handle what you can immediately
+✓ Finalize those assignments
+✓ Continue working on remaining issues
+✓ Flexible and realistic for busy MOD operations

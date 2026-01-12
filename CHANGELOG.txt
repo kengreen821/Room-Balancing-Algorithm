@@ -1,0 +1,55 @@
+CHANGELOG - Room Balancing Algorithm
+=====================================
+
+Version 1.1 - Critical Business Logic Fix
+------------------------------------------
+
+FIXED: Downgrade Prevention
+- Removed all downgrade paths from cross-category upgrades
+- Added isDowngrade() function to detect tier and bed downgrades
+- Emergency logic now skips downgrades - would rather walk guest
+- Named suite logic also protected against downgrades
+
+REMOVED Invalid Cross-Category Paths:
+✗ KSVN → TDBN (Park View King to Standard Double - NEVER)
+✗ KNGN → TDBN (King to Double - downgrade)
+✗ NKSP → KNGN (Premium to Standard - downgrade)
+✗ All other downgrade scenarios
+
+KEPT Valid Cross-Category Paths:
+✓ TDBN → KNGN/KSVN/KEXN (Standard Double to Kings - upgrade)
+✓ TSVN → KSVN/KEXN (Park View Double to Premium Kings - upgrade)
+✓ ADA → Non-ADA same/better tier (when ADA exhausted)
+
+Business Logic: 
+- Would rather WALK a guest than downgrade them
+- Protects guest experience and hotel reputation
+- Aligns with real MOD decision-making
+
+Version 1.0 - Initial Release
+------------------------------
+- Rate type priority algorithm
+- MOD approval workflow
+- ADA compliance handling
+- Overbooking management
+
+Version 1.2 - Flexible Approval Workflow
+-----------------------------------------
+
+CHANGED: Partial Approval System
+- MOD can now finalize with SOME alerts checked (not all required)
+- Approved alerts → Guests get assigned
+- Unchecked alerts → Remain as "Unresolved - Manual Handling Required"
+- Finalize button shows count: "Finalize 15 Approved (5 Remain)"
+
+Real-World Scenario:
+- 20 alerts appear (overbookings, upgrades, etc.)
+- MOD handles 15 (calls guests, gets approval)
+- Can finalize those 15 immediately
+- Remaining 5 escalated to GM or guests walked
+
+Benefits:
+- More realistic MOD workflow
+- Don't need to handle everything before finalizing
+- Partial completion supported
+- Clear visibility of remaining issues

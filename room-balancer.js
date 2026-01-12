@@ -390,6 +390,7 @@ function displayPreview(reservations, overbookings, demand) {
             </div>
         `;
         document.getElementById('finalizeBtn').disabled = false;
+        document.getElementById('finalizeBtn').textContent = '✓ Finalize All Room Assignments';
     } else {
         pendingAlerts.forEach((alert, index) => {
             const alertDiv = document.createElement('div');
@@ -419,34 +420,76 @@ function displayPreview(reservations, overbookings, demand) {
 }
 
 function updateApprovalStatus() {
-    let allApproved = true;
+    // Count how many are approved
+    let approvedCount = 0;
     
     pendingAlerts.forEach((alert, index) => {
         const checkbox = document.getElementById(`checkbox-${index}`);
         const alertDiv = document.getElementById(`alert-${index}`);
         
-        if (checkbox.checked) {
+        if (checkbox && checkbox.checked) {
             alertDiv.classList.add('approved');
             alert.approved = true;
+            approvedCount++;
         } else {
             alertDiv.classList.remove('approved');
             alert.approved = false;
-            allApproved = false;
         }
     });
     
-    document.getElementById('finalizeBtn').disabled = !allApproved && pendingAlerts.length > 0;
+    // Enable finalize button if at least ONE is checked (or if there are no alerts)
+    const hasAlerts = pendingAlerts.length > 0;
+    const hasApprovals = approvedCount > 0;
+    
+    document.getElementById('finalizeBtn').disabled = hasAlerts && !hasApprovals;
+    
+    // Update button text to show count
+    const finalizeBtn = document.getElementById('finalizeBtn');
+    if (hasAlerts) {
+        if (approvedCount === pendingAlerts.length) {
+            finalizeBtn.textContent = '✓ Finalize All Room Assignments';
+        } else if (approvedCount > 0) {
+            finalizeBtn.textContent = `✓ Finalize ${approvedCount} Approved (${pendingAlerts.length - approvedCount} Remain)`;
+        } else {
+            finalizeBtn.textContent = '✓ Finalize Room Assignments';
+        }
+    }
 }
 
 // PHASE 2: Finalize assignments
 document.getElementById('finalizeBtn').addEventListener('click', () => {
+    // Filter assignments - only include those with approved alerts or no alerts
+    const approvedGuestNames = new Set();
+    const unapprovedAlerts = [];
+    
+    pendingAlerts.forEach(alert => {
+        if (alert.approved) {
+            approvedGuestNames.add(alert.guestName);
+        } else {
+            unapprovedAlerts.push(alert);
+        }
+    });
+    
+    // Keep standard assignments (no alerts) + approved special assignments
+    const approvedAssignments = finalAssignments.filter(assignment => {
+        // Standard assignments (no alerts) are always included
+        if (assignment.assignment_type === 'standard') {
+            return true;
+        }
+        // Special assignments only if approved
+        return approvedGuestNames.has(assignment.guest_name);
+    });
+    
+    // Update finalAssignments to only approved ones
+    finalAssignments = approvedAssignments;
+    
     document.getElementById('previewPhase').classList.add('hidden');
     document.getElementById('resultsPhase').classList.remove('hidden');
     
-    displayFinalResults();
+    displayFinalResults(unapprovedAlerts);
 });
 
-function displayFinalResults() {
+function displayFinalResults(unapprovedAlerts = []) {
     const reservations = allReservations.filter(r => r.checkin_date === currentDate);
     
     // Stats
@@ -458,6 +501,45 @@ function displayFinalResults() {
     
     const occupancy = ((reservations.length / 321) * 100).toFixed(0);
     document.getElementById('statOccupancy').textContent = occupancy + '%';
+    
+    // Show unresolved alerts if any
+    const resultsSection = document.querySelector('#resultsPhase .section');
+    let unresolvedHTML = '';
+    
+    if (unapprovedAlerts.length > 0) {
+        unresolvedHTML = `
+            <div style="padding: 20px; background: #fff3e0; border: 2px solid ${unapprovedAlerts.length > 0 ? '#f57c00' : '#27ae60'}; border-radius: 8px; margin-bottom: 20px;">
+                <strong style="color: #f57c00; font-size: 16px;">⚠️ ${unapprovedAlerts.length} Unresolved Alert${unapprovedAlerts.length > 1 ? 's' : ''} - Manual Handling Required</strong>
+                <div style="margin-top: 15px;">
+                    ${unapprovedAlerts.map(alert => `
+                        <div style="padding: 10px; background: white; border-radius: 6px; margin-top: 8px; border-left: 3px solid #f57c00;">
+                            ${alert.message}
+                        </div>
+                    `).join('')}
+                </div>
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                    <strong>Next Steps:</strong> These guests require manual intervention (walk guest, GM approval, etc.). 
+                    Remaining ${finalAssignments.length} guests have been assigned and are ready for check-in.
+                </p>
+            </div>
+        `;
+    } else {
+        unresolvedHTML = `
+            <div style="padding: 20px; background: #e8f5e9; border-radius: 8px; margin-bottom: 20px;">
+                <strong style="color: var(--success); font-size: 16px;">✓ All room assignments finalized and ready for check-in.</strong>
+            </div>
+        `;
+    }
+    
+    // Update the success banner
+    const successBanner = resultsSection.querySelector('div[style*="background: #e8f5e9"]');
+    if (successBanner) {
+        successBanner.outerHTML = unresolvedHTML;
+    } else {
+        // Insert after h2
+        const h2 = resultsSection.querySelector('h2');
+        h2.insertAdjacentHTML('afterend', unresolvedHTML);
+    }
     
     // Display all assignments
     filteredAssignments = [...finalAssignments];
