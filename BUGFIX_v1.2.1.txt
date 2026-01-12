@@ -1,0 +1,46 @@
+VERSION 1.2.1 - BUGFIX: Partial Approval Not Working
+=====================================================
+
+ISSUE IDENTIFIED:
+-----------------
+User reported that checking some boxes (but not all) was not enabling 
+the finalize button or properly filtering assignments.
+
+ROOT CAUSES FIXED:
+------------------
+
+1. Button State Update
+   - Added proper null checks in updateApprovalStatus()
+   - Added initialization call after creating checkboxes
+   - Fixed button text to show "Check at least one alert" when disabled
+   - Ensured button updates immediately on checkbox change
+
+2. Assignment Filtering
+   - Clarified logic: standard assignments always included
+   - Special assignments (upgrades, cross-category, etc.) only included if approved
+   - Added explicit checks for whether assignment has associated alert
+
+3. Walk Guest Handling
+   - Added explicit comment: walk guest alerts do NOT create assignments
+   - These guests have no room, so don't appear in finalAssignments at all
+
+4. Display Logic
+   - Fixed banner insertion to properly remove old banners
+   - Improved unresolved alerts formatting
+   - Better messaging about what happens next
+
+TESTING CHECKLIST:
+------------------
+□ Load Jan 17 date (should have walk guest alerts)
+□ Check 2 out of 6 alerts
+□ Button should say "Finalize 2 Approved (4 Remain)"
+□ Click finalize
+□ Should see 2 guests handled, 4 unresolved alerts shown
+□ Stats should show: Total 321, Assigned 315 (or similar)
+
+KNOWN BEHAVIOR:
+---------------
+- Button disabled until at least ONE checkbox is checked
+- Checked alerts → Assignments finalized
+- Unchecked alerts → Shown as "Unresolved" in results
+- Walk guests → Never appear in assignments table

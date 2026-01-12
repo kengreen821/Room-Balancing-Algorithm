@@ -344,6 +344,8 @@ function simulateAssignment(guest, available, overbookedTypes, isAda) {
         guestName: guest.guest_name,
         approved: false
     });
+    
+    // DO NOT add to finalAssignments - this guest has no room
     return false;
 }
 
@@ -401,7 +403,9 @@ function displayPreview(reservations, overbookings, demand) {
             checkbox.type = 'checkbox';
             checkbox.className = 'alert-checkbox';
             checkbox.id = `checkbox-${index}`;
-            checkbox.addEventListener('change', () => updateApprovalStatus());
+            checkbox.addEventListener('change', () => {
+                updateApprovalStatus();
+            });
             
             const icon = document.createElement('span');
             icon.className = 'alert-icon';
@@ -416,6 +420,9 @@ function displayPreview(reservations, overbookings, demand) {
             alertDiv.appendChild(content);
             alertsList.appendChild(alertDiv);
         });
+        
+        // Initialize button state
+        updateApprovalStatus();
     }
 }
 
@@ -427,62 +434,86 @@ function updateApprovalStatus() {
         const checkbox = document.getElementById(`checkbox-${index}`);
         const alertDiv = document.getElementById(`alert-${index}`);
         
-        if (checkbox && checkbox.checked) {
-            alertDiv.classList.add('approved');
-            alert.approved = true;
-            approvedCount++;
-        } else {
-            alertDiv.classList.remove('approved');
-            alert.approved = false;
+        if (checkbox && alertDiv) {
+            if (checkbox.checked) {
+                alertDiv.classList.add('approved');
+                alert.approved = true;
+                approvedCount++;
+            } else {
+                alertDiv.classList.remove('approved');
+                alert.approved = false;
+            }
         }
     });
     
-    // Enable finalize button if at least ONE is checked (or if there are no alerts)
-    const hasAlerts = pendingAlerts.length > 0;
-    const hasApprovals = approvedCount > 0;
-    
-    document.getElementById('finalizeBtn').disabled = hasAlerts && !hasApprovals;
-    
-    // Update button text to show count
     const finalizeBtn = document.getElementById('finalizeBtn');
-    if (hasAlerts) {
-        if (approvedCount === pendingAlerts.length) {
+    const totalAlerts = pendingAlerts.length;
+    
+    // If no alerts at all, enable with standard text
+    if (totalAlerts === 0) {
+        finalizeBtn.disabled = false;
+        finalizeBtn.textContent = '✓ Finalize All Room Assignments';
+        return;
+    }
+    
+    // Enable button if at least one is checked
+    if (approvedCount > 0) {
+        finalizeBtn.disabled = false;
+        
+        if (approvedCount === totalAlerts) {
             finalizeBtn.textContent = '✓ Finalize All Room Assignments';
-        } else if (approvedCount > 0) {
-            finalizeBtn.textContent = `✓ Finalize ${approvedCount} Approved (${pendingAlerts.length - approvedCount} Remain)`;
         } else {
-            finalizeBtn.textContent = '✓ Finalize Room Assignments';
+            const remaining = totalAlerts - approvedCount;
+            finalizeBtn.textContent = `✓ Finalize ${approvedCount} Approved (${remaining} Remain)`;
         }
+    } else {
+        // No approvals yet - keep button disabled
+        finalizeBtn.disabled = true;
+        finalizeBtn.textContent = '✓ Finalize Room Assignments (Check at least one alert)';
     }
 }
 
 // PHASE 2: Finalize assignments
 document.getElementById('finalizeBtn').addEventListener('click', () => {
-    // Filter assignments - only include those with approved alerts or no alerts
-    const approvedGuestNames = new Set();
+    // Separate approved and unapproved alerts
     const unapprovedAlerts = [];
+    const approvedAlertGuestNames = new Set();
     
     pendingAlerts.forEach(alert => {
         if (alert.approved) {
-            approvedGuestNames.add(alert.guestName);
+            approvedAlertGuestNames.add(alert.guestName);
         } else {
             unapprovedAlerts.push(alert);
         }
     });
     
-    // Keep standard assignments (no alerts) + approved special assignments
+    // Filter assignments:
+    // 1. Keep all standard assignments (no alerts)
+    // 2. Keep special assignments where alert was approved
+    // 3. Remove assignments where alert was NOT approved
     const approvedAssignments = finalAssignments.filter(assignment => {
-        // Standard assignments (no alerts) are always included
+        // Standard assignments always included
         if (assignment.assignment_type === 'standard') {
             return true;
         }
-        // Special assignments only if approved
-        return approvedGuestNames.has(assignment.guest_name);
+        
+        // Special assignments only if their alert was approved
+        // (or if this assignment somehow doesn't have an associated alert)
+        const hasAlert = pendingAlerts.some(a => a.guestName === assignment.guest_name);
+        
+        if (!hasAlert) {
+            // No alert for this guest (shouldn't happen but handle gracefully)
+            return true;
+        }
+        
+        // Has alert - only include if approved
+        return approvedAlertGuestNames.has(assignment.guest_name);
     });
     
-    // Update finalAssignments to only approved ones
+    // Update global finalAssignments to approved ones
     finalAssignments = approvedAssignments;
     
+    // Show results
     document.getElementById('previewPhase').classList.add('hidden');
     document.getElementById('resultsPhase').classList.remove('hidden');
     
@@ -502,44 +533,47 @@ function displayFinalResults(unapprovedAlerts = []) {
     const occupancy = ((reservations.length / 321) * 100).toFixed(0);
     document.getElementById('statOccupancy').textContent = occupancy + '%';
     
-    // Show unresolved alerts if any
-    const resultsSection = document.querySelector('#resultsPhase .section');
-    let unresolvedHTML = '';
+    // Create unresolved alerts banner
+    let bannerHTML = '';
     
     if (unapprovedAlerts.length > 0) {
-        unresolvedHTML = `
-            <div style="padding: 20px; background: #fff3e0; border: 2px solid ${unapprovedAlerts.length > 0 ? '#f57c00' : '#27ae60'}; border-radius: 8px; margin-bottom: 20px;">
+        bannerHTML = `
+            <div style="padding: 20px; background: #fff3e0; border: 2px solid #f57c00; border-radius: 8px; margin-bottom: 20px;">
                 <strong style="color: #f57c00; font-size: 16px;">⚠️ ${unapprovedAlerts.length} Unresolved Alert${unapprovedAlerts.length > 1 ? 's' : ''} - Manual Handling Required</strong>
                 <div style="margin-top: 15px;">
                     ${unapprovedAlerts.map(alert => `
-                        <div style="padding: 10px; background: white; border-radius: 6px; margin-top: 8px; border-left: 3px solid #f57c00;">
+                        <div style="padding: 10px; background: white; border-radius: 6px; margin-top: 8px; border-left: 3px solid #f57c00; font-size: 14px;">
                             ${alert.message}
                         </div>
                     `).join('')}
                 </div>
                 <p style="margin-top: 15px; color: #666; font-size: 14px;">
-                    <strong>Next Steps:</strong> These guests require manual intervention (walk guest, GM approval, etc.). 
-                    Remaining ${finalAssignments.length} guests have been assigned and are ready for check-in.
+                    <strong>Next Steps:</strong> These ${unapprovedAlerts.length} guest${unapprovedAlerts.length > 1 ? 's' : ''} require manual intervention 
+                    (walk guest, GM approval, coordinate with housekeeping, etc.). 
+                    The remaining <strong>${finalAssignments.length} guests</strong> have been assigned and are ready for check-in.
                 </p>
             </div>
         `;
     } else {
-        unresolvedHTML = `
+        bannerHTML = `
             <div style="padding: 20px; background: #e8f5e9; border-radius: 8px; margin-bottom: 20px;">
                 <strong style="color: var(--success); font-size: 16px;">✓ All room assignments finalized and ready for check-in.</strong>
             </div>
         `;
     }
     
-    // Update the success banner
-    const successBanner = resultsSection.querySelector('div[style*="background: #e8f5e9"]');
-    if (successBanner) {
-        successBanner.outerHTML = unresolvedHTML;
-    } else {
-        // Insert after h2
-        const h2 = resultsSection.querySelector('h2');
-        h2.insertAdjacentHTML('afterend', unresolvedHTML);
+    // Find the section and insert banner after h2
+    const resultsSection = document.querySelector('#resultsPhase .section');
+    const h2 = resultsSection.querySelector('h2');
+    
+    // Remove any existing banner
+    const existingBanner = h2.nextElementSibling;
+    if (existingBanner && existingBanner.tagName === 'DIV') {
+        existingBanner.remove();
     }
+    
+    // Insert new banner
+    h2.insertAdjacentHTML('afterend', bannerHTML);
     
     // Display all assignments
     filteredAssignments = [...finalAssignments];

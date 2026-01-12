@@ -1,0 +1,81 @@
+TESTING PARTIAL APPROVAL - STEP BY STEP
+========================================
+
+Test Case: January 17, 2026 (321 arrivals, 100% sold out)
+Expected: Multiple walk guest alerts + other alerts
+
+STEP 1: Load and Analyze
+-------------------------
+1. Open index.html in browser
+2. Load "embassy_suites_reservations_final.json"
+3. Select "2026-01-17" from dropdown
+4. Click "Analyze Arrivals"
+
+Expected Result:
+- See stats: 321 arrivals, X overbookings, Y alerts
+- See list of alerts with checkboxes
+- Finalize button should be DISABLED and gray
+- Button text: "Finalize Room Assignments (Check at least one alert)"
+
+STEP 2: Check Some Boxes (Not All)
+-----------------------------------
+1. Check the FIRST 2 checkboxes only
+2. Leave the rest unchecked
+
+Expected Result:
+- First 2 alerts should get green background (approved state)
+- Button should become ENABLED (blue)
+- Button text should change to: "✓ Finalize 2 Approved (X Remain)"
+  (where X = total alerts - 2)
+
+STEP 3: Click Finalize
+-----------------------
+1. Click the "Finalize 2 Approved (X Remain)" button
+
+Expected Result:
+- Screen transitions to final results
+- Top stats show:
+  - Total Arrivals: 321
+  - Rooms Assigned: (should be less than 321)
+  - Upgrades: some number
+- Orange banner appears: "⚠️ X Unresolved Alerts - Manual Handling Required"
+- Banner lists the unchecked alerts with details
+- Assignments table shows only successfully assigned guests
+- Walk guests do NOT appear in assignments table
+
+STEP 4: Verify Walk Guests Excluded
+------------------------------------
+1. Scroll through assignments table
+2. Search for guest names from "WALK GUEST" alerts
+
+Expected Result:
+- Walk guest names should NOT appear in table
+- Only guests with actual room assignments should be listed
+
+STEP 5: Test "Check All"
+-------------------------
+1. Go back (reload page)
+2. Repeat steps 1-2
+3. This time, check ALL checkboxes
+
+Expected Result:
+- Button text: "✓ Finalize All Room Assignments"
+- When clicked, green banner appears: "✓ All room assignments finalized"
+- No unresolved alerts section
+
+STEP 6: Test "Check None"
+--------------------------
+1. Go back (reload page)
+2. Repeat step 1
+3. Don't check any checkboxes
+
+Expected Result:
+- Button remains DISABLED (gray)
+- Cannot click finalize
+- Button text: "Finalize Room Assignments (Check at least one alert)"
+
+IF ANY STEP FAILS:
+------------------
+- Take screenshot of console (F12 → Console tab)
+- Note which step failed
+- Check browser console for JavaScript errors
