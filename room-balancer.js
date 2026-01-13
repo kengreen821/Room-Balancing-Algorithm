@@ -602,4 +602,3 @@ document.getElementById('startOverBtn').addEventListener('click', () => {
     pendingAlerts = [];
     finalAssignments = [];
 });
-
