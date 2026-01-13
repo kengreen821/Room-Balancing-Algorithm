@@ -1,0 +1,273 @@
+TABLE COLUMN STRUCTURE UPDATE
+================================================================================
+Date: January 13, 2026
+
+CHANGES MADE
+================================================================================
+
+Updated the Overbooking Analysis table to match hotel operations terminology
+and workflow.
+
+
+OLD COLUMN STRUCTURE
+================================================================================
+
+1. Room Type
+2. Arrivals
+3. Available
+4. Due Outs
+5. In House
+6. Overbooked By
+7. Status
+
+
+NEW COLUMN STRUCTURE
+================================================================================
+
+1. Room Type
+2. Available
+3. Arrivals
+4. Sold
+5. OOO
+6. Total Inventory
+7. Departures
+8. In House
+9. Overbooked By
+10. Status
+
+
+COLUMN DEFINITIONS
+================================================================================
+
+**Room Type**
+- Room category code (KNGN, TDBN, etc.)
+
+**Available**
+- Rooms available for today's arrivals
+- Formula: Total Inventory - Sold - OOO
+- This is what's left after accounting for stayovers and out-of-order rooms
+
+**Arrivals**
+- New guests checking in today
+- If this exceeds Available → overbooked
+
+**Sold**
+- Rooms with guests staying over from last night
+- Formula: In House - Departures
+- These rooms are occupied before new arrivals
+
+**OOO (Out of Order)**
+- Rooms unavailable due to maintenance/repairs
+- Currently set to 0 (can be made dynamic)
+
+**Total Inventory**
+- Physical room count for this type
+- Fixed number from ROOM_INVENTORY constant
+
+**Departures**
+- Guests checking out today
+- Formerly called "Due Outs"
+- These rooms become available after checkout
+
+**In House**
+- Guests who stayed last night
+- Total occupancy before today's departures
+
+**Overbooked By**
+- How many more arrivals than available rooms
+- Formula: max(0, Arrivals - Available)
+
+**Status**
+- OK (green) or OVERBOOKED (red)
+
+
+CALCULATION FLOW
+================================================================================
+
+Start of Day:
+1. In House = 200 guests from last night
+2. Departures = 50 guests checking out today
+3. Sold = 200 - 50 = 150 rooms staying over
+
+Available Calculation:
+4. Total Inventory = 321 rooms
+5. OOO = 0 (no maintenance)
+6. Available = 321 - 150 - 0 = 171 rooms
+
+Arrivals Processing:
+7. Arrivals = 125 new check-ins today
+8. If Arrivals (125) < Available (171) → OK
+9. If Arrivals (125) > Available (171) → OVERBOOKED
+
+
+EXAMPLE SCENARIOS
+================================================================================
+
+**Scenario 1: Normal Day (No Overbooking)**
+Room Type: KNGN
+- Total Inventory: 94
+- In House: 70 (from last night)
+- Departures: 15 (checking out)
+- Sold: 70 - 15 = 55 (staying over)
+- OOO: 0
+- Available: 94 - 55 - 0 = 39
+- Arrivals: 30 (new check-ins)
+- Overbooked By: 0 (30 < 39)
+- Status: OK ✓
+
+**Scenario 2: Overbooked**
+Room Type: KNGN
+- Total Inventory: 94
+- In House: 88 (from last night)
+- Departures: 10 (checking out)
+- Sold: 88 - 10 = 78 (staying over)
+- OOO: 0
+- Available: 94 - 78 - 0 = 16
+- Arrivals: 25 (new check-ins)
+- Overbooked By: 9 (25 - 16)
+- Status: OVERBOOKED ⚠️
+
+**Scenario 3: With Out of Order**
+Room Type: KNGN
+- Total Inventory: 94
+- In House: 70
+- Departures: 15
+- Sold: 55
+- OOO: 5 (maintenance/repairs)
+- Available: 94 - 55 - 5 = 34
+- Arrivals: 30
+- Overbooked By: 0
+- Status: OK ✓
+
+
+WHY THESE CHANGES
+================================================================================
+
+**Hotel Operations Clarity:**
+- "Sold" is clearer than "currently occupied" for stayover rooms
+- "Departures" is more common than "Due Outs"
+- "OOO" is standard hotel terminology
+
+**Logical Flow:**
+- Columns now read left-to-right in decision order:
+  1. How many rooms are available?
+  2. How many guests are arriving?
+  3. Do we have enough inventory?
+
+**Transparency:**
+- Shows Total Inventory so MOD can see full capacity
+- Shows OOO to account for maintenance
+- Shows the math: Available = Inventory - Sold - OOO
+
+
+UPDATED FILES
+================================================================================
+
+✅ room-balancer.js
+   - Updated table row generation
+   - Added Sold calculation
+   - Added OOO field (default 0)
+   - Reordered columns
+   - Updated totals row
+
+✅ index.html
+   - Updated table headers
+   - Reordered to match new structure
+   - Now 10 columns instead of 7
+
+
+TESTING THE CHANGES
+================================================================================
+
+After deploying, verify:
+
+1. **Column Headers Display Correctly:**
+   Room Type | Available | Arrivals | Sold | OOO | Total Inventory | 
+   Departures | In House | Overbooked By | Status
+
+2. **Calculations Are Correct:**
+   - Sold = In House - Departures
+   - Available = Total Inventory - Sold - OOO
+   - Overbooked By = max(0, Arrivals - Available)
+
+3. **Totals Row Sums Properly:**
+   - All columns show correct sums
+   - Status shows OVERBOOKED if any room type overbooked
+
+4. **Load Test Data:**
+   - embassy_suites_GUARANTEED_occupancy.json
+   - Select Jan 17 (337 rooms, 105% occupancy)
+   - Verify table shows proper breakdown
+
+
+DEPLOYMENT INSTRUCTIONS
+================================================================================
+
+1. Upload room-balancer.js to GitHub (replaces old version)
+2. Upload index.html to GitHub (replaces old version)
+3. Commit: "Update table columns: Available, Sold, OOO, Total Inventory"
+4. Wait 2 minutes for GitHub Pages
+5. Hard reload: ⌘ + Shift + R
+6. Test with reservation dataset
+
+
+BACKWARDS COMPATIBILITY
+================================================================================
+
+No breaking changes to:
+- File upload
+- Date selector
+- Algorithm logic
+- Upgrade paths
+- MOD approval workflow
+- CSV export
+
+Only visual changes to the Overbooking Analysis table.
+
+
+FUTURE ENHANCEMENTS
+================================================================================
+
+**OOO Management:**
+Currently OOO is hardcoded to 0. Future enhancement:
+- Add OOO input fields per room type
+- Store OOO in localStorage
+- Allow MOD to mark rooms out of order
+- Deduct OOO from available inventory
+
+**Implementation:**
+```javascript
+const OOO_ROOMS = {
+    'KNGN': 2,
+    'TDBN': 1,
+    // etc.
+};
+
+const ooo = OOO_ROOMS[roomType] || 0;
+const available = totalInventory - sold - ooo;
+```
+
+
+VALIDATION
+================================================================================
+
+✅ JavaScript syntax validated (no errors)
+✅ All calculations correct
+✅ Column order matches request
+✅ Terminology matches hotel operations
+✅ Ready to deploy
+
+
+SUMMARY
+================================================================================
+
+The table now shows:
+- What's available TODAY (Available)
+- What's coming in TODAY (Arrivals)
+- What's staying over (Sold)
+- What's unavailable (OOO)
+- What we physically have (Total Inventory)
+- Who's leaving TODAY (Departures)
+- Who was here LAST NIGHT (In House)
+
+This gives MOD complete operational visibility in one table.

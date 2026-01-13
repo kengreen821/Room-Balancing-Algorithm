@@ -356,10 +356,13 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     tbody.innerHTML = '';
     
     // Table totals - use DIFFERENT variable names to avoid conflict
-    let tableInHouse = 0;
-    let tableDueOuts = 0;
-    let tableArrivals = 0;
     let tableAvailable = 0;
+    let tableArrivals = 0;
+    let tableSold = 0;
+    let tableOOO = 0;
+    let tableTotalInventory = 0;
+    let tableDepartures = 0;
+    let tableInHouse = 0;
     let tableOverbooked = 0;
     
     const allRoomTypes = Object.keys(ROOM_INVENTORY);
@@ -372,24 +375,31 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
         const arrivals = demand[roomType] || 0;
         const totalInventory = ROOM_INVENTORY[roomType] || 0;
         const inHouseCount = inHouse[roomType] || 0;
-        const dueOutCount = dueOuts[roomType] || 0;
-        const currentlyOccupied = inHouseCount - dueOutCount;
-        const actuallyAvailable = totalInventory - currentlyOccupied;
+        const departuresCount = dueOuts[roomType] || 0;
+        const sold = inHouseCount - departuresCount;  // Rooms staying over from last night
+        const ooo = 0;  // Out of Order rooms (can be made dynamic later)
+        const actuallyAvailable = totalInventory - sold - ooo;  // Available for new arrivals
         const overby = Math.max(0, arrivals - actuallyAvailable);
         const status = overby > 0 ? 'OVERBOOKED' : 'OK';
         
-        tableInHouse += inHouseCount;
-        tableDueOuts += dueOutCount;
-        tableArrivals += arrivals;
         tableAvailable += actuallyAvailable;
+        tableArrivals += arrivals;
+        tableSold += sold;
+        tableOOO += ooo;
+        tableTotalInventory += totalInventory;
+        tableDepartures += departuresCount;
+        tableInHouse += inHouseCount;
         tableOverbooked += overby;
         
         const row = tbody.insertRow();
         row.innerHTML = `
             <td><strong>${roomType}</strong></td>
-            <td>${arrivals}</td>
             <td>${actuallyAvailable}</td>
-            <td>${dueOutCount}</td>
+            <td>${arrivals}</td>
+            <td>${sold}</td>
+            <td>${ooo}</td>
+            <td>${totalInventory}</td>
+            <td>${departuresCount}</td>
             <td>${inHouseCount}</td>
             <td>${overby > 0 ? overby : '-'}</td>
             <td><span class="badge ${overby > 0 ? 'overbooked' : 'ok'}">${status}</span></td>
@@ -404,9 +414,12 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     
     totalsRow.innerHTML = `
         <td><strong>TOTALS</strong></td>
-        <td><strong>${tableArrivals}</strong></td>
         <td><strong>${tableAvailable}</strong></td>
-        <td><strong>${tableDueOuts}</strong></td>
+        <td><strong>${tableArrivals}</strong></td>
+        <td><strong>${tableSold}</strong></td>
+        <td><strong>${tableOOO}</strong></td>
+        <td><strong>${tableTotalInventory}</strong></td>
+        <td><strong>${tableDepartures}</strong></td>
         <td><strong>${tableInHouse}</strong></td>
         <td><strong>${tableOverbooked > 0 ? tableOverbooked : '-'}</strong></td>
         <td><span class="badge ${tableOverbooked > 0 ? 'overbooked' : 'ok'}">${tableOverbooked > 0 ? 'OVERBOOKED' : 'OK'}</span></td>

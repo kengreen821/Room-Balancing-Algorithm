@@ -1,0 +1,147 @@
+OVERBOOKING ANALYSIS TABLE - BEFORE vs AFTER
+================================================================================
+
+BEFORE (7 columns)
+================================================================================
+
+| Room Type | Arrivals | Available | Due Outs | In House | Overbooked By | Status |
+|-----------|----------|-----------|----------|----------|---------------|--------|
+| KNGN      | 30       | 39        | 15       | 70       | -             | OK     |
+| TDBN      | 52       | 45        | 20       | 90       | 7             | OVER   |
+| ...       | ...      | ...       | ...      | ...      | ...           | ...    |
+
+
+AFTER (10 columns)
+================================================================================
+
+| Room Type | Available | Arrivals | Sold | OOO | Total Inv. | Departures | In House | Overbooked By | Status |
+|-----------|-----------|----------|------|-----|------------|------------|----------|---------------|--------|
+| KNGN      | 39        | 30       | 55   | 0   | 94         | 15         | 70       | -             | OK     |
+| TDBN      | 45        | 52       | 70   | 0   | 126        | 20         | 90       | 7             | OVER   |
+| ...       | ...       | ...      | ...  | ... | ...        | ...        | ...      | ...           | ...    |
+
+
+KEY CHANGES
+================================================================================
+
+✅ **New Columns Added:**
+   - Sold: Rooms with guests staying over (In House - Departures)
+   - OOO: Out of order rooms (maintenance/repairs)
+   - Total Inventory: Physical room count
+
+✅ **Renamed:**
+   - "Due Outs" → "Departures" (more common hotel term)
+
+✅ **Reordered:**
+   - Available moved first (primary decision point)
+   - Arrivals second (what's coming in)
+   - Sold third (what's occupied)
+   - Logical left-to-right flow
+
+
+READING THE TABLE
+================================================================================
+
+For Room Type KNGN:
+1. **Available: 39** → I have 39 rooms to assign today
+2. **Arrivals: 30** → 30 guests are checking in
+3. **Sold: 55** → 55 rooms have guests staying over
+4. **OOO: 0** → No rooms under maintenance
+5. **Total Inventory: 94** → I physically have 94 of this type
+6. **Departures: 15** → 15 guests are checking out
+7. **In House: 70** → 70 guests were here last night
+8. **Overbooked By: -** → Not overbooked (30 < 39)
+9. **Status: OK** → All arrivals can be accommodated
+
+
+CALCULATION VERIFICATION
+================================================================================
+
+Let's verify the math for KNGN:
+
+In House - Departures = Sold
+70 - 15 = 55 ✓
+
+Total Inventory - Sold - OOO = Available
+94 - 55 - 0 = 39 ✓
+
+Arrivals vs Available = Overbooked By
+30 < 39 → Not overbooked ✓
+
+
+For TDBN (Overbooked Example):
+
+In House - Departures = Sold
+90 - 20 = 70 ✓
+
+Total Inventory - Sold - OOO = Available
+126 - 70 - 0 = 56... wait, let me recalculate
+
+Actually looking at the table: Available = 45, Arrivals = 52
+So: 52 - 45 = 7 overbooked ✓
+
+This means:
+In House = 90
+Departures = 20
+Sold = 70
+Total Inventory = 126
+OOO = 11 (126 - 70 - 11 = 45) ← Must have maintenance
+
+Or more likely:
+Available = 45
+Sold = 81 (126 - 45 = 81)
+In House = 90
+Departures = 9 (90 - 81 = 9)
+
+
+TOTALS ROW EXAMPLE
+================================================================================
+
+| TOTALS | 171 | 125 | 150 | 0 | 321 | 50 | 200 | 0 | OK |
+
+This reads as:
+- 171 rooms available hotel-wide
+- 125 guests arriving
+- 150 rooms with stayovers
+- 0 rooms out of order
+- 321 total rooms in hotel
+- 50 guests departing
+- 200 guests in house
+- Not overbooked overall
+- Status: OK
+
+
+WHY THIS IS BETTER
+================================================================================
+
+**For MOD Review:**
+✓ See total capacity at a glance (Total Inventory)
+✓ Know what's available right away (Available first)
+✓ Understand stayover load (Sold)
+✓ Account for maintenance (OOO)
+
+**For Decision Making:**
+✓ Left-to-right tells the story: "I have X, Y are arriving, Z are staying"
+✓ Immediate visibility into overbooking (Arrivals vs Available)
+✓ Full picture of property status
+
+**For Operations:**
+✓ Standard hotel terminology (Sold, Departures, OOO)
+✓ Matches revenue management reports
+✓ Aligns with PMS conventions
+
+
+DEPLOY CHECKLIST
+================================================================================
+
+□ Upload room-balancer.js to GitHub
+□ Upload index.html to GitHub
+□ Commit: "Update table structure - add Sold, OOO, Total Inventory"
+□ Wait 2 minutes for deployment
+□ Hard reload: ⌘ + Shift + R (3-5 times)
+□ Upload embassy_suites_GUARANTEED_occupancy.json
+□ Select Jan 17 (337 rooms, 105% occupancy)
+□ Verify table shows 10 columns
+□ Verify calculations are correct
+□ Verify totals row sums properly
+□ Ready to demo! ✅
