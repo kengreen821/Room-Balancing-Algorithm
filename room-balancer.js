@@ -352,6 +352,17 @@ function displayPreview(reservations, overbookings, demand, inHouse, dueOuts) {
     const occupancy = ((totalOccupied / 321) * 100).toFixed(0);
     document.getElementById('previewOccupancy').textContent = occupancy + '% (' + totalOccupied + ' rooms)';
     
+    // Show AI recommendations section if overbookings exist or high occupancy
+    const aiSection = document.getElementById('aiRecommendationsSection');
+    if (overbookings.length > 0 || occupancy >= 95) {
+        aiSection.style.display = 'block';
+        // Reset AI recommendations for new analysis
+        document.getElementById('aiRecommendationsList').innerHTML = '';
+        document.getElementById('refreshAIBtn').style.display = 'none';
+    } else {
+        aiSection.style.display = 'none';
+    }
+    
     const tbody = document.getElementById('previewOverbookingTable').querySelector('tbody');
     tbody.innerHTML = '';
     
@@ -602,3 +613,404 @@ document.getElementById('startOverBtn').addEventListener('click', () => {
     pendingAlerts = [];
     finalAssignments = [];
 });
+
+// ============================================================================
+// AI UPGRADE RECOMMENDATIONS SYSTEM
+// ============================================================================
+
+let aiRecommendations = [];
+
+// API KEY MANAGEMENT
+function getStoredApiKey() {
+    return localStorage.getItem('claude_api_key') || '';
+}
+
+function saveApiKey(key) {
+    if (key && key.trim()) {
+        localStorage.setItem('claude_api_key', key.trim());
+        return true;
+    }
+    return false;
+}
+
+function clearApiKey() {
+    localStorage.removeItem('claude_api_key');
+}
+
+// Initialize API key on page load
+window.addEventListener('DOMContentLoaded', () => {
+    const storedKey = getStoredApiKey();
+    if (storedKey) {
+        updateApiKeyStatus(true);
+    }
+});
+
+function updateApiKeyStatus(hasKey) {
+    const statusEl = document.getElementById('apiKeyStatus');
+    const manageBtn = document.getElementById('manageApiKeyBtn');
+    
+    if (statusEl) {
+        if (hasKey) {
+            statusEl.innerHTML = '🔑 <strong>API Key Saved</strong> - Using Real AI Mode';
+            statusEl.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
+            statusEl.style.color = 'white';
+            if (manageBtn) manageBtn.textContent = '⚙️ Manage API Key';
+        } else {
+            statusEl.innerHTML = '🎭 <strong>Demo Mode</strong> - Enter API key for real AI analysis';
+            statusEl.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            statusEl.style.color = 'white';
+            if (manageBtn) manageBtn.textContent = '🔑 Add API Key';
+        }
+    }
+}
+
+// CALL CLAUDE API FOR UPGRADE ANALYSIS
+async function getAIUpgradeRecommendations(guests, overbookings) {
+    let apiKey = getStoredApiKey();
+    
+    if (!apiKey || apiKey.trim() === '') {
+        // DEMO MODE: Generate mock recommendations
+        return generateDemoRecommendations(guests, overbookings);
+    }
+    
+    try {
+        // Prepare guest data for analysis
+        const guestData = guests.slice(0, 20).map(g => ({
+            name: g.guest_name,
+            honors: g.honors_status,
+            room_type: g.room_type,
+            los: g.length_of_stay,
+            rate: g.rate_type,
+            requests: g.special_requests || 'None'
+        }));
+        
+        const overbookingData = overbookings.map(o => ({
+            type: o.roomType,
+            overby: o.overby
+        }));
+        
+        const response = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": apiKey,
+                "anthropic-version": "2023-06-01"
+            },
+            body: JSON.stringify({
+                model: "claude-sonnet-4-20250514",
+                max_tokens: 2000,
+                messages: [{
+                    role: "user",
+                    content: `You are analyzing guests for an overbooked hotel to recommend intelligent upgrades.
+
+OVERBOOKED ROOM TYPES:
+${JSON.stringify(overbookingData, null, 2)}
+
+GUEST ARRIVALS (first 20):
+${JSON.stringify(guestData, null, 2)}
+
+For guests needing upgrades, consider:
+1. Honors Status (Diamond/Gold = high priority)
+2. Length of Stay (longer = more important)
+3. Rate Type (Direct = high value, Third-Party = low)
+4. Special Requests (anniversaries, birthdays, etc.)
+
+Return JSON array of top 5-7 upgrade recommendations with this structure:
+[{
+  "guest_name": "name",
+  "priority": "high|medium|low",
+  "from_room": "KNGN",
+  "to_room": "NKSP",
+  "reasoning": "Brief explanation of why this guest should be upgraded"
+}]
+
+Focus on guests who would most appreciate the upgrade and have highest loyalty value.`
+                }]
+            })
+        });
+        
+        const data = await response.json();
+        const content = data.content[0].text;
+        
+        // Extract JSON from response
+        const jsonMatch = content.match(/\[[\s\S]*\]/);
+        if (jsonMatch) {
+            return JSON.parse(jsonMatch[0]);
+        }
+        
+        throw new Error('Could not parse AI response');
+        
+    } catch (error) {
+        console.error('AI API Error:', error);
+        // Fallback to demo mode
+        return generateDemoRecommendations(guests, overbookings);
+    }
+}
+
+// GENERATE DEMO RECOMMENDATIONS (when no API key)
+function generateDemoRecommendations(guests, overbookings) {
+    const recommendations = [];
+    
+    // Priority scoring
+    const scored = guests.map(g => {
+        let score = 0;
+        
+        // Honors status
+        if (g.honors_status === 'Diamond' || g.honors_status === 'Lifetime Diamond') score += 100;
+        else if (g.honors_status === 'Gold') score += 80;
+        else if (g.honors_status === 'Silver') score += 60;
+        else if (g.honors_status === 'Blue') score += 40;
+        
+        // Length of stay
+        score += g.length_of_stay * 10;
+        
+        // Rate type
+        if (g.rate_type === 'Direct') score += 50;
+        else if (g.rate_type === 'AAA') score += 40;
+        else if (g.rate_type === 'Government') score += 30;
+        else if (g.rate_type === 'Corporate') score += 25;
+        else if (g.rate_type === 'Third-Party') score += 5;
+        
+        // Special requests
+        if (g.special_requests && (g.special_requests.includes('anniversary') || g.special_requests.includes('birthday'))) {
+            score += 75;
+        }
+        
+        return { ...g, score };
+    }).sort((a, b) => b.score - a.score);
+    
+    // Generate recommendations for top guests
+    scored.slice(0, 7).forEach(guest => {
+        let priority = 'low';
+        let reasoning = '';
+        
+        if (guest.score > 150) {
+            priority = 'high';
+            reasoning = `${guest.honors_status} member`;
+            if (guest.length_of_stay >= 4) reasoning += ` staying ${guest.length_of_stay} nights`;
+            if (guest.rate_type === 'Direct') reasoning += `, booked directly with us`;
+            if (guest.special_requests && guest.special_requests.includes('anniversary')) {
+                reasoning += `. Celebrating anniversary - excellent opportunity for delight!`;
+            } else if (guest.special_requests && guest.special_requests.includes('birthday')) {
+                reasoning += `. Birthday celebration - create memorable experience!`;
+            }
+        } else if (guest.score > 100) {
+            priority = 'medium';
+            reasoning = `${guest.honors_status} member, ${guest.length_of_stay} night stay. Good upgrade candidate for loyalty building.`;
+        } else {
+            priority = 'low';
+            reasoning = `${guest.length_of_stay} night stay with ${guest.rate_type} rate. Standard upgrade opportunity.`;
+        }
+        
+        // Determine upgrade path
+        let toRoom = guest.room_type;
+        if (UPGRADE_PATHS[guest.room_type] && UPGRADE_PATHS[guest.room_type].length > 0) {
+            toRoom = UPGRADE_PATHS[guest.room_type][0];
+        }
+        
+        recommendations.push({
+            guest_name: guest.guest_name,
+            priority: priority,
+            from_room: guest.room_type,
+            to_room: toRoom,
+            reasoning: reasoning,
+            honors_status: guest.honors_status,
+            length_of_stay: guest.length_of_stay,
+            rate_type: guest.rate_type,
+            special_requests: guest.special_requests || 'None'
+        });
+    });
+    
+    return recommendations;
+}
+
+// DISPLAY AI RECOMMENDATIONS
+function displayAIRecommendations(recommendations) {
+    const container = document.getElementById('aiRecommendationsList');
+    container.innerHTML = '';
+    
+    if (!recommendations || recommendations.length === 0) {
+        container.innerHTML = `
+            <div class="ai-error">
+                <h3>No Recommendations Generated</h3>
+                <p>Try analyzing a date with more overbookings or guests with higher loyalty tiers.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    recommendations.forEach((rec, index) => {
+        const card = document.createElement('div');
+        card.className = 'ai-recommendation-card';
+        card.innerHTML = `
+            <div class="ai-rec-header">
+                <div class="ai-rec-guest">👤 ${rec.guest_name}</div>
+                <div class="ai-rec-priority ${rec.priority}">${rec.priority} Priority</div>
+            </div>
+            
+            <div class="ai-rec-body">
+                <div class="ai-rec-detail">
+                    <strong>Status:</strong> ${rec.honors_status || 'Non-Member'}
+                </div>
+                <div class="ai-rec-detail">
+                    <strong>Length:</strong> ${rec.length_of_stay || 1} nights
+                </div>
+                <div class="ai-rec-detail">
+                    <strong>Rate:</strong> ${rec.rate_type || 'Standard'}
+                </div>
+                <div class="ai-rec-detail">
+                    <strong>Requests:</strong> ${rec.special_requests || 'None'}
+                </div>
+            </div>
+            
+            <div class="ai-rec-reasoning">
+                <div class="ai-rec-reasoning-title">
+                    💡 AI Analysis
+                </div>
+                <div class="ai-rec-reasoning-text">
+                    ${rec.reasoning}
+                </div>
+            </div>
+            
+            <div class="ai-rec-upgrade">
+                <span>${rec.from_room}</span>
+                <span class="ai-rec-upgrade-arrow">→</span>
+                <span>${rec.to_room}</span>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+    
+    // Show refresh button
+    document.getElementById('refreshAIBtn').style.display = 'inline-block';
+}
+
+// GET AI RECOMMENDATIONS BUTTON
+document.getElementById('getAIRecommendationsBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('getAIRecommendationsBtn');
+    const container = document.getElementById('aiRecommendationsList');
+    
+    // Show loading
+    btn.disabled = true;
+    btn.textContent = '⏳ Analyzing guests...';
+    container.innerHTML = `
+        <div class="ai-loading">
+            <div class="ai-loading-spinner"></div>
+            <h3>Claude AI is analyzing your guests...</h3>
+            <p>Considering honors status, length of stay, rate types, and special occasions.</p>
+        </div>
+    `;
+    
+    try {
+        const reservations = allReservations.filter(r => r.checkin_date === currentDate);
+        const overbookings = []; // Get from existing analysis
+        
+        // Calculate overbookings
+        const currentDateObj = new Date(currentDate);
+        const inHouse = {};
+        const dueOuts = {};
+        
+        allReservations.forEach(res => {
+            const checkinDate = new Date(res.checkin_date);
+            const checkoutDate = new Date(res.checkout_date);
+            const roomType = res.room_type;
+            
+            if (checkinDate < currentDateObj && checkoutDate > currentDateObj) {
+                inHouse[roomType] = (inHouse[roomType] || 0) + 1;
+            }
+            
+            if (checkoutDate.toISOString().split('T')[0] === currentDate) {
+                dueOuts[roomType] = (dueOuts[roomType] || 0) + 1;
+            }
+        });
+        
+        const demand = {};
+        reservations.forEach(r => {
+            demand[r.room_type] = (demand[r.room_type] || 0) + 1;
+        });
+        
+        Object.entries(demand).forEach(([roomType, arrivals]) => {
+            const totalInventory = ROOM_INVENTORY[roomType] || 0;
+            const sold = (inHouse[roomType] || 0) - (dueOuts[roomType] || 0);
+            const available = totalInventory - sold;
+            
+            if (arrivals > available) {
+                overbookings.push({
+                    roomType,
+                    arrivals,
+                    available,
+                    overby: arrivals - available
+                });
+            }
+        });
+        
+        // Get AI recommendations
+        aiRecommendations = await getAIUpgradeRecommendations(reservations, overbookings);
+        displayAIRecommendations(aiRecommendations);
+        
+    } catch (error) {
+        console.error('Error getting AI recommendations:', error);
+        container.innerHTML = `
+            <div class="ai-error">
+                <h3>⚠️ Error Getting Recommendations</h3>
+                <p>${error.message}</p>
+                <p>Falling back to demo mode...</p>
+            </div>
+        `;
+        
+        setTimeout(async () => {
+            const reservations = allReservations.filter(r => r.checkin_date === currentDate);
+            aiRecommendations = generateDemoRecommendations(reservations, []);
+            displayAIRecommendations(aiRecommendations);
+        }, 2000);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '🤖 Get AI Recommendations';
+    }
+});
+
+// REFRESH AI RECOMMENDATIONS
+document.getElementById('refreshAIBtn').addEventListener('click', () => {
+    document.getElementById('getAIRecommendationsBtn').click();
+});
+
+// MANAGE API KEY BUTTON
+document.getElementById('manageApiKeyBtn').addEventListener('click', () => {
+    const currentKey = getStoredApiKey();
+    
+    if (currentKey) {
+        // Key exists - show manage options
+        const action = confirm('You have an API key saved. Choose:\n\nOK = Change Key\nCancel = Delete Key');
+        
+        if (action) {
+            // Change key
+            const newKey = prompt('Enter your new Claude API key:', currentKey);
+            if (newKey && newKey.trim() && newKey !== currentKey) {
+                if (saveApiKey(newKey)) {
+                    updateApiKeyStatus(true);
+                    alert('✅ API key updated successfully!\n\nYou\'re now using Real AI Mode.');
+                }
+            }
+        } else {
+            // Delete key
+            const confirmDelete = confirm('Are you sure you want to delete your API key?\n\nYou\'ll switch to Demo Mode.');
+            if (confirmDelete) {
+                clearApiKey();
+                updateApiKeyStatus(false);
+                alert('🎭 API key deleted. Now using Demo Mode.');
+            }
+        }
+    } else {
+        // No key - add new one
+        const newKey = prompt('Enter your Claude API key:\n\n(Get it from: https://console.anthropic.com/settings/keys)\n\nLeave blank to continue with Demo Mode.');
+        
+        if (newKey && newKey.trim()) {
+            if (saveApiKey(newKey)) {
+                updateApiKeyStatus(true);
+                alert('✅ API key saved successfully!\n\nYou\'re now using Real AI Mode.\n\nCost: ~$0.01-0.02 per recommendation.');
+            }
+        }
+    }
+});
+

@@ -429,6 +429,147 @@
                 font-size: 24px;
             }
         }
+        
+        /* AI Recommendations Styles */
+        .ai-recommendation-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .ai-recommendation-card:hover {
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .ai-rec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .ai-rec-guest {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .ai-rec-priority {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .ai-rec-priority.high {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .ai-rec-priority.medium {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .ai-rec-priority.low {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+        
+        .ai-rec-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .ai-rec-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .ai-rec-detail strong {
+            color: var(--navy);
+        }
+        
+        .ai-rec-reasoning {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .ai-rec-reasoning-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ai-rec-reasoning-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        
+        .ai-rec-upgrade {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .ai-rec-upgrade-arrow {
+            font-size: 24px;
+        }
+        
+        .ai-loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+        
+        .ai-loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f0f0f0;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .ai-error {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 20px;
+            color: #f57c00;
+        }
     </style>
 </head>
 <body>
@@ -508,6 +649,33 @@
                         <tbody></tbody>
                     </table>
                 </div>
+            </div>
+            
+            <div id="aiRecommendationsSection" class="section" style="display: none;">
+                <h2>🤖 AI Upgrade Recommendations</h2>
+                
+                <!-- API Key Status Banner -->
+                <div id="apiKeyStatus" class="approval-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-bottom: 15px;">
+                    🎭 <strong>Demo Mode</strong> - Enter API key for real AI analysis
+                </div>
+                
+                <div class="approval-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h3>✨ Intelligent Guest Analysis</h3>
+                    <p>
+                        <strong>Claude AI analyzes each guest</strong> considering honors status, length of stay, rate type, and special occasions. 
+                        These recommendations prioritize guest satisfaction and loyalty value.
+                    </p>
+                    <button class="btn" id="getAIRecommendationsBtn" style="background: white; color: #667eea; margin-top: 10px;">
+                        🤖 Get AI Recommendations
+                    </button>
+                    <button class="btn" id="refreshAIBtn" style="background: rgba(255,255,255,0.2); color: white; margin-top: 10px; margin-left: 10px; display: none;">
+                        🔄 Refresh Analysis
+                    </button>
+                    <button class="btn" id="manageApiKeyBtn" style="background: rgba(255,255,255,0.2); color: white; margin-top: 10px; margin-left: 10px;">
+                        🔑 Add API Key
+                    </button>
+                </div>
+                <div id="aiRecommendationsList"></div>
             </div>
             
             <div id="alertsSection" class="section">
